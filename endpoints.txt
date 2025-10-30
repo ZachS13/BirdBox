@@ -1,0 +1,73 @@
+Bird Box Monitoring System - REST API Endpoints
+================================================
+
+AUTH & USERS
+-------------
+POST   /auth/login                 -> Authenticate user and return token/session
+POST   /auth/logout                -> Invalidate session or token
+POST   /auth/refresh               -> Refresh authentication token
+GET    /me                         -> Get current logged-in user's profile
+GET    /users                      -> List all users (admin only)
+POST   /users                      -> Create new user (admin)
+PATCH  /users/:id                  -> Update user info (admin)
+
+BOXES (Dashboard / Map / Overview)
+----------------------------------
+GET    /boxes                      -> List boxes (with filters: status, bbox, trail)
+POST   /boxes                      -> Create new box
+GET    /boxes/:id                  -> Get box details
+PATCH  /boxes/:id                  -> Update box info
+GET    /boxes/:id/summary          -> Get summary (status, latest telemetry, etc.)
+GET    /stats/boxes                -> Dashboard totals (total, active, occupied, sightings)
+
+TELEMETRY
+----------
+GET    /boxes/:id/telemetry        -> Retrieve telemetry readings (with date range)
+POST   /ingest/telemetry           -> Submit telemetry from IoT sensors (API key auth)
+
+DETECTIONS
+-----------
+GET    /boxes/:id/detections       -> List species detections (filter by species/date)
+POST   /ingest/detection           -> Submit new detection (from AI model/sensor)
+GET    /analytics/identified-species -> Summary of species seen per box/time period
+
+GALLERY
+--------
+GET    /boxes/:id/images           -> Get images collected for box
+GET    /images/:id                 -> Get image metadata
+GET    /images/:id/download        -> Download image file (signed URL)
+
+ACTIVITY FEED
+--------------
+GET    /boxes/:id/activity         -> Recent activity (detections, maintenance, etc.)
+
+ANALYTICS
+-----------
+GET    /analytics/occupancy-trend  -> Occupancy trends for last 7 days
+GET    /analytics/daily-activity   -> Activity histogram by hour
+GET    /analytics/target-efficiency -> Target vs non-target detection efficiency
+
+MAINTENANCE
+------------
+GET    /boxes/:id/maintenance/log  -> List maintenance events for box
+POST   /boxes/:id/maintenance/log  -> Add maintenance record
+GET    /boxes/:id/maintenance/schedule -> Get scheduled maintenance tasks
+POST   /boxes/:id/maintenance/schedule -> Create maintenance schedule
+PATCH  /maintenance/schedule/:id   -> Update or mark schedule complete
+GET    /technicians                -> List all technicians
+
+SETTINGS
+----------
+GET    /boxes/:id/settings         -> Get configurable settings
+PATCH  /boxes/:id/settings         -> Update box settings (alerts, thresholds)
+
+REPORTS & EXPORTS
+------------------
+POST   /export                     -> Generate export (detections, telemetry, etc.)
+GET    /export/:id                 -> Check export status / download link
+
+ADMIN / TAXONOMY
+-----------------
+GET    /species                    -> List all species
+POST   /species                    -> Add new species
+PATCH  /species/:id                -> Update species info
