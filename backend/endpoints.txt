@@ -7,7 +7,7 @@ GET    /me                             - Get current logged-in user profile
 GET    /users                          - List users
 PUT    /users                          - Create new user
 GET    /users/:id                      - Get user by ID
-PATCH  /users/:id                      - Update user information
+POST   /users/:id                      - Update user information
 DELETE /users/:id                      - Delete user
 
 
@@ -29,7 +29,7 @@ POST   /ingest/telemetry               - Ingest telemetry from sensors
 GET    /boxes/:id/detections           - List detections for a box
 GET    /boxes/:id/detections/latest    - Get latest detection for a box
 GET    /detections/:id                 - Get detection by ID
-POST   /ingest/detection               - Ingest detection from sensors/AI (API key auth)
+POST   /ingest/detection               - Ingest detection from sensors/AI 
 
 
 GET    /analytics/identified-species   - Species identified analytics
@@ -46,12 +46,6 @@ DELETE /images/:id                     - Delete image
 
 GET    /boxes/:id/activity             - List recent activity for a box
 GET    /activity                       - Global activity feed
-
-GET    /technicians                    - List technicians
-PUT    /technicians                    - Create technician
-GET    /technicians/:id                - Get technician details
-POST   /technicians/:id                - Update technician
-DELETE /technicians/:id                - Delete technician
 
 
 GET    /boxes/:id/maintenance/log      - List maintenance logs for a box
@@ -80,13 +74,6 @@ DELETE /exports/:id                    - Delete or cancel export job
 
 GET    /species                        - List species
 PUT    /species                        - Create species
-
 GET    /species/:id                    - Get species by ID
 POST   /species/:id                    - Update species
 DELETE /species/:id                    - Delete species
-
-
-GET    /api-keys                       - List API keys
-POST   /api-keys                       - Create API key
-POST   /api-keys/:id                   - Update API key (e.g., expiry/disable)
-DELETE /api-keys/:id                   - Delete/revoke API key

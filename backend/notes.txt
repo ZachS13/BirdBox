@@ -1,0 +1,15 @@
+Users   -- add phones to users, remove roles
+Exports -- remove params, full report in ENUM
+
+remove technicians
+maintenance_logs -- user_id instead of technician_id
+maintenance_schedules -- user_id instead of technician_id
+combine maintenance_logs maintenance_schedules into one table
+
+telemetry -- remove signal_pct, temp humidity ??
+images
+detection
+
+potentially remove activity_feed
+
+remove api_keys
