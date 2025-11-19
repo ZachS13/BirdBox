@@ -1,8 +1,4 @@
 @startuml
-' Bird Box Monitoring System ER Diagram
-
-hide circle
-skinparam linetype ortho
 
 ' ===================== ENTITIES =====================
 
@@ -147,7 +143,6 @@ entity "api_keys" as api_keys {
   expires_at : DATETIME(6)
 }
 
-' (Optional) You can also add views as separate entities if you want:
 entity "v_box_latest_telemetry" as v_box_latest_telemetry <<view>> {
   --
   (same columns as telemetry)
@@ -184,7 +179,7 @@ technicians  ||--o{ maintenance_schedules
 ' users -> exports
 users        ||--o{ exports               
 
-' views (optional relationships)
+' views relationships
 boxes                ||--o{ v_box_latest_telemetry
 telemetry   ||--o{ v_box_latest_telemetry 
 
