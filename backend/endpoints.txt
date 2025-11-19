@@ -1,0 +1,92 @@
+POST   /auth/login                     - Login user and return auth token/session
+POST   /auth/logout                    - Logout user and invalidate token/session
+POST   /auth/refresh                   - Refresh authentication token
+GET    /me                             - Get current logged-in user profile
+
+
+GET    /users                          - List users
+PUT    /users                          - Create new user
+GET    /users/:id                      - Get user by ID
+PATCH  /users/:id                      - Update user information
+DELETE /users/:id                      - Delete user
+
+
+GET    /boxes                          - List boxes (with filters)
+PUT    /boxes                          - Create new box
+GET    /boxes/:id                      - Get box details
+POST   /boxes/:id                      - Update box info
+DELETE /boxes/:id                      - Delete box
+GET    /boxes/:id/summary              - Get box summary (status, latest data, etc.)
+
+GET    /stats/boxes                    - Get aggregate box statistics
+
+
+GET    /boxes/:id/telemetry            - List telemetry readings for a box
+GET    /boxes/:id/telemetry/latest     - Get latest telemetry reading for a box
+POST   /ingest/telemetry               - Ingest telemetry from sensors
+
+
+GET    /boxes/:id/detections           - List detections for a box
+GET    /boxes/:id/detections/latest    - Get latest detection for a box
+GET    /detections/:id                 - Get detection by ID
+POST   /ingest/detection               - Ingest detection from sensors/AI (API key auth)
+
+
+GET    /analytics/identified-species   - Species identified analytics
+GET    /analytics/occupancy-trend      - Occupancy trend analytics
+GET    /analytics/daily-activity       - Daily activity histogram analytics
+GET    /analytics/target-efficiency    - Target vs non-target efficiency analytics
+
+
+GET    /boxes/:id/images               - List images for a box
+GET    /images/:id                     - Get image metadata
+GET    /images/:id/download            - Download image file (or signed URL)
+DELETE /images/:id                     - Delete image
+
+
+GET    /boxes/:id/activity             - List recent activity for a box
+GET    /activity                       - Global activity feed
+
+GET    /technicians                    - List technicians
+PUT    /technicians                    - Create technician
+GET    /technicians/:id                - Get technician details
+POST   /technicians/:id                - Update technician
+DELETE /technicians/:id                - Delete technician
+
+
+GET    /boxes/:id/maintenance/log      - List maintenance logs for a box
+PUT    /boxes/:id/maintenance/log      - Create maintenance log for a box
+
+GET    /maintenance/log/:id            - Get single maintenance log
+POST   /maintenance/log/:id            - Update maintenance log
+DELETE /maintenance/log/:id            - Delete maintenance log
+
+
+GET    /boxes/:id/maintenance/schedule - List maintenance schedules for a box
+PUT    /boxes/:id/maintenance/schedule - Create maintenance schedule for a box
+
+GET    /maintenance/schedule/:id       - Get maintenance schedule by ID
+POST   /maintenance/schedule/:id       - Update maintenance schedule (status, etc.)
+DELETE /maintenance/schedule/:id       - Delete maintenance schedule
+
+
+GET    /boxes/:id/settings             - Get box settings
+POST   /boxes/:id/settings             - Update box settings
+
+PUT    /exports                        - Create export job
+GET    /exports                        - List export jobs for current user
+GET    /exports/:id                    - Get export job status/details
+DELETE /exports/:id                    - Delete or cancel export job
+
+GET    /species                        - List species
+PUT    /species                        - Create species
+
+GET    /species/:id                    - Get species by ID
+POST   /species/:id                    - Update species
+DELETE /species/:id                    - Delete species
+
+
+GET    /api-keys                       - List API keys
+POST   /api-keys                       - Create API key
+POST   /api-keys/:id                   - Update API key (e.g., expiry/disable)
+DELETE /api-keys/:id                   - Delete/revoke API key

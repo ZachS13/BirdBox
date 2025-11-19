@@ -19,7 +19,7 @@ CREATE TABLE users (
   last_login_at DATETIME(6) NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uq_users_email (email)
-) ENGINE=InnoDB;
+);
 
 -- TECHNICIANS
 DROP TABLE IF EXISTS technicians;
@@ -32,7 +32,7 @@ CREATE TABLE technicians (
   updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   PRIMARY KEY (id),
   UNIQUE KEY uq_technicians_email (email)
-) ENGINE=InnoDB;
+);
 
 -- SPECIES
 DROP TABLE IF EXISTS species;
@@ -45,7 +45,7 @@ CREATE TABLE species (
   updated_at      DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   PRIMARY KEY (id),
   UNIQUE KEY uq_species_common (common_name)
-) ENGINE=InnoDB;
+);
 
 -- BOXES
 DROP TABLE IF EXISTS boxes;
@@ -66,7 +66,7 @@ CREATE TABLE boxes (
   KEY ix_boxes_location (lat, lng),
   CONSTRAINT fk_boxes_target_species FOREIGN KEY (target_species)
     REFERENCES species(id) ON DELETE SET NULL
-) ENGINE=InnoDB;
+);
 
 -- IMAGES
 DROP TABLE IF EXISTS images;
@@ -84,7 +84,7 @@ CREATE TABLE images (
   KEY ix_images_box_time (box_id, captured_at),
   CONSTRAINT fk_images_box FOREIGN KEY (box_id)
     REFERENCES boxes(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+);
 
 -- TELEMETRY READINGS
 DROP TABLE IF EXISTS telemetry_readings;
@@ -101,7 +101,7 @@ CREATE TABLE telemetry_readings (
   KEY ix_tel_box_time (box_id, recorded_at),
   CONSTRAINT fk_tel_box FOREIGN KEY (box_id)
     REFERENCES boxes(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+);
 
 -- DETECTIONS
 DROP TABLE IF EXISTS detections;
@@ -124,7 +124,7 @@ CREATE TABLE detections (
     REFERENCES species(id) ON DELETE RESTRICT,
   CONSTRAINT fk_det_image FOREIGN KEY (image_id)
     REFERENCES images(id) ON DELETE SET NULL
-) ENGINE=InnoDB;
+);
 
 -- MAINTENANCE LOGS
 DROP TABLE IF EXISTS maintenance_logs;
@@ -142,7 +142,7 @@ CREATE TABLE maintenance_logs (
     REFERENCES boxes(id) ON DELETE CASCADE,
   CONSTRAINT fk_maint_tech FOREIGN KEY (technician_id)
     REFERENCES technicians(id) ON DELETE SET NULL
-) ENGINE=InnoDB;
+);
 
 -- MAINTENANCE SCHEDULES
 DROP TABLE IF EXISTS maintenance_schedules;
@@ -164,7 +164,7 @@ CREATE TABLE maintenance_schedules (
     REFERENCES boxes(id) ON DELETE CASCADE,
   CONSTRAINT fk_sched_tech FOREIGN KEY (technician_id)
     REFERENCES technicians(id) ON DELETE SET NULL
-) ENGINE=InnoDB;
+);
 
 -- ACTIVITY FEED
 DROP TABLE IF EXISTS activity_feed;
@@ -180,7 +180,7 @@ CREATE TABLE activity_feed (
   KEY ix_activity_box_time (box_id, occurred_at),
   CONSTRAINT fk_activity_box FOREIGN KEY (box_id)
     REFERENCES boxes(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+);
 
 -- EXPORTS (optional)
 DROP TABLE IF EXISTS exports;
@@ -196,7 +196,7 @@ CREATE TABLE exports (
   KEY ix_exports_user_time (user_id, created_at),
   CONSTRAINT fk_exports_user FOREIGN KEY (user_id)
     REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+);
 
 -- API KEYS (optional; for sensor ingestion)
 DROP TABLE IF EXISTS api_keys;
@@ -211,7 +211,7 @@ CREATE TABLE api_keys (
   KEY ix_api_keys_box (box_id),
   CONSTRAINT fk_api_keys_box FOREIGN KEY (box_id)
     REFERENCES boxes(id) ON DELETE CASCADE
-) ENGINE=InnoDB;
+);
 
 -- VIEWS (helpers)
 DROP VIEW IF EXISTS v_box_latest_telemetry;
