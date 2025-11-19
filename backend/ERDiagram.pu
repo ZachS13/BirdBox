@@ -3,154 +3,154 @@
 ' ===================== ENTITIES =====================
 
 entity "users" as users {
-  * id : INT UNSIGNED
-  --
-  name          : VARCHAR(120)
-  email         : VARCHAR(190)
-  password_hash : VARCHAR(255)
-  role          : ENUM('admin','manager','technician','viewer')
-  created_at    : DATETIME(6)
-  updated_at    : DATETIME(6)
-  last_login_at : DATETIME(6)
+	* id : INT UNSIGNED
+  	--
+  	name          : VARCHAR(120)
+	email         : VARCHAR(190)
+  	password_hash : VARCHAR(255)
+  	role          : ENUM('admin','manager','technician','viewer')
+  	created_at    : DATETIME(6)
+  	updated_at    : DATETIME(6)
+  	last_login_at : DATETIME(6)
 }
 
 entity "technicians" as technicians {
-  * id : INT UNSIGNED
-  --
-  name       : VARCHAR(120)
-  email      : VARCHAR(190)
-  phone      : VARCHAR(40)
-  created_at : DATETIME(6)
-  updated_at : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--	
+  	name       : VARCHAR(120)
+  	email      : VARCHAR(190)
+  	phone      : VARCHAR(40)
+  	created_at : DATETIME(6)
+  	updated_at : DATETIME(6)
 }
 
 entity "species" as species {
-  * id : INT UNSIGNED
-  --
-  common_name     : VARCHAR(120)
-  scientific_name : VARCHAR(160)
-  is_target       : TINYINT(1)
-  created_at      : DATETIME(6)
-  updated_at      : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	common_name     : VARCHAR(120)
+  	scientific_name : VARCHAR(160)
+  	is_target       : TINYINT(1)
+  	created_at      : DATETIME(6)
+  	updated_at      : DATETIME(6)
 }
 
 entity "boxes" as boxes {
-  * id : INT UNSIGNED
-  --
-  name           : VARCHAR(120)
-  trail_name     : VARCHAR(160)
-  status         : ENUM('occupied','vacant','reading','offline')
-  lat            : DECIMAL(9,6)
-  lng            : DECIMAL(9,6)
-  installed_at   : DATETIME(6)
-  target_species : INT UNSIGNED  <<FK>>
-  notes          : TEXT
-  created_at     : DATETIME(6)
-  updated_at     : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	name           : VARCHAR(120)
+  	trail_name     : VARCHAR(160)
+  	status         : ENUM('occupied','vacant','reading','offline')
+  	lat            : DECIMAL(9,6)
+  	lng            : DECIMAL(9,6)
+  	installed_at   : DATETIME(6)
+  	target_species : INT UNSIGNED  <<FK>>
+  	notes          : TEXT
+	created_at     : DATETIME(6)
+  	updated_at     : DATETIME(6)
 }
 
 entity "images" as images {
-  * id : INT UNSIGNED
-  --
-  box_id         : INT UNSIGNED  <<FK>>
-  captured_at    : DATETIME(6)
-  file_url       : VARCHAR(512)
-  mime_type      : VARCHAR(100)
-  filesize_bytes : INT UNSIGNED
-  sha256         : CHAR(64)
-  caption        : VARCHAR(255)
-  created_at     : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id         : INT UNSIGNED  <<FK>>
+  	captured_at    : DATETIME(6)
+  	file_url       : VARCHAR(512)
+  	mime_type      : VARCHAR(100)
+  	filesize_bytes : INT UNSIGNED
+  	sha256         : CHAR(64)
+  	caption        : VARCHAR(255)
+  	created_at     : DATETIME(6)
 }
 
 entity "telemetry" as telemetry {
-  * id : INT UNSIGNED
-  --
-  box_id        : INT UNSIGNED  <<FK>>
-  recorded_at   : DATETIME(6)
-  battery_pct   : DECIMAL(5,2)
-  signal_pct    : DECIMAL(5,2)
-  temperature_f : DECIMAL(5,2)
-  humidity_pct  : DECIMAL(5,2)
-  created_at    : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id        : INT UNSIGNED  <<FK>>
+  	recorded_at   : DATETIME(6)
+  	battery_pct   : DECIMAL(5,2)
+  	signal_pct    : DECIMAL(5,2)
+  	temperature_f : DECIMAL(5,2)
+  	humidity_pct  : DECIMAL(5,2)
+  	created_at    : DATETIME(6)
 }
 
 entity "detections" as detections {
-  * id : INT UNSIGNED
-  --
-  box_id         : INT UNSIGNED  <<FK>>
-  detected_at    : DATETIME(6)
-  species_id     : INT UNSIGNED  <<FK>>
-  confidence_pct : DECIMAL(5,2)
-  activity       : ENUM('perching','nesting','flight','entering','exiting','unknown')
-  image_id       : INT UNSIGNED  <<FK>>
-  created_at     : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id         : INT UNSIGNED  <<FK>>
+  	detected_at    : DATETIME(6)
+  	species_id     : INT UNSIGNED  <<FK>>
+  	confidence_pct : DECIMAL(5,2)
+  	activity       : ENUM('perching','nesting','flight','entering','exiting','unknown')
+  	image_id       : INT UNSIGNED  <<FK>>
+  	created_at     : DATETIME(6)
 }
 
 entity "maintenance_logs" as maintenance_logs {
-  * id : INT UNSIGNED
-  --
-  box_id        : INT UNSIGNED  <<FK>>
-  performed_at  : DATETIME(6)
-  type          : VARCHAR(100)
-  technician_id : INT UNSIGNED  <<FK>>
-  notes         : TEXT
-  created_at    : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id        : INT UNSIGNED  <<FK>>
+  	performed_at  : DATETIME(6)
+  	type          : VARCHAR(100)
+  	technician_id : INT UNSIGNED  <<FK>>
+  	notes         : TEXT
+  	created_at    : DATETIME(6)
 }
 
 entity "maintenance_schedules" as maintenance_schedules {
-  * id : INT UNSIGNED
-  --
-  box_id        : INT UNSIGNED  <<FK>>
-  due_at        : DATETIME(6)
-  type          : VARCHAR(100)
-  priority      : ENUM('low','medium','high')
-  technician_id : INT UNSIGNED  <<FK>>
-  is_recurring  : TINYINT(1)
-  rrule         : VARCHAR(255)
-  status        : ENUM('scheduled','done','canceled')
-  created_at    : DATETIME(6)
-  updated_at    : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id        : INT UNSIGNED  <<FK>>
+  	due_at        : DATETIME(6)
+  	type          : VARCHAR(100)
+  	priority      : ENUM('low','medium','high')
+  	technician_id : INT UNSIGNED  <<FK>>
+  	is_recurring  : TINYINT(1)
+  	rrule         : VARCHAR(255)
+  	status        : ENUM('scheduled','done','canceled')
+  	created_at    : DATETIME(6)
+  	updated_at    : DATETIME(6)
 }
 
 entity "activity_feed" as activity_feed {
-  * id : INT UNSIGNED
-  --
-  box_id      : INT UNSIGNED  <<FK>>
-  occurred_at : DATETIME(6)
-  kind        : ENUM('status_change','detection','maintenance','system')
-  summary     : VARCHAR(255)
-  meta_json   : JSON
-  created_at  : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id      : INT UNSIGNED  <<FK>>
+  	occurred_at : DATETIME(6)
+  	kind        : ENUM('status_change','detection','maintenance','system')
+  	summary     : VARCHAR(255)
+  	meta_json   : JSON
+  	created_at  : DATETIME(6)
 }
 
 entity "exports" as exports {
-  * id : INT UNSIGNED
-  --
-  user_id    : INT UNSIGNED  <<FK>>
-  created_at : DATETIME(6)
-  kind       : ENUM('detections','telemetry','maintenance')
-  params_json: JSON
-  file_url   : VARCHAR(512)
-  status     : ENUM('pending','ready','failed')
+  	* id : INT UNSIGNED
+  	--
+  	user_id    : INT UNSIGNED  <<FK>>
+  	created_at : DATETIME(6)
+  	kind       : ENUM('detections','telemetry','maintenance')
+  	params_json: JSON
+  	file_url   : VARCHAR(512)
+  	status     : ENUM('pending','ready','failed')
 }
 
 entity "api_keys" as api_keys {
-  * id : INT UNSIGNED
-  --
-  box_id     : INT UNSIGNED  <<FK>>
-  token_hash : CHAR(64)
-  created_at : DATETIME(6)
-  expires_at : DATETIME(6)
+  	* id : INT UNSIGNED
+  	--
+  	box_id     : INT UNSIGNED  <<FK>>
+  	token_hash : CHAR(64)
+  	created_at : DATETIME(6)
+  	expires_at : DATETIME(6)
 }
 
 entity "v_box_latest_telemetry" as v_box_latest_telemetry <<view>> {
-  --
-  (same columns as telemetry)
+  	--
+  	(same columns as telemetry)
 }
 
 entity "v_box_latest_detection" as v_box_latest_detection <<view>> {
-  --
-  (same columns as detections)
+  	--
+  	(same columns as detections)
 }
 
 ' ===================== RELATIONSHIPS =====================
