@@ -198,21 +198,6 @@ CREATE TABLE exports (
     REFERENCES users(id) ON DELETE CASCADE
 );
 
--- API KEYS (optional; for sensor ingestion)
-DROP TABLE IF EXISTS api_keys;
-CREATE TABLE api_keys (
-  id          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  box_id      BIGINT UNSIGNED NOT NULL,
-  token_hash  CHAR(64) NOT NULL,     -- store SHA-256 of token
-  created_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  expires_at  DATETIME(6) NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uq_api_keys_token (token_hash),
-  KEY ix_api_keys_box (box_id),
-  CONSTRAINT fk_api_keys_box FOREIGN KEY (box_id)
-    REFERENCES boxes(id) ON DELETE CASCADE
-);
-
 -- VIEWS (helpers)
 DROP VIEW IF EXISTS v_box_latest_telemetry;
 CREATE VIEW v_box_latest_telemetry AS
