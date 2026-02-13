@@ -316,16 +316,35 @@ async function deleteExport(id) {
 async function listSpecies() {
     return speciesQueries.getAllSpecies();
 }
+
 async function getSpeciesById(id) {
-    return speciesQueries.getSpeciesById(id);
+    if (!id) throw badRequest('species id is required');
+
+    const species = await speciesQueries.getSpeciesById(id);
+
+    if (!species) throw notFound('species not found');
+
+    return species;
 }
+
 async function createSpecies(data) {
+    if (!data?.name) throw badRequest('name is required');
+
+    const existing = await speciesQueries.getSpeciesByName(data.name);
+    if (existing) throw conflict('species already exists');
+
     return speciesQueries.createSpecies(data);
 }
+
 async function updateSpecies(id, data) {
+    if (!id) throw badRequest('species id is required');
+
     return speciesQueries.updateSpeciesById(id, data);
 }
+
 async function deleteSpecies(id) {
+    if (!id) throw badRequest('species id is required');
+
     return speciesQueries.deleteSpeciesById(id);
 }
 

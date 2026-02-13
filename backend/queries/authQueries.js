@@ -7,7 +7,7 @@ const db = require("../db");
 
 async function findUserByEmail(email) {
     const sql = `
-    SELECT , password_hash
+    SELECT *
     FROM users
     WHERE email = ?
     LIMIT 1
@@ -18,7 +18,7 @@ async function findUserByEmail(email) {
 
 async function findUserPublicById(userId) {
     const sql = `
-    SELECT 
+    SELECT *
     FROM users
     WHERE id = ?
     LIMIT 1

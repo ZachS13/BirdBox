@@ -6,8 +6,12 @@ router.get('/:id', async (req, res, next) => {
     try {
         const data = await business.getDetectionById(req.params.id);
         res.status(200).json({ ok: true, data });
-    } catch (err) {
-        next(err);
+    } catch (error) {
+        const status = error.status || 500;
+        res.status(status).json({
+            success: false,
+            message: error.message
+        });
     }
 });
 

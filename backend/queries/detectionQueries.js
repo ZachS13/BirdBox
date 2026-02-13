@@ -1,5 +1,14 @@
+const pool = require('../db');
+
 async function getDetectionById(id) {
-    return { id: Number(id), result: 'stub-detection' };
+    const [rows] = await pool.query(
+        'SELECT * FROM detections WHERE id = ?',
+        [id]
+    );
+
+    return rows[0] || null;
 }
 
-module.exports = { getDetectionById };
+module.exports = {
+    getDetectionById
+};

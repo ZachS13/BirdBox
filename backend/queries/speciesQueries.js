@@ -1,17 +1,49 @@
+const pool = require('../db');
+
 async function getAllSpecies() {
-    return [];
+    const [rows] = await pool.query(
+        'SELECT id, name, is_target, created_at FROM species ORDER BY id DESC'
+    );
+    return rows;
 }
+
 async function getSpeciesById(id) {
-    return { id: Number(id), commonName: 'stub', scientificName: 'stub' };
+    const [rows] = await pool.query(
+        'SELECT id, name, is_target, created_at FROM species WHERE id = ?',
+        [id]
+    );
+
+    return rows[0] || null;
 }
+
 async function createSpecies(data) {
-    return { id: 1, ...data };
+    const { name, is_target } = data;
+
+    const [result] = await pool.query(
+        `INSERT INTO species (name, is_target, created_at)
+        VALUES (?, ?, NOW())`,
+        [name, is_target]
+    );
+
+    return { id: result.insertId };
 }
+
 async function updateSpeciesById(id, data) {
-    return { id: Number(id), ...data };
+    const { name, is_target } = data;
+
+    await pool.query(
+        `UPDATE species
+        SET name = ?, is_target = ?, updated_at = NOW()
+        WHERE id = ?`,
+        [name, is_target, id]
+    );
+
+    return { updated: true };
 }
+
 async function deleteSpeciesById(id) {
-    return { deleted: true, id: Number(id) };
+    await pool.query('DELETE FROM species WHERE id = ?', [id]);
+    return { deleted: true };
 }
 
 module.exports = {

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const business = require('../businessLayer');
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
         const result = await business.loginUser({ username, password });
@@ -17,7 +17,7 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
-router.post('/logout', async (req, res, next) => {
+router.post('/logout', async (req, res) => {
     try {
         // Example token read (you can change to cookies later)
         const token = req.headers.authorization?.replace('Bearer ', '');
@@ -32,7 +32,7 @@ router.post('/logout', async (req, res, next) => {
     }
 });
 
-router.post('/refresh', async (req, res, next) => {
+router.post('/refresh', async (req, res) => {
     try {
         const { refreshToken } = req.body;
         const result = await business.refreshAuth({ refreshToken });
