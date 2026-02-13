@@ -1,80 +1,196 @@
-const authQueries = require('./queries/authQueries');
-const sessionQueries = require('./queries/sessionQueries');
-const userQueries = require('./queries/userQueries');
-const boxQueries = require('./queries/boxQueries');
-const detectionQueries = require('./queries/detectionQueries');
-const analyticsQueries = require('./queries/analyticsQueries');
-const imageQueries = require('./queries/imageQueries');
-const maintenanceQueries = require('./queries/maintenanceQueries');
-const exportQueries = require('./queries/exportQueries');
-const speciesQueries = require('./queries/speciesQueries');
+const authQueries = require('./queries/authQueries'),
+      sessionQueries = require('./queries/sessionQueries'),
+      userQueries = require('./queries/userQueries'),
+      boxQueries = require('./queries/boxQueries'),
+      detectionQueries = require('./queries/detectionQueries'),
+      analyticsQueries = require('./queries/analyticsQueries'),
+      imageQueries = require('./queries/imageQueries'),
+      maintenanceQueries = require('./queries/maintenanceQueries'),
+      exportQueries = require('./queries/exportQueries'),
+      speciesQueries = require('./queries/speciesQueries');
+
+const bcrypt = require("bcrypt");
 
 function badRequest(msg) {
     const e = new Error(msg);
     e.status = 400;
     return e;
 }
+
 function unauthorized(msg = 'Unauthorized') {
     const e = new Error(msg);
     e.status = 401;
     return e;
 }
 
-/* ---------------- AUTH ---------------- */
-async function loginUser({ username, password }) {
-    if (!username || !password) throw badRequest('username and password are required');
-
-    const user = await authQueries.findUserByUsername(username);
-    if (!user) throw unauthorized('Invalid username or password');
-
-    // TODO: compare password to stored hash
-    const token = 'stub-token';
-    const refreshToken = 'stub-refresh';
-
-    await sessionQueries.createSession({ userId: user.id, token, refreshToken });
-    return { token, refreshToken, user: { id: user.id, username: user.username } };
+function notFound(msg = "Not found") {
+    const e = new Error(msg);
+    e.status = 404;
+    return e;
 }
 
+function conflict(msg = "Conflict") {
+    const e = new Error(msg);
+    e.status = 409;
+    return e;
+}
+
+/* ---------------- AUTH ---------------- */
+/**
+ * Login as a user.
+ * @returns Token and User Object w/ ID and username.
+ */
+async function loginUser({ username, password }) {
+    if (!username || !password) {
+        throw badRequest("username and password are required");
+    }
+
+    const user = await authQueries.findUserByUsername(username);
+    if (!user) {
+        throw unauthorized("Invalid username or password");
+    }
+
+    const passwordValid = await bcrypt.compare(password, user.password);
+
+    if (!passwordValid) {
+        throw unauthorized("Invalid username or password");
+    }
+
+    const token = "stub-token";
+
+    await sessionQueries.createSession({
+        userId: user.id,
+        token,
+    });
+
+    return {
+        token,
+        user: {
+            id: user.id,
+            username: user.username
+        }
+    };
+}
+
+/**
+ * Make a new user account.
+ * @returns User ID.
+ */
+async function signup(username, email, password) {
+    if (!username || !email || !password) {
+        throw new Error("Missing required fields");
+    }
+
+    const existingUser = await userQueries.findByEmail(email);
+    if (existingUser) {
+        throw new Error("Email already registered");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await userQueries.createUser({
+        username,
+        email,
+        password: hashedPassword
+    });
+
+    return newUser;
+}
+
+/**
+ * Update the token to be up to date.
+ * @returns Token ID.
+ */
 async function refreshAuth({ refreshToken }) {
     const rotated = await sessionQueries.rotateRefreshToken({ refreshToken });
     if (!rotated) throw unauthorized('Invalid refresh token');
     return rotated;
 }
 
+/**
+ * Log out the user.
+ * @returns Token ID.
+ */
 async function logoutUser({ token }) {
     if (!token) throw badRequest('Missing token');
     return sessionQueries.deleteSessionByToken(token);
 }
 
 /* ---------------- ME ---------------- */
+/**
+ * Get the user using the current session
+ * @returns User Object
+ */
 async function getMe({ token }) {
+    if (!token) throw unauthorized("Missing auth token");
+
     const session = await sessionQueries.getSessionByToken(token);
     if (!session) throw unauthorized();
-    return userQueries.getUserById(session.userId);
+
+    const user = await userQueries.getUserById(session.userId);
+    if (!user) throw unauthorized();
+
+    return user;
 }
 
 /* ---------------- USERS ---------------- */
+/**
+ * @returns Array of all users.
+ */
 async function listUsers() {
     return userQueries.getAllUsers();
 }
 
+/**
+ * @param {Integer} id - Id of the user.
+ * @returns User object.
+ */
 async function getUserById(id) {
-    return userQueries.getUserById(id);
+    if (!id) throw badRequest("id is required");
+
+    const user = await userQueries.getUserById(id);
+    if (!user) throw notFound("User not found");
+
+    return user;
 }
 
+/**
+ * Create a user (admin-style endpoint, not /auth/signup)
+ * Expects: { name, email, password}
+ * - hashes password and stores in password_hash
+ * @returns ID of the user created.
+ */
 async function createUser(userData) {
-    if (!userData?.username) throw badRequest('username is required');
-    return userQueries.createUser(userData);
+    const name = userData?.name;
+    const email = userData?.email;
+    const password = userData?.password;
+
+    if (!name) throw badRequest("name is required");
+    if (!email) throw badRequest("email is required");
+    if (!password) throw badRequest("password is required");
+
+    const existing = await userQueries.findUserByEmail(email);
+    if (existing) throw conflict("Email already registered");
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    return userQueries.createUser({ name, email, passwordHash, role });
 }
 
-// Diagram says PUT /users (update current user profile) and DELETE /users (delete current user profile)
-// These assume “current user” is derived from token/session.
+/**
+ * Update the current user.
+ * @returns User object.
+ */
 async function updateCurrentUser({ token, updates }) {
     const session = await sessionQueries.getSessionByToken(token);
     if (!session) throw unauthorized();
     return userQueries.updateUserById(session.userId, updates);
 }
 
+/**
+ * Delete the current user.
+ * @returns Rows affected.
+ */
 async function deleteCurrentUser({ token }) {
     const session = await sessionQueries.getSessionByToken(token);
     if (!session) throw unauthorized();
@@ -215,6 +331,7 @@ async function deleteSpecies(id) {
 
 module.exports = {
     loginUser,
+    signup,
     refreshAuth,
     logoutUser,
     getMe,

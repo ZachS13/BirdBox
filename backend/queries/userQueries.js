@@ -1,34 +1,55 @@
-// Add the SQL connection here
+const pool = require('../db');
 
 async function getAllUsers() {
-    // TODO: SELECT * FROM users
-    return [];
-}
-
-async function createUser(userData) {
-    // TODO: INSERT INTO users (...) VALUES (...)
-    return { id: 123, ...userData };
+    const [rows] = await pool.query(
+        'SELECT id, first_name, last_name, username, email, phone FROM users'
+    );
+    return rows;
 }
 
 async function getUserById(id) {
-    // TODO: SELECT * FROM users WHERE id = ?
-    return { id: Number(id), username: 'stub-user' };
+    const [rows] = await pool.query(
+        'SELECT id, first_name, last_name, username, email, phone FROM users WHERE id = ?',
+        [id]
+    );
+
+    return rows[0] || null;
 }
 
-async function updateUserById(id, updates) {
-    // TODO: UPDATE users SET ... WHERE id = ?
-    return { id: Number(id), ...updates };
+async function createUser(user) {
+    const { first_name, last_name, username, email, password, phone } = user;
+
+    const [result] = await pool.query(
+        `INSERT INTO users (first_name, last_name, username, email, password, phone, created_at)
+     VALUES (?, ?, ?, ?, ?, ?, NOW())`,
+        [first_name, last_name, username, email, password, phone]
+    );
+
+    return { id: result.insertId };
+}
+
+async function updateUserById(id, user) {
+    const { first_name, last_name, username, email, phone } = user;
+
+    await pool.query(
+        `UPDATE users
+     SET first_name = ?, last_name = ?, username = ?, email = ?, phone = ?, updated_at = NOW()
+     WHERE id = ?`,
+        [first_name, last_name, username, email, phone, id]
+    );
+
+    return { updated: true };
 }
 
 async function deleteUserById(id) {
-    // TODO: DELETE FROM users WHERE id = ?
-    return { deleted: true, id: Number(id) };
+    await pool.query('DELETE FROM users WHERE id = ?', [id]);
+    return { deleted: true };
 }
 
 module.exports = {
     getAllUsers,
-    createUser,
     getUserById,
+    createUser,
     updateUserById,
     deleteUserById
 };

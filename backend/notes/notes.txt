@@ -13,3 +13,33 @@ detection
 potentially remove activity_feed
 
 remove api_keys
+
+add a signup endpoint
+
+
+Server Arcitexture:
+backend/
+├─ server.js
+├─ businessLayer.js
+├─ routes/
+│  ├─ authRoutes.js
+│  ├─ meRoutes.js
+│  ├─ userRoutes.js
+│  ├─ boxRoutes.js
+│  ├─ detectionRoutes.js
+│  ├─ analyticsRoutes.js
+│  ├─ imageRoutes.js
+│  ├─ maintenanceRoutes.js
+│  ├─ exportRoutes.js
+│  └─ speciesRoutes.js
+└─ queries/
+   ├─ authQueries.js
+   ├─ sessionQueries.js
+   ├─ userQueries.js
+   ├─ boxQueries.js
+   ├─ detectionQueries.js
+   ├─ analyticsQueries.js
+   ├─ imageQueries.js
+   ├─ maintenanceQueries.js
+   ├─ exportQueries.js
+   └─ speciesQueries.js
