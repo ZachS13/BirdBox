@@ -2,14 +2,14 @@ const pool = require('../db');
 
 async function getAllUsers() {
     const [rows] = await pool.query(
-        'SELECT id, first_name, last_name, username, email, phone FROM users'
+        'SELECT * FROM users'
     );
     return rows;
 }
 
 async function getUserById(id) {
     const [rows] = await pool.query(
-        'SELECT id, first_name, last_name, username, email, phone FROM users WHERE id = ?',
+        'SELECT * FROM users WHERE id = ?',
         [id]
     );
 
@@ -33,8 +33,8 @@ async function updateUserById(id, user) {
 
     await pool.query(
         `UPDATE users
-     SET first_name = ?, last_name = ?, username = ?, email = ?, phone = ?, updated_at = NOW()
-     WHERE id = ?`,
+        SET first_name = ?, last_name = ?, username = ?, email = ?, phone = ?, updated_at = NOW()
+        WHERE id = ?`,
         [first_name, last_name, username, email, phone, id]
     );
 

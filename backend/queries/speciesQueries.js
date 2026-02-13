@@ -2,14 +2,14 @@ const pool = require('../db');
 
 async function getAllSpecies() {
     const [rows] = await pool.query(
-        'SELECT id, name, is_target, created_at FROM species ORDER BY id DESC'
+        'SELECT * FROM species ORDER BY id DESC'
     );
     return rows;
 }
 
 async function getSpeciesById(id) {
     const [rows] = await pool.query(
-        'SELECT id, name, is_target, created_at FROM species WHERE id = ?',
+        'SELECT * FROM species WHERE id = ?',
         [id]
     );
 

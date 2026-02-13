@@ -1,31 +1,45 @@
-// queries/sessionQueries.js
-// This file would handle sessions/tokens/refresh tokens in the DB.
+const pool = require('../db');
 
-async function createSession({ userId, token, refreshToken }) {
-    // TODO: INSERT INTO sessions (...) VALUES (...)
-    return { sessionId: 999, userId, token, refreshToken };
+async function getSessionByToken(token) {
+    const [rows] = await pool.query(
+        'SELECT * FROM sessions WHERE token = ? LIMIT 1',
+        [token]
+    );
+
+    return rows[0] || null;
+}
+
+async function createSession({ user_id, token, expires_at }) {
+    const [result] = await pool.query(
+        `INSERT INTO sessions (user_id, token, created_at, expires_at)
+         VALUES (?, ?, NOW(), ?)`,
+        [user_id, token, expires_at]
+    );
+
+    return { id: result.insertId };
 }
 
 async function deleteSessionByToken(token) {
-    // TODO: DELETE FROM sessions WHERE token = ?
-    return { success: true, token };
+    await pool.query(
+        'DELETE FROM sessions WHERE token = ?',
+        [token]
+    );
+
+    return { deleted: true };
 }
 
-async function getSessionByToken(token) {
-    // TODO: SELECT * FROM sessions WHERE token = ?
-    if (!token) return null;
-    return { userId: 1, token };
-}
+async function deleteSessionsByUserId(userId) {
+    await pool.query(
+        'DELETE FROM sessions WHERE user_id = ?',
+        [userId]
+    );
 
-async function rotateRefreshToken({ refreshToken }) {
-    // TODO: verify refresh token in DB and rotate/replace
-    if (!refreshToken) return null;
-    return { token: 'stub-token-refreshed', refreshToken: 'stub-refresh-rotated' };
+    return { deleted: true };
 }
 
 module.exports = {
+    getSessionByToken,
     createSession,
     deleteSessionByToken,
-    getSessionByToken,
-    rotateRefreshToken
+    deleteSessionsByUserId
 };
