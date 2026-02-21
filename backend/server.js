@@ -1,15 +1,15 @@
 const express = require('express');
 
-const authRoutes = require('./routes/authRoutes');
-const meRoutes = require('./routes/meRoutes');
-const userRoutes = require('./routes/userRoutes');
-const boxRoutes = require('./routes/boxRoutes');
-const detectionRoutes = require('./routes/detectionRoutes');
-const analyticsRoutes = require('./routes/analyticsRoutes');
-const imageRoutes = require('./routes/imageRoutes');
-const maintenanceRoutes = require('./routes/maintenanceRoutes');
-const exportRoutes = require('./routes/exportRoutes');
-const speciesRoutes = require('./routes/speciesRoutes');
+const authRoutes = require('./routes/authRoutes.js');
+const meRoutes = require('./routes/meRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
+const boxRoutes = require('./routes/birdboxRoutes.js');
+const detectionRoutes = require('./routes/detectionRoutes.js');
+const analyticsRoutes = require('./routes/analyticsRoutes.js');
+const imageRoutes = require('./routes/imageRoutes.js');
+const maintenanceRoutes = require('./routes/maintenanceRoutes.js');
+const exportRoutes = require('./routes/exportRoutes.js');
+const speciesRoutes = require('./routes/speciesRoutes.js');
 
 const app = express();
 const PORT = 3000;

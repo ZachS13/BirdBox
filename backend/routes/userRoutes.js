@@ -6,24 +6,23 @@ const business = require('../businessLayer');
 router.get('/', async (req, res) => {
     try {
         const users = await business.listUsers();
-        res.status(200).json({ ok: true, message: 'Users list (stub)', data: users });
+        return res.status(200).json({ success: true, message: 'Users list', data: users });
     } catch (error) {
         const status = error.status || 500;
-        res.status(status).json({
+        return res.status(status).json({
             success: false,
             message: error.message
         });
     }
 });
 
-// Create user (REST-correct)
 router.post('/', async (req, res) => {
     try {
         const created = await business.createUser(req.body);
-        res.status(201).json({ ok: true, message: 'User created (stub)', data: created });
+        return res.status(201).json({ success: true, message: 'User created', data: created });
     } catch (error) {
         const status = error.status || 500;
-        res.status(status).json({
+        return res.status(status).json({
             success: false,
             message: error.message
         });
@@ -33,25 +32,31 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const user = await business.getUserById(req.params.id);
-        res.status(200).json({ ok: true, message: 'User by ID (stub)', data: user });
+        return res.status(200).json({ success: true, message: 'User by ID', data: user });
     } catch (error) {
         const status = error.status || 500;
-        res.status(status).json({
+        return res.status(status).json({
             success: false,
             message: error.message
         });
     }
 });
 
-// Update user (use PATCH normally, but keeping your earlier POST style is fine if you want)
-// I’ll implement PATCH since it’s standard:
-router.patch('/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
     try {
-        const updated = await business.updateUser(req.params.id, req.body);
-        res.status(200).json({ ok: true, message: 'User updated (stub)', data: updated });
+        const updated = await business.updateCurrentUser(req.params.id, req.body);
+        if (!updated.updated) {
+            if (updated.reason === "user_not_found") {
+                return res.status(404).json({ success: false, message: "User not found" });
+            } else {
+                return res.status(200).json({ success: true, message: 'No changes made', data: updated });
+            }
+        } else {
+            return res.status(200).json({ success: true, message: 'User updated', data: updated });
+        }
     } catch (error) {
         const status = error.status || 500;
-        res.status(status).json({
+        return res.status(status).json({
             success: false,
             message: error.message
         });
@@ -60,11 +65,17 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const result = await business.deleteUser(req.params.id);
-        res.status(200).json({ ok: true, message: 'User deleted (stub)', data: result });
+        const result = await business.deleteCurrentUser(req.params.id);
+        if (!result.deleted) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        return res.status(200).json({ success: true, message: 'User deleted', data: result });
     } catch (error) {
         const status = error.status || 500;
-        res.status(status).json({
+        return res.status(status).json({
             success: false,
             message: error.message
         });

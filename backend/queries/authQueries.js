@@ -1,8 +1,3 @@
-// queries/userQueries.js
-// Assumes you have a DB helper that returns a mysql2/promise pool/connection.
-// Example DB helper patterns:
-//   const pool = require("../db"); // pool.execute(sql, params)
-// Adjust the import below to match your project.
 const db = require("../db");
 
 async function findUserByEmail(email) {
@@ -34,7 +29,6 @@ async function createUser({ name, email, passwordHash, role = "viewer" }) {
   `;
     const [result] = await db.execute(sql, [name, email, passwordHash, role]);
 
-    // Return the new user (public fields)
     return await findUserPublicById(result.insertId);
 }
 

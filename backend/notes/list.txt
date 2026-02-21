@@ -1,0 +1,47 @@
+Done:
+    Routes:
+        - Auth
+        - User
+        - Detection
+        - Species
+
+    Queries:
+        - Auth
+        - User
+        - Detection
+        - Species
+        - Session
+
+    Business Layer:
+        - Auth
+        - User
+        - Detection
+        - Species ???
+
+
+To Do:
+    Routes:
+        - Birdbox
+        - Analytics
+        - Images
+        - Maintenance
+
+    Queries:
+        - Birdbox
+        - Analytics
+        - Images
+        - Maintenance
+
+    Business Layer:
+        - Birdbox
+        - Analytics
+        - Images
+        - Maintenance
+
+    RLES:
+        - Run the init.sql file on RLES.
+        - Place the server onto RLES.
+        - Download NPM and Node.
+        - Try to get the RLES public facing.
+
+    - Make the session better by combining the hashed IP, Username, and ID into a string.

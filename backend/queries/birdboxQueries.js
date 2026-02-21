@@ -1,17 +1,81 @@
+const pool = require('../db.js');
+
 async function getAllBoxes() {
-    return [];
+    const [rows] = await pool.execute(
+        'SELECT * FROM boxes'
+    );
+    return rows;
 }
-async function createBox(data) {
-    return { id: 10, ...data };
-}
+
 async function getBoxById(id) {
-    return { id: Number(id), name: 'stub-box' };
+    const [rows] = await pool.execute(
+        'SELECT * FROM boxes WHERE id = ?',
+        [id]
+    );
+    return rows[0] || null;
 }
+
+async function createBox(data) {
+    const sql = `
+        INSERT INTO birdboxes (
+            name,
+            trail_name,
+            latitude,
+            longitude
+        )
+        VALUES (?, ?, ?, ?)
+    `;
+
+    const { name, trailName, latitude, longitude } = data;
+
+    const [result] = await db.execute(sql, [
+        name,
+        trailName,
+        latitude,
+        longitude
+    ]);
+
+    // Return the newly created box
+    return getBoxById(result.insertId);
+}
+
 async function updateBoxById(id, data) {
-    return { id: Number(id), ...data };
+    const sql = `
+        UPDATE birdboxes
+        SET
+            name = ?,
+            trail_name = ?,
+            latitude = ?,
+            longitude = ?,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+    `;
+
+    const { name, trailName, latitude, longitude } = data;
+
+    const [result] = await db.execute(sql, [
+        name,
+        trailName,
+        latitude,
+        longitude,
+        id
+    ]);
+
+    if (result.affectedRows === 0) {
+        return null;
+    }
+
+    return getBoxById(id);
 }
 async function deleteBoxById(id) {
-    return { deleted: true, id: Number(id) };
+    const sql = `
+        DELETE FROM birdboxes
+        WHERE id = ?
+    `;
+
+    const [result] = await db.execute(sql, [id]);
+
+    return result.affectedRows > 0;
 }
 
 async function getBoxSummary(boxId) {

@@ -1,13 +1,13 @@
-const authQueries = require('./queries/authQueries'),
-      sessionQueries = require('./queries/sessionQueries'),
-      userQueries = require('./queries/userQueries'),
-      boxQueries = require('./queries/boxQueries'),
-      detectionQueries = require('./queries/detectionQueries'),
-      analyticsQueries = require('./queries/analyticsQueries'),
-      imageQueries = require('./queries/imageQueries'),
-      maintenanceQueries = require('./queries/maintenanceQueries'),
-      exportQueries = require('./queries/exportQueries'),
-      speciesQueries = require('./queries/speciesQueries');
+const authQueries = require('./queries/authQueries.js'),
+      sessionQueries = require('./queries/sessionQueries.js'),
+      userQueries = require('./queries/userQueries.js'),
+      boxQueries = require('./queries/birdboxQueries.js'),
+      detectionQueries = require('./queries/detectionQueries.js'),
+      analyticsQueries = require('./queries/analyticsQueries.js'),
+      imageQueries = require('./queries/imageQueries.js'),
+      maintenanceQueries = require('./queries/maintenanceQueries.js'),
+      exportQueries = require('./queries/exportQueries.js'),
+      speciesQueries = require('./queries/speciesQueries.js');
 
 const bcrypt = require("bcrypt");
 
@@ -56,6 +56,7 @@ async function loginUser({ username, password }) {
         throw unauthorized("Invalid username or password");
     }
 
+    // Will be passed into the function later with a hashed and combined username, id, and IP address.
     const token = "stub-token";
 
     await sessionQueries.createSession({
@@ -102,7 +103,7 @@ async function signup(username, email, password) {
  * @returns Token ID.
  */
 async function refreshAuth({ refreshToken }) {
-    const rotated = await sessionQueries.rotateRefreshToken({ refreshToken });
+    const rotated = await sessionQueries.refreshToken({ refreshToken });
     if (!rotated) throw unauthorized('Invalid refresh token');
     return rotated;
 }
@@ -201,16 +202,49 @@ async function deleteCurrentUser({ token }) {
 async function listBoxes() {
     return boxQueries.getAllBoxes();
 }
+
 async function createBox(data) {
+    const name = data?.name;
+    const trailName = data?.trailName;
+    const latitude = data?.latitude;
+    const longitude = data?.longitude;
+
+    if (!name) throw badRequest("name is required");
+    if (latitude === undefined) throw badRequest("latitude is required");
+    if (longitude === undefined) throw badRequest("longitude is required");
+
+    if (!trailName) data.trailName = null;
+
     return boxQueries.createBox(data);
 }
 async function getBoxById(id) {
-    return boxQueries.getBoxById(id);
+    if (!id) throw badRequest("id is required");
+
+    const box = await boxQueries.getBoxById(id);
+    if (!box) throw notFound("Box not found");
+
+    return box;
 }
+
 async function updateBox(id, data) {
+    if (!id) throw badRequest("id is required");
+
+    const name = data?.name;
+    const trailName = data?.trailName;
+    const latitude = data?.latitude;
+    const longitude = data?.longitude;
+
+    if (!name) throw badRequest("name is required");
+    if (!trailName) data.trailName = null;
+    if (latitude === undefined) throw badRequest("latitude is required");
+    if (longitude === undefined) throw badRequest("longitude is required");
+
     return boxQueries.updateBoxById(id, data);
 }
+
 async function deleteBox(id) {
+    if (!id) throw badRequest("id is required");
+
     return boxQueries.deleteBoxById(id);
 }
 
@@ -303,13 +337,12 @@ async function listExports() {
     return exportQueries.getExports();
 }
 async function getExportById(id) {
-    return exportQueries.getExportById(id);
-}
-async function createExport(data) {
-    return exportQueries.createExport(data);
-}
-async function deleteExport(id) {
-    return exportQueries.deleteExportById(id);
+    if (!id) throw badRequest("id is required");
+
+    const exp = await exportQueries.getExportById(id);
+    if (!exp) throw notFound("export not found");
+
+    return exp;
 }
 
 /* ---------------- SPECIES ---------------- */
