@@ -1,0 +1,7 @@
+/* MAP VIEW CONTAINER */
+.div-map-view-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.4rem;
+    padding: 3.2rem 4.8rem;
+}

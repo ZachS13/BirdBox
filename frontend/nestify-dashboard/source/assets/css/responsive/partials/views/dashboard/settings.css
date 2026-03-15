@@ -1,0 +1,7 @@
+@media (max-width: 576px) {
+    /* FORM DASHBOARD VIEW SETTINGS MULTI INPUT CONTAINER */
+    .div-form-dashboard-view-settings-multi-input-container {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+}

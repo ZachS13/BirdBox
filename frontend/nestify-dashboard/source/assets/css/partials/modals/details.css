@@ -1,0 +1,240 @@
+/* DETAILS MODAL CONTAINER */
+.div-details-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+/* DETAILS MODAL */
+.div-details-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 48rem;
+    max-width: calc(100% - 3.2rem);
+    padding: 2.4rem;
+    background-color: var(--container-white);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+}
+
+/* HEADER DETAILS MODAL */
+.header-details-modal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.6rem;
+}
+
+/* HEADER DETAILS MODAL INFO CONTAINER */
+.div-header-details-modal-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.div-header-details-modal-info-container ion-icon {
+    font-size: 2.4rem;
+    color: var(--color-green);
+}
+
+.div-header-details-modal-info-container h2 {
+    display: -webkit-box;
+    font-size: 1.6rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.header-details-modal button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--container-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.header-details-modal button:hover {
+    background-color: var(--container-light);
+}
+
+.header-details-modal button ion-icon {
+    font-size: 1.4rem;
+}
+
+/* DETAILS MODAL OVERVIEW CONTAINER */
+.div-details-modal-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+/* DETAILS MODAL BATTERY OVERVIEW CONTAINER */
+.div-details-modal-battery-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* HEADER DETAILS MODAL BATTERY OVERVIEW CONTAINER */
+.header-details-modal-battery-overview-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.header-details-modal-battery-overview-container span {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* HEADER DETAILS MODAL BATTERY OVERVIEW INFO CONTAINER */
+.div-header-details-modal-battery-overview-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.div-header-details-modal-battery-overview-info-container ion-icon {
+    font-size: 1.6rem;
+    color: var(--accent-sky);
+}
+
+.div-header-details-modal-battery-overview-info-container h4 {
+    font-size: 1.4rem;
+}
+
+/* DETAILS MODAL BATTERY OVERVIEW PERCENTAGE CONTAINER */
+.div-details-modal-battery-overview-percentage-container {
+    display: flex;
+    background-color: var(--container-light);
+    border-radius: 12rem;
+}
+
+.div-details-modal-battery-overview-percentage-container span {
+    display: inline-block;
+    width: 80%;
+    background-color: var(--container-gray);
+    border-radius: 12rem;
+}
+
+/* DETAILS MODAL ANALYTICS OVERVIEW CONTAINER */
+.div-details-modal-analytics-overview-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div-details-modal-sightings-overview-container,
+.div-details-modal-occupancy-overview-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.2rem;
+    box-shadow: inset 0 0 0 0.12rem var(--container-light-gray);
+    border-radius: 0.8rem;
+}
+
+.div-details-modal-analytics-overview-container div p {
+    font-size: 1.2rem;
+}
+
+.div-details-modal-analytics-overview-container div span {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* DETAILS MODAL IMAGES OVERVIEW CONTAINER */
+.div-details-modal-images-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 1.2rem;
+    box-shadow: inset 0 0 0 0.12rem var(--container-light-gray);
+    border-radius: 0.8rem;
+}
+
+/* DETAILS MODAL IMAGES OVERVIEW CONTAINER */
+.header-details-modal-images-overview-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.header-details-modal-images-overview-container ion-icon {
+    font-size: 1.6rem;
+}
+
+.header-details-modal-images-overview-container h4 {
+    font-size: 1.4rem;
+}
+
+/* DETAILS MODAL IMAGES OVERVIEW LIST */
+.details-modal-images-overview-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+}
+
+/* DETAILS MODAL IMAGES OVERVIEW LIST ITEM */
+.details-modal-images-overview-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    background-color: var(--container-light-gray);
+    border-radius: 0.8rem;
+}
+
+.details-modal-images-overview-list-item ion-icon {
+    font-size: 2rem;
+    color: var(--text-gray);
+}
+
+.div-details-modal-overview-container a:link,
+.div-details-modal-overview-container a:visited {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem;
+    font-size: 1.4rem;
+    color: var(--text-white);
+    background-color: var(--color-green);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-details-modal-overview-container a:hover,
+.div-details-modal-overview-container a:active {
+    background-color: var(--color-green-hover);
+}
+
+.div-details-modal-overview-container a:link ion-icon,
+.div-details-modal-overview-container a:visited ion-icon {
+    font-size: 1.6rem;
+    color: inherit;
+}
+
+.div-details-modal-overview-container a:link span,
+.div-details-modal-overview-container a:visited span {
+    font-size: 1.4rem;
+    color: inherit;
+}

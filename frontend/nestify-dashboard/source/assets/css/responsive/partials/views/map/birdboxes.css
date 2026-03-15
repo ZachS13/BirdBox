@@ -1,0 +1,32 @@
+@media (max-width: 576px) {
+    /* MAP VIEW BIRDBOXES LIST CONTAINER */
+    .div-map-view-birdboxes-list-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        margin-left: 0;
+        padding: 1.6rem;
+        box-shadow: unset;
+        box-shadow: -0.2rem 0 0.4rem rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        transform: translateX(120%);
+        /* transition: all 0.2s ease-in-out; */
+        z-index: 9998;
+    }
+
+    .active.div-map-view-birdboxes-list-container {
+        transform: translateX(0);
+    }
+
+    /* FOOTER MAP VIEW BIRDBOXES LIST CONTAINER */
+    .footer-map-view-birdboxes-list-container {
+        display: block;
+    }
+
+    /* MAP VIEW BIRDBOXES CONTAINER OVERLAY */
+    .active.div-map-view-birdboxes-container-overlay {
+        transform: translateX(0);
+    }
+}

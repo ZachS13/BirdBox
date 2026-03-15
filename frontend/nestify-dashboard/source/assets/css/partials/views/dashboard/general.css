@@ -1,0 +1,84 @@
+/* HEADER DASHBOARD VIEW GENERAL CONTAINER */
+.header-dashboard-view-general-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* DASHBOARD VIEW GENERAL TOGGLE LIST */
+.dashboard-view-general-toggle-list {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem;
+    background-color: var(--container-gray);
+    border-radius: 24rem;
+}
+
+/* DASHBOARD VIEW GENERAL TOGGLE LIST ITEM */
+.dashboard-view-general-toggle-list-item button {
+    padding: 0.8rem 1.6rem;
+    background-color: var(--container-gray);
+    border: unset;
+    border-radius: 24rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.dashboard-view-general-toggle-list-item button:hover,
+.dashboard-view-general-toggle-list-item button.active {
+    background-color: var(--container-white);
+}
+
+.dashboard-view-general-toggle-list-item button span {
+    font-size: 1.4rem;
+}
+
+/* DASHBOARD VIEW GENERAL ACTIONS CONTAINER */
+.div-dashboard-view-general-actions-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div-dashboard-view-general-actions-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-dashboard-view-general-actions-container button:first-child {
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--color-green);
+}
+
+.div-dashboard-view-general-actions-container button:first-child:hover,
+.div-dashboard-view-general-actions-container button:first-child.active {
+    background-color: var(--container-light);
+}
+
+.div-dashboard-view-general-actions-container button:last-child {
+    color: var(--text-white);
+    background-color: var(--brand-blue-accent);
+}
+
+.div-dashboard-view-general-actions-container button:last-child:hover,
+.div-dashboard-view-general-actions-container button:last-child.active {
+    background-color: var(--brand-blue-core);
+}
+
+.div-dashboard-view-general-actions-container button ion-icon {
+    font-size: 1.6rem;
+    color: inherit;
+}
+
+.div-dashboard-view-general-actions-container button span {
+    font-size: 1.4rem;
+    color: inherit;
+}

@@ -1,0 +1,6 @@
+@media (max-width: 576px) {
+    /* FORM BIRDBOX MULTI INPUT CONTAINER */
+    .div-form-birdbox-multi-input-container {
+        grid-template-columns: 1fr;
+    }
+}

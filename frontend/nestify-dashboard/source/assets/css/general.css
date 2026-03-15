@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Lato", sans-serif;
+    color: var(--text-black);
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--container-light);
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+ul {
+    list-style: none;
+}
+
+input,
+textarea {
+    outline: unset;
+    caret-color: var(--text-black);
+    resize: unset;
+}
+
+a:link {
+    text-decoration: unset;
+}

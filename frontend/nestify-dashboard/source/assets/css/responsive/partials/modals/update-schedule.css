@@ -1,0 +1,6 @@
+@media (max-width: 576px) {
+    /* FORM UPDATE SCHEDULE MULTI INPUT CONTAINER */
+    .div-form-update-schedule-multi-input-container {
+        grid-template-columns: 1fr;
+    }
+}

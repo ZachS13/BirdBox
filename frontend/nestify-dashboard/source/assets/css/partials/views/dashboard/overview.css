@@ -1,0 +1,213 @@
+/* DASHBOARD VIEW OVERVIEW CONTAINER */
+.div-dashboard-view-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW STATISTICS CONTAINER */
+.div-dashboard-view-overview-statistics-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem;
+}
+
+.div-dashboard-view-overview-statistics-container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+.div-dashboard-view-overview-statistics-container > div header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div-dashboard-view-overview-statistics-container > div header ion-icon {
+    font-size: 2rem;
+}
+
+.div-dashboard-view-overview-statistics-container > div:nth-child(1) header ion-icon,
+.div-dashboard-view-overview-statistics-container > div:nth-child(2) header ion-icon {
+    color: var(--brand-green-core);
+}
+
+.div-dashboard-view-overview-statistics-container > div:nth-child(3) header ion-icon {
+    color: var(--accent-sky);
+}
+
+.div-dashboard-view-overview-statistics-container > div header h4 {
+    font-size: 1.6rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW LOCATION OVERVIEW LIST */
+.dashboard-view-overview-location-overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW LOCATION OVERVIEW LIST ITEM */
+.dashboard-view-overview-location-overview-list-item p {
+    font-size: 1.4rem;
+}
+
+.dashboard-view-overview-location-overview-list-item:nth-child(1) p {
+    font-weight: 700;
+}
+
+.dashboard-view-overview-location-overview-list-item:nth-child(2) p {
+    color: var(--text-gray);
+}
+
+.div-dashboard-view-overview-location-overview-container a:link,
+.div-dashboard-view-overview-location-overview-container a:visited {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+}
+
+.div-dashboard-view-overview-location-overview-container a:hover,
+.div-dashboard-view-overview-location-overview-container a:active {
+    background-color: var(--container-light);
+}
+
+.div-dashboard-view-overview-location-overview-container a:link ion-icon,
+.div-dashboard-view-overview-location-overview-container a:visited ion-icon {
+    font-size: 1.6rem;
+}
+
+.div-dashboard-view-overview-location-overview-container a:link span,
+.div-dashboard-view-overview-location-overview-container a:visited span {
+    font-size: 1.4rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW STATISTICS OVERVIEW LIST */
+.dashboard-view-overview-statistics-overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW STATISTICS OVERVIEW LIST ITEM */
+.dashboard-view-overview-statistics-overview-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+}
+
+.dashboard-view-overview-statistics-overview-list-item span {
+    font-weight: 700;
+}
+
+/* DASHBOARD VIEW OVERVIEW BATTERY OVERVIEW INFO CONTAINER */
+.div-dashboard-view-overview-battery-overview-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.div-dashboard-view-overview-battery-overview-info-container > span {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* DASHBOARD VIEW OVERVIEW BATTERY OVERVIEW PERCENTAGE CONTAINER */
+.div-dashboard-view-overview-battery-overview-percentage-container {
+    display: flex;
+    background-color: var(--container-light);
+    border-radius: 12rem;
+}
+
+.div-dashboard-view-overview-battery-overview-percentage-container span {
+    display: inline-block;
+    width: 80%;
+    background-color: var(--container-gray);
+    border-radius: 12rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW RECENT IMAGES CONTAINER */
+.div-dashboard-view-overview-recent-images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+/* HEADER DASHBOARD VIEW OVERVIEW RECENT IMAGES CONTAINER */
+.header-dashboard-view-overview-recent-images-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* HEADER DASHBOARD VIEW OVERVIEW RECENT IMAGES INFO CONTAINER */
+.div-header-dashboard-view-overview-recent-images-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.div-header-dashboard-view-overview-recent-images-info-container ion-icon {
+    font-size: 2rem;
+}
+
+.div-header-dashboard-view-overview-recent-images-info-container h4 {
+    font-size: 1.6rem;
+}
+
+.header-dashboard-view-overview-recent-images-container button {
+    padding: 0.8rem 1.2rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.header-dashboard-view-overview-recent-images-container button:hover {
+    background-color: var(--container-light);
+}
+
+.header-dashboard-view-overview-recent-images-container button span {
+    font-size: 1.4rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW RECENT IMAGES LIST */
+.dashboard-view-overview-recent-images-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.6rem;
+}
+
+/* DASHBOARD VIEW OVERVIEW RECENT IMAGES LIST ITEM */
+.dashboard-view-overview-recent-images-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--container-light-gray);
+    border-radius: 0.8rem;
+    cursor: pointer;
+}
+
+.dashboard-view-overview-recent-images-list-item ion-icon {
+    font-size: 2rem;
+    color: var(--text-gray);
+}

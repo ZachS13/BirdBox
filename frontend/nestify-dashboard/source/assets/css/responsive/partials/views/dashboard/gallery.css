@@ -1,0 +1,11 @@
+@media (max-width: 576px) {
+    /* DASHBOARD VIEW GALLERY GRID LAYOUT LIST */
+    .dashboard-view-gallery-grid-layout-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* DASHBOARD VIEW GALLERY LIST LAYOUT LIST */
+    .dashboard-view-gallery-list-layout-list {
+        grid-template-columns: 1fr;
+    }
+}

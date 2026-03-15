@@ -1,0 +1,173 @@
+/* IMAGE DETAILS MODAL CONTAINER */
+.div-image-details-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+/* IMAGE DETAILS MODAL */
+.div-image-details-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 48rem;
+    max-width: calc(100% - 3.2rem);
+    padding: 2.4rem;
+    background-color: var(--container-white);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+}
+
+/* HEADER IMAGE DETAILS MODAL */
+.header-image-details-modal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* HEADER IMAGE DETAILS MODAL INFO CONTAINER */
+.div-header-image-details-modal-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.div-header-image-details-modal-info-container ion-icon {
+    font-size: 2.4rem;
+    color: var(--color-green);
+}
+
+.div-header-image-details-modal-info-container h2 {
+    font-size: 1.6rem;
+}
+
+.header-image-details-modal button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--container-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.header-image-details-modal button:hover {
+    background-color: var(--container-light);
+}
+
+.header-image-details-modal button ion-icon {
+    font-size: 1.4rem;
+}
+
+/* IMAGE DETAILS MODAL OVERVIEW CONTAINER */
+.div-image-details-modal-overview-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
+}
+
+/* IMAGE DETAILS MODAL OVERVIEW IMAGE OVERVIEW CONTAINER */
+.div-image-details-modal-image-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* IMAGE DETAILS MODAL IMAGE PLACEHOLDER CONTAINER */
+.div-image-details-modal-image-placeholder-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--container-light-gray);
+    border-radius: 0.8rem;
+}
+
+/* .div-image-details-modal-image-placeholder-container span {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 1.2rem;
+    background-color: var(--container-light-gray);
+    border-radius: 0.4rem;
+} */
+
+.div-image-details-modal-image-placeholder-container ion-icon {
+    font-size: 2.4rem;
+}
+
+.div-image-details-modal-image-overview-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-image-details-modal-image-overview-container button:hover {
+    background-color: var(--container-light);
+}
+
+.div-image-details-modal-image-overview-container button ion-icon {
+    font-size: 1.6rem;
+}
+
+.div-image-details-modal-image-overview-container button span {
+    font-size: 1.4rem;
+}
+
+/* IMAGE DETAILS MODAL OVERVIEW INFO LIST */
+.image-details-modal-overview-info-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 0.8rem 0;
+}
+
+/* IMAGE DETAILS MODAL OVERVIEW INFO LIST ITEM */
+.image-details-modal-overview-info-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.image-details-modal-overview-info-list-item h4 {
+    font-size: 1.6rem;
+}
+
+.image-details-modal-overview-info-list-item p {
+    font-size: 1.4rem;
+    color: var(--text-gray);
+}
+
+.image-details-modal-overview-info-list-item:nth-child(2) p {
+    width: fit-content;
+    padding: 0.4rem 1.2rem;
+    background-color: var(--container-light-gray);
+    border-radius: 0.4rem;
+}
+
+.image-details-modal-overview-info-list-item:nth-child(3) p {
+    color: var(--color-green);
+}

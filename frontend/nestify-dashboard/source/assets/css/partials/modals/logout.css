@@ -1,0 +1,102 @@
+/* LOGOUT MODAL CONTAINER */
+.div-logout-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+/* LOGOUT MODAL */
+.div-logout-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 48rem;
+    max-width: calc(100% - 3.2rem);
+    padding: 2.4rem;
+    background-color: var(--container-white);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+}
+
+/* HEADER LOGOUT MODAL */
+.header-logout-modal {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.header-logout-modal ion-icon {
+    font-size: 1.6rem;
+    color: var(--color-red);
+}
+
+.header-logout-modal h2 {
+    font-size: 1.6rem;
+}
+
+/* LOGOUT MODAL INFO CONTAINER */
+.div-logout-modal-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.div-logout-modal-info-container p {
+    font-size: 1.4rem;
+}
+
+.div-logout-modal-info-container p span {
+    font-weight: 700;
+}
+
+/* FOOTER LOGOUT MODAL */
+.footer-logout-modal {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    margin-left: auto;
+}
+
+.footer-logout-modal button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.2rem;
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.footer-logout-modal button:first-child {
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+}
+
+.footer-logout-modal button:first-child:hover {
+    background-color: var(--container-light);
+}
+
+.footer-logout-modal button:last-child {
+    color: var(--text-white);
+    background-color: var(--color-red);
+}
+
+.footer-logout-modal button:last-child ion-icon,
+.footer-logout-modal button:last-child span {
+    color: inherit;
+}
+
+.footer-logout-modal button:last-child:hover {
+    background-color: var(--color-red-hover);
+}

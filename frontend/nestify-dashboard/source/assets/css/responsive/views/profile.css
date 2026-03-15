@@ -1,0 +1,13 @@
+@media (max-width: 576px) {
+    /* FROM PROFILE VIEW CONTAINER */
+    .form-profile-view-container {
+        gap: 1.6rem;
+        padding: 1.6rem;
+    }
+
+    /* PROFILE VIEW OVERVIEW CONTAINER */
+    .div-profile-view-overview-container {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+}

@@ -1,0 +1,128 @@
+/* FORM DASHBOARD VIEW SETTINGS CONTAINER */
+.form-dashboard-view-settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+/* HEADER DASHBOARD VIEW SETTINGS CONTAINER */
+.header-dashboard-view-settings-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.header-dashboard-view-settings-container h2 {
+    font-size: 1.6rem;
+}
+
+.header-dashboard-view-settings-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-header-dashboard-view-settings-edit-container > button {
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+}
+
+.div-header-dashboard-view-settings-edit-container > button:hover {
+    background-color: var(--container-light);
+}
+
+/* HEADER DASHBOARD VIEW SETTINGS EDITABLE CONTAINER */
+.div-header-dashboard-view-settings-editable-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div-header-dashboard-view-settings-editable-container button:first-child {
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+}
+
+.div-header-dashboard-view-settings-editable-container button:first-child:hover {
+    background-color: var(--container-light);
+}
+
+.div-header-dashboard-view-settings-editable-container button:last-child {
+    color: var(--text-white);
+    background-color: var(--container-black);
+}
+
+.header-dashboard-view-settings-container button ion-icon {
+    font-size: 1.6rem;
+    color: inherit;
+}
+
+.header-dashboard-view-settings-container button span {
+    font-size: 1.4rem;
+    color: inherit;
+}
+
+/* DIV FORM DASHBOARD VIEW SETTINGS CONTAINER */
+.div-form-dashboard-view-settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+/* FORM DASHBOARD VIEW SETTINGS MULTI INPUT CONTAINER */
+.div-form-dashboard-view-settings-multi-input-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+}
+
+/* FORM DASHBOARD VIEW SETTINGS INPUT CONTAINER */
+.div-form-dashboard-view-settings-input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.div-form-dashboard-view-settings-input-container label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.div-form-dashboard-view-settings-input-container input,
+.div-form-dashboard-view-settings-input-container textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--container-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+}
+
+.disabled.div-form-dashboard-view-settings-input-container input,
+.disabled.div-form-dashboard-view-settings-input-container textarea {
+    background-color: var(--container-gray);
+}
+
+.div-form-dashboard-view-settings-input-container span {
+    font-size: 1.2rem;
+    color: var(--color-red);
+}
+
+.div-form-dashboard-view-settings-input-container span.visible {
+    display: inline-block;
+}
+
+.div-form-dashboard-view-settings-input-container span.hidden {
+    display: none;
+}

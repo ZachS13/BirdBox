@@ -1,0 +1,72 @@
+/* PROFILE VIEW INFORMATION FORM CONTAINER */
+.div-profile-view-information-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+/* HEADER PROFILE VIEW INFORMATION FORM CONTAINER */
+.header-profile-view-information-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.header-profile-view-information-container ion-icon {
+    font-size: 2rem;
+    color: var(--brand-green-core);
+}
+
+.header-profile-view-information-container h2 {
+    font-size: 1.6rem;
+}
+
+/* FORM PROFILE VIEW INFORMATION CONTAINER */
+.div-form-profile-view-information-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+/* FORM PROFILE VIEW INFORMATION INPUT CONTAINER */
+.div-form-profile-view-information-input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.div-form-profile-view-information-input-container label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.div-form-profile-view-information-input-container input {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--container-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+}
+
+.disabled.div-form-profile-view-information-input-container input {
+    background-color: var(--container-gray);
+}
+
+.div-form-profile-view-information-input-container span {
+    font-size: 1.2rem;
+    color: var(--color-red);
+}
+
+.div-form-profile-view-information-input-container span.visible {
+    display: inline-block;
+}
+
+.div-form-profile-view-information-input-container span.hidden {
+    display: none;
+}

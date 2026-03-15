@@ -1,0 +1,129 @@
+/* DASHBOARD VIEW ANALYTICS CONTAINER */
+.div-dashboard-view-analytics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+/* DASHBOARD VIEW ANALYTICS METRICS CONTAINER */
+.div-dashboard-view-analytics-metrics-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
+}
+
+/* DASHBOARD VIEW ANALYTICS TRENDS CONTAINER */
+.div-dashboard-view-analytics-trends-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+.div-dashboard-view-analytics-trends-container h2 {
+    font-size: 1.6rem;
+}
+
+/* DASHBOARD VIEW ANALYTICS SPECIES CONTAINER */
+.div-dashboard-view-analytics-species-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+.div-dashboard-view-analytics-species-container h2 {
+    font-size: 1.6rem;
+}
+
+/* DASHBOARD VIEW ANALYTICS SPECIES LIST */
+.dashboard-view-analytics-species-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* DASHBOARD VIEW ANALYTICS SPECIES LIST ITEM */
+.dashboard-view-analytics-species-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* DASHBOARD VIEW ANALYTICS SPECIES LIST ITEM INFO CONTAINER */
+.div-dashboard-view-analytics-species-list-item-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.div-dashboard-view-analytics-species-list-item-info-container ion-icon {
+    font-size: 2rem;
+}
+
+.dashboard-view-analytics-species-list-item:nth-child(1) ion-icon {
+    color: var(--brand-green-core);
+}
+
+.dashboard-view-analytics-species-list-item:nth-child(2) ion-icon {
+    color: var(--brand-blue-core);
+}
+
+.dashboard-view-analytics-species-list-item:nth-child(3) ion-icon {
+    color: var(--accent-yellow);
+}
+
+.div-dashboard-view-analytics-species-list-item-info-container span {
+    font-size: 1.4rem;
+}
+
+.dashboard-view-analytics-species-list-item > span {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0.4rem;
+}
+
+.dashboard-view-analytics-species-list-item:nth-child(1) > span,
+.dashboard-view-analytics-species-list-item:nth-child(2) > span {
+    color: var(--text-white);
+    background-color: var(--container-black);
+}
+
+.dashboard-view-analytics-species-list-item:nth-child(3) > span {
+    background-color: var(--container-gray);
+}
+
+/* DASHBOARD VIEW ANALYTICS PATTERN CONTAINER */
+.div-dashboard-view-analytics-pattern-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+/* HEADER DASHBOARD VIEW ANALYTICS PATTERN CONTAINER */
+.header-dashboard-view-analytics-pattern-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.header-dashboard-view-analytics-pattern-container h2 {
+    font-size: 1.6rem;
+}
+
+.header-dashboard-view-analytics-pattern-container p {
+    font-size: 1.4rem;
+    color: var(--text-gray);
+}

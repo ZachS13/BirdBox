@@ -1,0 +1,11 @@
+@media (max-width: 576px) {
+    /* DETAILS MODAL ANALYTICS OVERVIEW CONTAINER */
+    .div-details-modal-analytics-overview-container {
+        flex-direction: column;
+    }
+
+    .div-details-modal-sightings-overview-container,
+    .div-details-modal-occupancy-overview-container {
+        width: 100%;
+    }
+}

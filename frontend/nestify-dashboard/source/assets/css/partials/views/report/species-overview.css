@@ -1,0 +1,63 @@
+/* REPORT VIEW SPECIES OVERVIEW CONTAINER */
+.div-report-view-species-overview-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
+}
+
+/* REPORT VIEW SPECIE OVERVIEW CONTAINER */
+.div-report-view-specie-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+/* HEADER REPORT VIEW SPECIE OVERVIEW CONTAINER */
+.header-report-view-specie-overview-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.header-report-view-specie-overview-container ion-icon {
+    font-size: 1.6rem;
+}
+
+.div-report-view-specie-overview-container:nth-child(1) .header-report-view-specie-overview-container ion-icon {
+    color: var(--brand-blue-accent);
+}
+
+.div-report-view-specie-overview-container:nth-child(2) .header-report-view-specie-overview-container ion-icon {
+    color: var(--accent-red);
+}
+
+.div-report-view-specie-overview-container:nth-child(3) .header-report-view-specie-overview-container ion-icon {
+    color: var(--accent-forest-green);
+}
+
+.div-report-view-specie-overview-container:nth-child(4) .header-report-view-specie-overview-container ion-icon {
+    color: var(--brand-blue-core);
+}
+
+.header-report-view-specie-overview-container h4 {
+    font-size: 1.6rem;
+}
+
+/* REPORT VIEW SPECIE OVERVIEW LIST */
+.report-view-specie-overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+/* REPORT VIEW SPECIE OVERVIEW LIST ITEM */
+.report-view-specie-overview-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+}

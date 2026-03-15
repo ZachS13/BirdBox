@@ -1,0 +1,12 @@
+@media (max-width: 576px) {
+    /* SIGNUP VIEW CONTAINER */
+    .div-signup-view-container + .div-notification-modal-container {
+        width: 48rem;
+        max-width: calc(100% - 3.2rem);
+        padding: 0;
+    }
+
+    .div-signup-view-container + .active.div-notification-modal-container {
+        top: 1.6rem;
+    }
+}

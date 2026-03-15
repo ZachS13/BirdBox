@@ -1,0 +1,25 @@
+@media (max-width: 576px) {
+    /* DASHBOARD VIEW CONTAINER */
+    .div-dashboard-view-container {
+        gap: 1.6rem;
+        padding: 1.6rem;
+    }
+
+    /* HEADER DASHBOARD VIEW CONTAINER */
+    .header-dashboard-view-container {
+        flex-direction: column;
+        align-items: unset;
+        justify-content: flex-start;
+        gap: 1.6rem;
+    }
+
+    /* BIRDBOX SELECT CONTAINER */
+    .div-birdbox-select-container {
+        flex-grow: 1;
+    }
+
+    /* SELECTED BIRDBOX INFO CONTAINER */
+    .div-selected-birdbox-info-container {
+        width: 100%;
+    }
+}

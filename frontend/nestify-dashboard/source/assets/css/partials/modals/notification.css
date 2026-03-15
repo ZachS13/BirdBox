@@ -1,0 +1,72 @@
+/* NOTIFICATION MODAL CONTAINER */
+.div-notification-modal-container {
+    position: fixed;
+    bottom: -6.4rem;
+    right: 3.2rem;
+    height: fit-content;
+    transition: all 0.6s ease-in-out;
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.active.div-notification-modal-container {
+    bottom: 3.2rem;
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* NOTIFICATION MODAL */
+.div-notification-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    width: 36rem;
+    padding: 1.2rem 1.6rem;
+    background-color: var(--container-white);
+    box-shadow:
+        inset 0 0 0 0.12rem var(--stroke-light-gray),
+        0 0.4rem 1.6rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.8rem;
+}
+
+.div-notification-modal-content-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div-notification-modal-content-container ion-icon {
+    font-size: 1.6rem;
+}
+
+.success.div-notification-modal .div-notification-modal-content-container ion-icon {
+    color: var(--color-green);
+}
+
+.failure.div-notification-modal .div-notification-modal-content-container ion-icon {
+    color: var(--color-red);
+}
+
+.div-notification-modal-content-container p {
+    font-size: 1.4rem;
+}
+
+.div-notification-modal > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--container-white);
+    border: unset;
+    cursor: pointer;
+}
+
+.div-notification-modal > button ion-icon {
+    font-size: 1.6rem;
+    color: var(--text-black);
+    /* transition: all 0.2s ease-in-out; */
+}
+
+.div-notification-modal > button:hover ion-icon {
+    color: var(--text-gray);
+}

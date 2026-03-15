@@ -1,0 +1,171 @@
+/* EXPORT MODAL CONTAINER */
+.div-export-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+/* EXPORT MODAL */
+.div-export-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 48rem;
+    max-width: calc(100% - 3.2rem);
+    padding: 2.4rem;
+    background-color: var(--container-white);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+}
+
+/* HEADER EXPORT MODAL */
+.header-export-modal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* HEADER EXPORT MODAL INFO CONTAINER */
+.div-header-export-modal-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.div-header-export-modal-info-container ion-icon {
+    font-size: 2.4rem;
+    color: var(--color-green);
+}
+
+.div-header-export-modal-info-container h2 {
+    font-size: 1.6rem;
+}
+
+.header-export-modal button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--container-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.header-export-modal button:hover {
+    background-color: var(--container-light);
+}
+
+.header-export-modal button ion-icon {
+    font-size: 1.4rem;
+}
+
+/* FORM EXPORT MODAL */
+.form-export-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+/* FORM EXPORT CONTENT CONTAINER */
+.div-form-export-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.div-form-export-content-container p {
+    font-size: 1.4rem;
+}
+
+/* FORM EXPORT MULTI INPUT CONTAINER */
+.div-form-export-multi-input-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+}
+
+/* FORM EXPORT INPUT CONTAINER */
+.div-form-export-input-container button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--container-light);
+    box-shadow: inset 0 0 0 0.2rem var(--container-light-gray);
+    border: unset;
+    border-radius: 2.4rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-form-export-input-container:first-child button:hover,
+.div-form-export-input-container:first-child button.active {
+    background-color: var(--color-green-disabled);
+    box-shadow: inset 0 0 0 0.4rem var(--color-green);
+}
+
+.div-form-export-input-container:last-child button:hover,
+.div-form-export-input-container:last-child button.active {
+    background-color: var(--brand-blue-accent-disabled);
+    box-shadow: inset 0 0 0 0.4rem var(--brand-blue-accent);
+}
+
+.div-form-export-input-container button ion-icon {
+    font-size: 5.6rem;
+}
+
+.div-form-export-input-container:first-child button ion-icon {
+    color: var(--color-green);
+}
+
+.div-form-export-input-container:last-child button ion-icon {
+    color: var(--brand-blue-accent);
+}
+
+.div-form-export-input-container button span {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+/* BUTTON FORM EXPORT SUBMIT */
+.form-export-modal > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem;
+    font-size: 1.4rem;
+    color: var(--text-white);
+    background-color: var(--color-green);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.form-export-modal > button:hover {
+    background-color: var(--color-green-hover);
+}
+
+.form-export-modal > button ion-icon {
+    font-size: 1.6rem;
+}
+
+.form-export-modal > button ion-icon,
+.form-export-modal > button span {
+    color: inherit;
+}

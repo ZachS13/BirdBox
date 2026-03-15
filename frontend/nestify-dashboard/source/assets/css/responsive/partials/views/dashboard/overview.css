@@ -1,0 +1,25 @@
+@media (max-width: 576px) {
+
+    /* DASHBOARD VIEW OVERVIEW CONTAINER */
+    .div-dashboard-view-overview-container {
+        gap: 1.6rem;
+    }
+
+    /* DASHBOARD VIEW OVERVIEW STATISTICS CONTAINER */
+    .div-dashboard-view-overview-statistics-container {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+
+    /* DASHBOARD VIEW OVERVIEW RECENT IMAGES LIST */
+    .dashboard-view-overview-recent-images-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.6rem;
+    }
+
+    /* DASHBOARD VIEW OVERVIEW RECENT IMAGES LIST ITEM */
+    .dashboard-view-overview-recent-images-list-item ion-icon {
+        font-size: 2.4rem;
+    }
+
+}

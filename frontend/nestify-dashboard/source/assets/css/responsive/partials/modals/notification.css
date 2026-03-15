@@ -1,0 +1,23 @@
+@media (max-width: 576px) {
+    /* NOTIFICATION MODAL CONTAINER */
+    .div-notification-modal-container {
+        top: -6.4rem;
+        bottom: unset;
+        left: 50%;
+        right: unset;
+        width: 100%;
+        padding: 0 1.6rem;
+        transform: translateX(-50%) scale(0.8);
+    }
+
+    .active.div-notification-modal-container {
+        top: 8rem;
+        bottom: unset;
+        transform: translateX(-50%) scale(1);
+    }
+
+    /* NOTIFICATION MODAL */
+    .div-notification-modal {
+        width: 100%;
+    }
+}

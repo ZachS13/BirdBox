@@ -1,0 +1,68 @@
+:root {
+    /* BRAND COLORS */
+    --brand-green-core: #4e801f;
+    --brand-green-accent: #78aa00;
+    --brand-green-accent-disabled: #e4edcf;
+    --brand-blue-core: #004c97;
+    --brand-blue-accent: #147bd1;
+    --brand-blue-accent-disabled: #d8e2f5;
+
+    /* ACCENT COLORS */
+    --accent-red-orange: #c05131;
+    --accent-red-orange-faded: #fbece7;
+    --accent-yellow: #eaaa00;
+    --accent-yellow-faded: #fff5e7;
+    --accent-purple: #8246af;
+    --accent-purple-faded: #f3eef6;
+    --accent-lilac: #ad96dc;
+    --accent-lilac-faded: #f6f3fa;
+    --accent-red: #9e2a2b;
+    --accent-red-faded: #f7e8e6;
+    --accent-sky: #419edf;
+    --accent-sky-faded: #edf4fb;
+    --accent-teal: #008aa2;
+    --accent-teal-faded: #e5f2f4;
+    --accent-forest-green: #006938;
+    --accent-forest-green-faded: #e6eee8;
+
+    /* STATUS COLORS */
+    /* --status-completed: #60dba0;
+    --status-completed: #00a63e;
+    --status-doing: #fad200;
+    --status-cancelled: #e7000b;
+    --status-vacant: #d5d5d5; */
+
+    /* PRIORITY COLORS */
+    /* --priority-completed: #00a63e;
+    --priority-doing: #fad200;
+    --priority-cancelled: #e7000b; */
+
+    /* REGULAR COLORS */
+    --color-green: #00a63e;
+    --color-green-hover: #59c582;
+    --color-green-disabled: #ccedd8;
+    --color-yellow: #fad200;
+    --color-red: #e7000b;
+    --color-red-hover: #ef5960;
+    --color-red-disabled: #faccce;
+
+    /* TEXT COLORS */
+    --text-black: #151515;
+    --text-gray: #767676;
+    --text-disabled: #adadad;
+    --text-white: #fafafa;
+
+    /* CONTAINER COLORS */
+    --container-white: #fafafa;
+    --container-light: #f6f6f6;
+    --container-light-gray: #ebebea;
+    --container-gray: #e0dfde;
+    --container-black: #151515;
+
+    /* STROKE COLORS */
+    --stroke-faded: #15151514;
+    --stroke-white: #fafafa;
+    --stroke-gray: #d9d9d6;
+    --stroke-light-gray: #ebebea;
+    --stroke-black: #151515;
+}

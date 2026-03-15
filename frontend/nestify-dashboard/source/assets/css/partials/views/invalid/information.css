@@ -1,0 +1,59 @@
+/* INVALID VIEW MODAL INFORMATION CONTAINER */
+.div-invalid-view-modal-information-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-invalid-view-modal-information-container h1 {
+    font-size: 32rem;
+    color: var(--brand-blue-core);
+}
+
+/* HEADER INVALID VIEW MODAL INFORMATION CONTAINER */
+.header-invalid-view-modal-information-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: -2.4rem;
+    text-align: center;
+}
+
+.header-invalid-view-modal-information-container h2 {
+    font-size: 2rem;
+}
+
+.header-invalid-view-modal-information-container p {
+    font-size: 1.4rem;
+}
+
+.div-invalid-view-modal-information-container a:link,
+.div-invalid-view-modal-information-container a:visited {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.6rem;
+    padding: 0.8rem 1.2rem;
+    color: var(--text-white);
+    background-color: var(--color-green);
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+}
+
+.div-invalid-view-modal-information-container a:hover,
+.div-invalid-view-modal-information-container a:active {
+    background-color: var(--color-green-hover);
+}
+
+.div-invalid-view-modal-information-container a:link ion-icon,
+.div-invalid-view-modal-information-container a:visited ion-icon {
+    font-size: 1.6rem;
+    color: inherit;
+}
+
+.div-invalid-view-modal-information-container a:link span,
+.div-invalid-view-modal-information-container a:visited span {
+    font-size: 1.4rem;
+    color: inherit;
+}

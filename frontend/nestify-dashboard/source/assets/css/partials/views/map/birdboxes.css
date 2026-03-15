@@ -1,0 +1,157 @@
+/* MAP VIEW BIRDBOXES LIST CONTAINER */
+.div-map-view-birdboxes-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 40rem;
+    margin-left: auto;
+    padding: 2.4rem;
+    background-color: var(--container-white);
+    box-shadow:
+        inset 0 0 0 0.12rem var(--stroke-light-gray),
+        0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+}
+
+/* HEADER MAP VIEW BIRDBOXES LIST CONTAINER */
+.header-map-view-birdboxes-list-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* HEADER MAP VIEW BIRDBOXES LIST INFO CONTAINER */
+.div-header-map-view-birdboxes-list-info-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div-header-map-view-birdboxes-list-info-container ion-icon {
+    font-size: 2.4rem;
+    color: var(--color-green);
+}
+
+.div-header-map-view-birdboxes-list-info-container h2 {
+    font-size: 2rem;
+}
+
+.header-map-view-birdboxes-list-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--color-green);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.header-map-view-birdboxes-list-container button:hover,
+.header-map-view-birdboxes-list-container button.active {
+    background-color: var(--container-light);
+}
+
+.header-map-view-birdboxes-list-container button ion-icon {
+    font-size: 1.6rem;
+}
+
+/* MAP VIEW BIRDBOXES LIST */
+.map-view-birdboxes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* MAP VIEW BIRDBOXES LIST ITEM */
+.map-view-birdboxes-list-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.2rem;
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+}
+
+.map-view-birdboxes-list-item:hover {
+    background-color: var(--container-light);
+}
+
+.map-view-birdboxes-list-item a:link,
+.map-view-birdboxes-list-item a:visited {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.map-view-birdboxes-list-item p {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.map-view-birdboxes-list-item span {
+    display: -webkit-box;
+    font-size: 1.4rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: var(--text-gray);
+    overflow: hidden;
+}
+
+/* FOOTER MAP VIEW BIRDBOXES LIST CONTAINER */
+.footer-map-view-birdboxes-list-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+}
+
+.footer-map-view-birdboxes-list-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.footer-map-view-birdboxes-list-container button:hover {
+    background-color: var(--container-light);
+}
+
+.footer-map-view-birdboxes-list-container button ion-icon {
+    font-size: 1.6rem;
+}
+
+.footer-map-view-birdboxes-list-container button span {
+    font-size: 1.4rem;
+}
+
+/* MAP VIEW BIRDBOXES CONTAINER OVERLAY */
+.div-map-view-birdboxes-container-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    transform: translateX(-100%);
+    /* transition: all 0.2s ease-in-out; */
+    z-index: 9997;
+}

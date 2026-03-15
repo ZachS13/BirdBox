@@ -1,0 +1,13 @@
+@media (max-width: 576px) {
+    /* MAP VIEW LEAFLET CONTAINER */
+    .div-map-view-pigeon-container {
+        width: 100%;
+        height: calc(100vh - 6.4rem);
+        box-shadow: unset;
+        border-radius: 0;
+    }
+
+    .div-map-view-pigeon-container button {
+        display: flex;
+    }
+}

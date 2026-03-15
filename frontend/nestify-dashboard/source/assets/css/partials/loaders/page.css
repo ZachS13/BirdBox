@@ -1,0 +1,120 @@
+/* PAGE LOADER MODAL CONTAINER */
+.div-page-loader-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--container-white);
+    transition: all 0.4s ease-in-out;
+    z-index: -1;
+    opacity: 0;
+}
+
+.active.div-page-loader-modal-container {
+    z-index: 9999;
+    opacity: 1;
+}
+
+/* PAGE LOADER MODAL */
+.div-page-loader-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    width: 48rem;
+    max-width: calc(100% - 3.2rem);
+    padding: 2.4rem;
+    transform: translate(-50%, -50%);
+}
+
+/* OUTER SPINNING CONTAINER */
+.div-outer-spinning-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18rem;
+    height: 18rem;
+    box-shadow: inset 0 0 0 0.8rem rgba(78, 128, 31, 0.12);
+    border-radius: 50%;
+}
+
+.div-outer-spinning-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18rem;
+    height: 18rem;
+    background: conic-gradient(var(--brand-green-core) 90deg, transparent 0deg);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation-name: spinning-container;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: normal;
+}
+
+@keyframes spinning-container {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.div-outer-spinning-container::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16.8rem;
+    height: 16.8rem;
+    background-color: var(--container-white);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* INNER SPINNING CONTAINER */
+.div-inner-spinning-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12rem;
+    height: 12rem;
+    background-color: var(--brand-green-core);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.div-inner-spinning-container ion-icon {
+    margin-right: -1.2rem;
+    font-size: 8rem;
+    color: var(--text-white);
+}
+
+/* HEADER PAGE LOADER MODAL */
+.header-page-loader-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.header-page-loader-modal h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.header-page-loader-modal p {
+    font-size: 1.4rem;
+}

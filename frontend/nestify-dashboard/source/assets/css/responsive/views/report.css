@@ -1,0 +1,12 @@
+@media (max-width: 576px) {
+    /* REPORT VIEW CONTAINER */
+    .div-report-view-container {
+        gap: 1.6rem;
+        padding: 1.6rem;
+    }
+
+    /* REPORT VIEW ANALYTICS CONTAINER */
+    .div-report-view-analytics-container {
+        gap: 1.6rem;
+    }
+}

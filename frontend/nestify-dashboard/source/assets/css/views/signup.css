@@ -1,0 +1,31 @@
+/* SIGNUP VIEW CONTAINER */
+.div-signup-view-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, #006938, #367e53);
+}
+
+/* SIGNUP VIEW MODAL */
+.div-signup-view-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 4.8rem;
+    width: 48rem;
+    max-width: calc(100% - 3.2rem);
+    padding: 3.2rem 2.4rem;
+    background-color: var(--container-white);
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+}
+
+.div-signup-view-modal > img {
+    width: 20rem;
+    margin: 0 auto;
+}

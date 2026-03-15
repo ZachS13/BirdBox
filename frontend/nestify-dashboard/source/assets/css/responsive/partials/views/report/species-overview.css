@@ -1,0 +1,7 @@
+@media (max-width: 576px) {
+    /* REPORT VIEW SPECIES OVERVIEW CONTAINER */
+    .div-report-view-species-overview-container {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+}

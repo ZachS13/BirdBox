@@ -1,0 +1,25 @@
+@media (max-width: 576px) {
+
+    /* HEADER DASHBOARD VIEW GENERAL CONTAINER */
+    .header-dashboard-view-general-container {
+        align-items: unset;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 1.6rem;
+    }
+
+    /* DASHBOARD VIEW GENERAL TOGGLE LIST */
+    .dashboard-view-general-toggle-list {
+        overflow-x: scroll;
+    }
+
+    .dashboard-view-general-toggle-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* DASHBOARD VIEW GENERAL ACTIONS CONTAINER */
+    .div-dashboard-view-general-actions-container button {
+        flex-grow: 1;
+    }
+
+}

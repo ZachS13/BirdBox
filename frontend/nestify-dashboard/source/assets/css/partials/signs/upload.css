@@ -1,0 +1,41 @@
+/* UPLOAD SIGN CONTAINER */
+.div-upload-sign-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 16rem;
+}
+
+.div-upload-sign-container p {
+    font-size: 1.6rem;
+}
+
+.div-upload-sign-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    color: var(--text-white);
+    background-color: var(--brand-blue-accent);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-upload-sign-container button ion-icon {
+    font-size: 1.6rem;
+    color: inherit;
+}
+
+.div-upload-sign-container button span {
+    font-size: 1.4rem;
+    color: inherit;
+}
+
+.div-upload-sign-container button:hover,
+.div-upload-sign-container button.active {
+    background-color: var(--brand-blue-core);
+}

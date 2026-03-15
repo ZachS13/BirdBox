@@ -1,0 +1,99 @@
+/* MAIN NAV CONTAINER */
+.div-main-nav-container {
+    padding: 1.6rem 2.4rem;
+    background-color: var(--container-white);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+}
+
+.div-main-nav-container .div-main-edge-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.div-main-nav-container .div-main-edge-container > a:link img,
+.div-main-nav-container .div-main-edge-container > a:visited img {
+    width: 16rem;
+}
+
+.div-main-nav-container .div-main-edge-container > button {
+    display: none;
+    align-items: baseline;
+    justify-content: center;
+    padding: 0.8rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-main-nav-container .div-main-edge-container > button:hover {
+    background-color: var(--container-light);
+}
+
+.div-main-nav-container .div-main-edge-container > button ion-icon {
+    font-size: 1.6rem;
+}
+
+/* MAIN NAV CONTAINER */
+/* MAIN NAV CONTAINER LIST */
+.main-nav-container,
+.main-nav-container-list {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+}
+
+/* MAIN NAV CONTAINER LIST ITEM */
+.main-nav-container-list-item a:link,
+.main-nav-container-list-item a:visited {
+    position: relative;
+    padding: 0.6rem 0.8rem;
+    font-size: 1.4rem;
+}
+
+.main-nav-container-list-item a:link:after,
+.main-nav-container-list-item a:visited:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2rem;
+    background-color: var(--container-white);
+    border-radius: 0.4rem;
+    /* transition: all 0.2s ease-in-out; */
+}
+
+.main-nav-container-list-item a:hover::after,
+.main-nav-container-list-item a:active::after,
+.main-nav-container-list-item a.active:link::after,
+.main-nav-container-list-item a.active:visited::after {
+    background-color: var(--container-black);
+}
+
+/* MAIN CONTAINER NAV */
+.main-nav-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.2rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.main-nav-container button span {
+    font-size: 1.4rem;
+}
+
+.main-nav-container button:hover,
+.main-nav-container button.active {
+    background-color: var(--container-light);
+}

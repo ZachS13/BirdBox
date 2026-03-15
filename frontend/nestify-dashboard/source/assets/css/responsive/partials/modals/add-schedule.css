@@ -1,0 +1,6 @@
+@media (max-width: 576px) {
+    /* FORM ADD SCHEDULE MULTI INPUT CONTAINER */
+    .div-form-add-schedule-multi-input-container {
+        grid-template-columns: 1fr;
+    }
+}

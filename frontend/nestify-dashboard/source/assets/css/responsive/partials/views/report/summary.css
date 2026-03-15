@@ -1,0 +1,11 @@
+@media (max-width: 576px) {
+    /* REPORT VIEW SUMMARY CONTAINER */
+    .div-report-view-summary-container {
+        gap: 2.4rem;
+    }
+
+    /* REPORT VIEW SUMMARY LIST */
+    .report-view-summary-list {
+        grid-template-columns: 1fr;
+    }
+}

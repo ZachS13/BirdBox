@@ -1,0 +1,79 @@
+@media (max-width: 576px) {
+    /* MAIN NAV CONTAINER */
+    .div-main-nav-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 6.4rem;
+        padding: 0 1.6rem;
+        box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.12);
+        z-index: 2;
+    }
+
+    .div-main-nav-container .div-main-edge-container > a:link img,
+    .div-main-nav-container .div-main-edge-container > a:visited img {
+        width: 12rem;
+    }
+
+    .div-main-nav-container .div-main-edge-container > button {
+        display: flex;
+    }
+
+    /* MAIN NAV CONTAINER */
+    .main-nav-container {
+        position: absolute;
+        top: 6.4rem;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        gap: 1.2rem;
+        width: 100%;
+        padding: 1.6rem;
+        background-color: var(--container-white);
+        box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.12);
+    }
+
+    .active.main-nav-container {
+        display: flex;
+    }
+
+    /* MAIN NAV CONTAINER LIST */
+    .main-nav-container-list {
+        flex-direction: column;
+        gap: 1.2rem;
+        width: 100%;
+    }
+
+    /* MAIN NAV CONTAINER LIST ITEM */
+    .main-nav-container-list-item {
+        width: 100%;
+    }
+
+    .main-nav-container-list-item a:link,
+    .main-nav-container-list-item a:visited {
+        display: inline-block;
+        width: 100%;
+        padding: 1.2rem;
+        box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+        border-radius: 0.8rem;
+    }
+
+    .main-nav-container-list-item a:link:after,
+    .main-nav-container-list-item a:visited:after {
+        visibility: hidden;
+    }
+
+    .main-nav-container-list-item a:hover,
+    .main-nav-container-list-item a:active,
+    .main-nav-container-list-item a.active:link,
+    .main-nav-container-list-item a.active:visited {
+        background-color: var(--container-light);
+    }
+
+    /* MAIN CONTAINER NAV */
+    .main-nav-container button {
+        justify-content: flex-start;
+        width: 100%;
+        padding: 1.2rem;
+    }
+}

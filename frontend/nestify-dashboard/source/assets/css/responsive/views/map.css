@@ -1,0 +1,8 @@
+@media (max-width: 576px) {
+    /* MAP VIEW CONTAINER */
+    .div-map-view-container {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+}

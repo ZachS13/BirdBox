@@ -1,0 +1,54 @@
+/* REPORT VIEW SEASONAL HISTORY CONTAINER */
+.div-report-view-seasonal-history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+.div-report-view-seasonal-history-container h4 {
+    font-size: 1.6rem;
+}
+
+/* REPORT VIEW SEASONAL HISTORY CHART OVERVIEW CONTAINER */
+.div-report-view-seasonal-history-chart-overview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+/* REPORT VIEW SEASONAL HISTORY CHART LEGEND LIST */
+.report-view-seasonal-history-chart-legend-list {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+/* REPORT VIEW SEASONAL HISTORY CHART LEGEND LIST ITEM */
+.report-view-seasonal-history-chart-legend-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.report-view-seasonal-history-chart-legend-list-item ion-icon {
+    font-size: 2rem;
+}
+
+.report-view-seasonal-history-chart-legend-list-item:nth-child(1) ion-icon {
+    color: var(--accent-forest-green);
+}
+
+.report-view-seasonal-history-chart-legend-list-item:nth-child(2) ion-icon {
+    color: var(--brand-blue-core);
+}
+
+.report-view-seasonal-history-chart-legend-list-item:nth-child(3) ion-icon {
+    color: var(--accent-purple);
+}
+
+.report-view-seasonal-history-chart-legend-list-item span {
+    font-size: 1.4rem;
+}
