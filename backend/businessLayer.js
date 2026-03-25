@@ -252,38 +252,70 @@ async function getBoxSummary(id) {
     return boxQueries.getBoxSummary(id);
 }
 async function getBoxTelemetry(id) {
-    return boxQueries.getBoxTelemetry(id);
+    if (!id) throw badRequest("id is required");
+
+    const telemetry = await boxQueries.getBoxTelemetry(id);
+    if (!telemetry) throw notFound("Telemetry not found");
+
+    return telemetry;
 }
 async function getBoxDetections(id) {
     return boxQueries.getBoxDetections(id);
 }
 async function getBoxImages(id) {
-    return boxQueries.getBoxImages(id);
+    if (!id) throw badRequest("id is required");
+
+    const images = await boxQueries.getBoxImages(id);
+    if (!images) throw notFound("Images not found");
+
+    return images;
 }
 
 async function listBoxMaintenanceLogs(boxId) {
-    return boxQueries.getBoxMaintenanceLogs(boxId);
+    if (!boxId) throw badRequest("boxId is required");
+
+    const listLogs = await boxQueries.getBoxMaintenanceLogs(boxId);
+
+    return listLogs;
 }
 async function createBoxMaintenanceLog(boxId, data) {
+    if (!boxId) throw badRequest("boxId is required");
+
     return boxQueries.createBoxMaintenanceLog(boxId, data);
 }
 async function updateBoxMaintenanceLog(boxId, logId, data) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!logId) throw badRequest("logId is required");
+
     return boxQueries.updateBoxMaintenanceLog(boxId, logId, data);
 }
 async function deleteBoxMaintenanceLog(boxId, logId) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!logId) throw badRequest("logId is required");
+
     return boxQueries.deleteBoxMaintenanceLog(boxId, logId);
 }
 
 async function getBoxMaintenanceSchedule(boxId) {
+    if (!boxId) throw badRequest("boxId is required");
+    
     return boxQueries.getBoxMaintenanceSchedule(boxId);
 }
 async function createBoxMaintenanceSchedule(boxId, data) {
+    if (!boxId) throw badRequest("boxId is required");
+
     return boxQueries.createBoxMaintenanceSchedule(boxId, data);
 }
 async function updateBoxMaintenanceSchedule(boxId, scheduleId, data) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!scheduleId) throw badRequest("scheduleId is required");
+
     return boxQueries.updateBoxMaintenanceSchedule(boxId, scheduleId, data);
 }
 async function deleteBoxMaintenanceSchedule(boxId, scheduleId) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!scheduleId) throw badRequest("scheduleId is required");
+
     return boxQueries.deleteBoxMaintenanceSchedule(boxId, scheduleId);
 }
 
@@ -315,21 +347,44 @@ async function analyticsTargetEfficiency() {
 
 /* ---------------- IMAGES ---------------- */
 async function getImageById(id) {
-    return imageQueries.getImageById(id);
+    if (!id) throw badRequest("id is required");
+
+    const image = await imageQueries.getImageById(id);
+    if (!image) throw notFound("Image not found");
+
+    return image;
 }
+
 async function downloadImageById(id) {
     return imageQueries.getImageDownloadById(id);
 }
+
 async function deleteImageById(id) {
-    return imageQueries.deleteImageById(id);
+    if (!id) throw badRequest("id is required");
+
+    const delImage = await imageQueries.deleteImageById(id);
+    if (!delImage) throw notFound("Image not found");
+
+    return delImage;
 }
 
 /* ---------------- MAINTENANCE ---------------- */
 async function getMaintenanceLogById(id) {
-    return maintenanceQueries.getMaintenanceLogById(id);
+    if (!id) throw badRequest("id is required");
+
+    const maintenanceLog = await maintenanceQueries.getMaintenanceLogById(id);
+    if (!maintenanceLog) throw notFound("Maintenance log not found");
+
+    return maintenanceLog;
 }
+
 async function getMaintenanceScheduleById(id) {
-    return maintenanceQueries.getMaintenanceScheduleById(id);
+    if (!id) throw badRequest("id is required");
+
+    const maintenanceSchedule = await maintenanceQueries.getMaintenanceScheduleById(id);
+    if (!maintenanceSchedule) throw notFound("Maintenance schedule not found");
+
+    return maintenanceSchedule;
 }
 
 /* ---------------- EXPORTS ---------------- */
@@ -354,7 +409,6 @@ async function getSpeciesById(id) {
     if (!id) throw badRequest('species id is required');
 
     const species = await speciesQueries.getSpeciesById(id);
-
     if (!species) throw notFound('species not found');
 
     return species;
