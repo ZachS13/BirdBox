@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import "../../../../css/partials/modals/update-schedule.css";
 import "../../../../css/responsive/partials/modals/update-schedule.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../../config";
-import { formatDateTimeForUser } from "../../../helpers/datetime";
-import { capitalize } from "../../../helpers/string";
+import { SERVER } from "../../../../../config.js";
+import { formatDateTimeForUser } from "../../../helpers/datetime.js";
+import { capitalize } from "../../../helpers/string.js";
 
 const MAINTENANCE_STATUS = [
     { id: 1, type: "cancelled" },

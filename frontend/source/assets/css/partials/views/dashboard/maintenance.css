@@ -116,6 +116,7 @@
 
 .div-dashboard-view-maintenance-log-list-item-indicators-container span.doing,
 .div-dashboard-view-maintenance-log-list-item-indicators-container span.medium {
+    color: var(--text-black);
     background-color: var(--color-yellow);
 }
 
@@ -251,6 +252,7 @@
 
 .div-dashboard-view-maintenance-schedule-list-item-indicators-container span.doing,
 .div-dashboard-view-maintenance-schedule-list-item-indicators-container span.medium {
+    color: var(--text-black);
     background-color: var(--color-yellow);
 }
 

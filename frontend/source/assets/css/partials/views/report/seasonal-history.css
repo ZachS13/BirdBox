@@ -46,6 +46,10 @@
 }
 
 .report-view-seasonal-history-chart-legend-list-item:nth-child(3) ion-icon {
+    color: var(--accent-yellow);
+}
+
+.report-view-seasonal-history-chart-legend-list-item:nth-child(4) ion-icon {
     color: var(--accent-purple);
 }
 

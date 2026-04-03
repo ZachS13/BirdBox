@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "../../../../../css/partials/views/dashboard/settings.css";
 import "../../../../../css/responsive/partials/views/dashboard/settings.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../../../config";
+import { SERVER } from "../../../../../../config.js";
 
 const Settings = function ({ selectedBirdBox, setSelectedBirdBox, setNotificationVisibility, setNotificationStatus, setNotificationMessage }) {
     const [inputFocused, setInputFocused] = useState({});

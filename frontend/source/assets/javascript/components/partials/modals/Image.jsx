@@ -1,7 +1,13 @@
 // IMPORTED STYLESHEETS
 import "../../../../css/partials/modals/image.css";
+// IMPORTED CUSTOM MODULES
+import { SERVER } from "../../../../../config.js";
+import { formatDateTimeForUser } from "../../../helpers/datetime.js";
 
-const Image = function ({ onToggleImageModal }) {
+const Image = function ({ selectedImage, onToggleImageModal }) {
+    const { date, time } = formatDateTimeForUser(selectedImage.capturedAt);
+    const fileSizeInMb = (+selectedImage.fileSize / 1024 ** 2).toFixed(2);
+
     return (
         <div className="div-image-details-modal-container">
             <div className="div-image-details-modal">
@@ -16,9 +22,8 @@ const Image = function ({ onToggleImageModal }) {
                 </header>
                 <div className="div-image-details-modal-overview-container">
                     <div className="div-image-details-modal-image-overview-container">
-                        <div className="div-image-details-modal-image-placeholder-container">
-                            {/* <span>American Kestrel</span> */}
-                            <ion-icon src="/media/icons/icon-camera.svg" />
+                        <div className="div-image-details-modal-image-container">
+                            <img src={`${SERVER}${selectedImage.fileUrl}`} alt="Alt Text Goes Here" />
                         </div>
                         <button>
                             <ion-icon src="/media/icons/icon-download.svg" />
@@ -28,19 +33,21 @@ const Image = function ({ onToggleImageModal }) {
                     <ul className="image-details-modal-overview-info-list">
                         <li className="image-details-modal-overview-info-list-item">
                             <h4>Timestamp</h4>
-                            <p>01/13/26 @ 08:00 am</p>
+                            <p>
+                                {date} @ {time}
+                            </p>
                         </li>
                         <li className="image-details-modal-overview-info-list-item">
                             <h4>Species Identification</h4>
-                            <p>American Kestrel</p>
+                            <p>{selectedImage.speciesName}</p>
                         </li>
                         <li className="image-details-modal-overview-info-list-item">
                             <h4>Species Detection</h4>
-                            <p>95% Confidence</p>
+                            <p>{selectedImage.confidencePct}% Confidence</p>
                         </li>
                         <li className="image-details-modal-overview-info-list-item">
                             <h4>File Information</h4>
-                            <p>Size: 2.5 MB</p>
+                            <p>Size: {fileSizeInMb} MB</p>
                         </li>
                     </ul>
                 </div>

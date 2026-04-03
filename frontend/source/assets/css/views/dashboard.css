@@ -62,6 +62,7 @@
 }
 
 .div-selected-birdbox-name-container ion-icon {
+    flex-shrink: 0;
     color: var(--color-green);
 }
 
@@ -108,13 +109,17 @@
 }
 
 /* BIRDBOX OPTIONS LIST ITEM */
-.birdbox-options-list-item {
-    position: relative;
+.birdbox-options-list-item a:link,
+.birdbox-options-list-item a:visited {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
 }
 
 .birdbox-options-list-item span {
+    flex-grow: 1;
     display: -webkit-box;
-    padding-right: 3.2rem;
     font-size: 1.4rem;
     line-clamp: 1;
     -webkit-line-clamp: 1;
@@ -123,12 +128,9 @@
 }
 
 .birdbox-options-list-item ion-icon {
-    position: absolute;
-    top: 50%;
-    right: 0;
+    flex-shrink: 0;
     font-size: 1.6rem;
     color: var(--text-white);
-    transform: translateY(-50%);
     /* transition: all 0.2s ease-in-out; */
 }
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../../../../css/partials/modals/export.css";
 // import "../../../../css/responsive/partials/modals/export.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../../config";
+import { SERVER } from "../../../../../config.js";
 
 const Export = function ({ onToggleExportModal }) {
     const [selectedExportType, setSelectingExportType] = useState("csv");

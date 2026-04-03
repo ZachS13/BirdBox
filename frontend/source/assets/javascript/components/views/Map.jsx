@@ -4,7 +4,7 @@ import { Activity, useEffect, useState } from "react";
 import "../../../css/views/map.css";
 import "../../../css/responsive/views/map.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../config";
+import { SERVER } from "../../../../config.js";
 import PageLoader from "../partials/loaders/Page";
 import DetailsModal from "../partials/modals/Details";
 import BirdBoxModal from "../partials/modals/BirdBox";

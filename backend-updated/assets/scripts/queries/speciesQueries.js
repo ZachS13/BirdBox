@@ -1,37 +1,39 @@
 const db = require("../../sql/database.js");
 
 async function getAllSpecies() {
-    const [rows] = await db.query(
+    const [species] = await db.query(
         `
         SELECT 
-            * 
+            id,
+            name,
+            is_target AS isTarget 
         FROM 
-            species 
-        ORDER BY 
-            id DESC;
+            species;
         `,
     );
 
-    return rows.length ? rows : null;
+    return species.length ? species : null;
 }
 
-async function getSpeciesById(id) {
-    const [rows] = await db.execute(
+async function getSpeciesBy(column, value) {
+    const [species] = await db.execute(
         `
         SELECT 
-            * 
+            id,
+            name,
+            is_target AS isTarget 
         FROM 
             species 
         WHERE 
-            id = ?;
+            ${column} = ?;
         `,
-        [id],
+        [value],
     );
 
-    return rows[0] || null;
+    return species[0] || null;
 }
 
-async function createSpecies(data) {
+async function createNewSpecies(data) {
     const { name, isTarget } = data;
 
     const [result] = await db.execute(
@@ -58,8 +60,7 @@ async function updateSpeciesById(id, data) {
             species
         SET 
             name = ?, 
-            is_target = ?, 
-            updated_at = NOW()
+            is_target = ?
         WHERE 
             id = ?;
         `,
@@ -85,8 +86,8 @@ async function deleteSpeciesById(id) {
 
 module.exports = {
     getAllSpecies,
-    getSpeciesById,
-    createSpecies,
+    getSpeciesBy,
+    createNewSpecies,
     updateSpeciesById,
     deleteSpeciesById,
 };

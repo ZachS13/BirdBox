@@ -11,6 +11,7 @@ const LoginForm = function ({ setNotificationVisibility, setNotificationStatus, 
     const [inputFocused, setInputFocused] = useState({});
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const { authenticate } = useAuth();
 
     const handleSetInputFocused = (e) => setInputFocused((ids) => ({ ...ids, [e.target.getAttribute("id")]: true }));
@@ -18,6 +19,8 @@ const LoginForm = function ({ setNotificationVisibility, setNotificationStatus, 
     const handleSetUsername = (e) => setUsername(e.target.value);
 
     const handleSetPassword = (e) => setPassword(e.target.value);
+
+    const handleSetIsPasswordVisible = () => setIsPasswordVisible((v) => !v);
 
     const handleLoginFormSubmit = async (e) => {
         e.preventDefault();
@@ -58,19 +61,22 @@ const LoginForm = function ({ setNotificationVisibility, setNotificationStatus, 
                 <p>Enter your credentials to access the dashboard.</p>
             </header>
             <form className="form-login-view-modal" onSubmit={handleLoginFormSubmit} action="/auth/login" method="POST">
-                <div className="div-form-login-input-container">
+                <div className={`div-form-login-input-container${inputFocused.username && !username ? " invalid" : ""}`}>
                     <label htmlFor="username">
                         <ion-icon src="/media/icons/icon-user.svg" />
                     </label>
-                    <input id="username" type="text" name="username" value={username} onChange={handleSetUsername} onBlur={handleSetInputFocused} autoComplete="on" placeholder="Enter your username..." />
-                    <ion-icon src="/media/icons/icon-warning.svg" className={inputFocused.username && !username ? "visible" : "hidden"} />
+                    <input id="username" type="text" name="username" value={username} onChange={handleSetUsername} onBlur={handleSetInputFocused} autoComplete="on" placeholder="Enter your username..." autoFocus />
+                    {/* <ion-icon src="/media/icons/icon-warning.svg" className={inputFocused.username && !username ? "visible" : "hidden"} /> */}
                 </div>
-                <div className="div-form-login-input-container">
+                <div className={`div-form-login-input-container${inputFocused.password && !password ? " invalid" : ""}`}>
                     <label htmlFor="password">
                         <ion-icon src="/media/icons/icon-password.svg" />
                     </label>
-                    <input id="password" type="password" name="password" value={password} onChange={handleSetPassword} onBlur={handleSetInputFocused} autoComplete="on" placeholder="Enter your password..." />
-                    <ion-icon src="/media/icons/icon-warning.svg" className={inputFocused.password && !password ? "visible" : "hidden"} />
+                    <input id="password" type={isPasswordVisible ? "text" : "password"} name="password" value={password} onChange={handleSetPassword} onBlur={handleSetInputFocused} autoComplete="on" placeholder="Enter your password..." />
+                    <button type="button" onClick={handleSetIsPasswordVisible}>
+                        <ion-icon src={`/media/icons/icon-${isPasswordVisible ? "hide" : "show"}.svg`} />
+                    </button>
+                    {/* <ion-icon src="/media/icons/icon-warning.svg" className={inputFocused.password && !password ? "visible" : "hidden"} /> */}
                 </div>
                 <button type="submit">
                     <ion-icon src="/media/icons/icon-sign-in.svg" />

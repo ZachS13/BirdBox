@@ -17,7 +17,125 @@
     font-size: 2rem;
 }
 
-.header-report-view-container button {
+/* HEDER REPORT VIEW ACTIONS CONTAINER */
+.div-header-report-view-actions-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* REPORT DATE SELECT CONTAINER */
+.div-report-date-select-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* SELECTED REPORT DATE INFO CONTAINER */
+.div-selected-report-date-info-container {
+    position: relative;
+    width: 24rem;
+    padding: 0.8rem 3.2rem 0.8rem 0.8rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.8rem;
+}
+
+/* SELECTED REPORT DATE NAME CONTAINER */
+.div-selected-report-date-name-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.div-selected-report-date-name-container ion-icon {
+    flex-shrink: 0;
+    color: var(--color-green);
+}
+
+.div-selected-report-date-name-container p {
+    flex-grow: 1;
+    display: -webkit-box;
+    font-size: 1.4rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.div-selected-report-date-name-container ion-icon {
+    font-size: 1.4rem;
+}
+
+.div-selected-report-date-info-container > ion-icon {
+    position: absolute;
+    top: 50%;
+    right: 0.8rem;
+    font-size: 1.6rem;
+    color: var(--text-gray);
+    transform: translateY(-50%);
+}
+
+/* REPORT DATE OPTIONS LIST */
+.report-date-options-list {
+    position: absolute;
+    bottom: -0.8rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--container-white);
+    box-shadow:
+        inset 0 0 0 0.12rem var(--stroke-light-gray),
+        0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.8rem;
+    transform: translateY(100%);
+    z-index: 1;
+}
+
+/* REPORT DATE OPTIONS LIST ITEM */
+.report-date-options-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+}
+
+.disabled.report-date-options-list-item {
+    pointer-events: unset;
+    opacity: 0.2;
+}
+
+.report-date-options-list-item span {
+    flex-grow: 1;
+    display: -webkit-box;
+    font-size: 1.4rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.report-date-options-list-item ion-icon {
+    flex-shrink: 0;
+    font-size: 1.6rem;
+    color: var(--text-white);
+    /* transition: all 0.2s ease-in-out; */
+}
+
+.report-date-options-list-item:hover ion-icon,
+.active.report-date-options-list-item ion-icon {
+    color: var(--text-gray);
+}
+
+.disabled.report-date-options-list-item ion-icon {
+    color: var(--text-white);
+}
+
+.div-header-report-view-actions-container button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,16 +149,16 @@
     cursor: pointer;
 }
 
-.header-report-view-container button:hover {
+.div-header-report-view-actions-container button:hover {
     background-color: var(--color-green-hover);
 }
 
-.header-report-view-container button ion-icon {
+.div-header-report-view-actions-container button ion-icon {
     font-size: 1.6rem;
     color: inherit;
 }
 
-.header-report-view-container button span {
+.div-header-report-view-actions-container button span {
     font-size: 1.4rem;
     color: inherit;
 }

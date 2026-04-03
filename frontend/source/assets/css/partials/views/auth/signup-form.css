@@ -58,6 +58,10 @@
     color: var(--text-gray);
 }
 
+.invalid.div-form-signup-input-container label ion-icon {
+    color: var(--color-red);
+}
+
 .div-form-signup-input-container input {
     width: 100%;
     font-size: 1.4rem;
@@ -67,24 +71,46 @@
     border-radius: 0.8rem;
 }
 
-.div-form-signup-input-container > ion-icon {
+.invalid.div-form-signup-input-container input {
+    box-shadow: inset 0 0 0 0.12rem var(--color-red);
+}
+
+/* .div-form-signup-input-container > ion-icon {
     position: absolute;
     top: 25%;
     right: 1.2rem;
     font-size: 1.6rem;
     color: var(--color-red);
-}
+} */
 
-.div-form-signup-input-container > ion-icon.visible {
+/* .div-form-signup-input-container > ion-icon.visible {
     visibility: visible;
 }
 
 .div-form-signup-input-container > ion-icon.hidden {
     visibility: hidden;
+} */
+
+.div-form-signup-input-container button {
+    position: absolute;
+    top: 50%;
+    right: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: unset;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.div-form-signup-input-container button ion-icon {
+    font-size: 1.6rem;
+    color: var(--text-gray);
 }
 
 /* BUTTON FORM SIGNUP SUBMIT */
-.form-signup-view-modal button {
+.form-signup-view-modal > button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,16 +124,16 @@
     cursor: pointer;
 }
 
-.form-signup-view-modal button:hover {
+.form-signup-view-modal > button:hover {
     background-color: var(--color-green-hover);
 }
 
-.form-signup-view-modal button ion-icon {
+.form-signup-view-modal > button ion-icon {
     font-size: 1.6rem;
     color: inherit;
 }
 
-.form-signup-view-modal button span {
+.form-signup-view-modal > button span {
     font-size: 1.4rem;
     color: inherit;
 }

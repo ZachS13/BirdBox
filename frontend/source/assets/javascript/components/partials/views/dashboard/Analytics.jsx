@@ -1,19 +1,40 @@
 // IMPORTED CORE MODULES
-import { ResponsiveContainer, AreaChart, BarChart, CartesianGrid, XAxis, YAxis, Area, Bar } from "recharts";
+import { useEffect, useState } from "react";
+import { ResponsiveContainer, AreaChart, BarChart, CartesianGrid, Tooltip, XAxis, YAxis, Area, Bar } from "recharts";
 // IMPORTED STYLESHEETS
 import "../../../../../css/partials/views/dashboard/analytics.css";
 import "../../../../../css/responsive/partials/views/dashboard/analytics.css";
+// IMPORTED CUSTOM MODULES
+import { SERVER } from "../../../../../../config.js";
+import TooltipModal from "../../modals/Tooltip";
 
 const Analytics = function () {
+    const [species, setSpecies] = useState([]);
+
     const data = [
-        { Day: "Feb 1", Kestrel: 12, Bat: 3, Other: 9 },
-        { Day: "Feb 2", Kestrel: 10, Bat: 6, Other: 3 },
-        { Day: "Feb 3", Kestrel: 3, Bat: 9, Other: 10 },
-        { Day: "Feb 4", Kestrel: 6, Bat: 3, Other: 12 },
-        { Day: "Feb 5", Kestrel: 9, Bat: 6, Other: 3 },
-        { Day: "Feb 6", Kestrel: 3, Bat: 12, Other: 6 },
-        { Day: "Feb 7", Kestrel: 9, Bat: 10, Other: 3 },
+        { Date: "Feb 1", "American Kestrel": 12, "Brown Bat": 3, Other: 9 },
+        { Date: "Feb 2", "American Kestrel": 10, "Brown Bat": 6, Other: 3 },
+        { Date: "Feb 3", "American Kestrel": 3, "Brown Bat": 9, Other: 10 },
+        { Date: "Feb 4", "American Kestrel": 6, "Brown Bat": 3, Other: 12 },
+        { Date: "Feb 5", "American Kestrel": 9, "Brown Bat": 6, Other: 3 },
+        { Date: "Feb 6", "American Kestrel": 3, "Brown Bat": 12, Other: 6 },
+        { Date: "Feb 7", "American Kestrel": 9, "Brown Bat": 10, Other: 3 },
     ];
+
+    useEffect(() => {
+        (async () => {
+            const request = await fetch(`${SERVER}/species`);
+
+            const response = await request.json();
+
+            // Guard clause.
+            if (!response.success) return;
+
+            const { data } = response;
+
+            setSpecies(data);
+        })();
+    }, []);
 
     return (
         <div className="div-dashboard-view-analytics-container">
@@ -23,10 +44,11 @@ const Analytics = function () {
                     <ResponsiveContainer width="100%" height="240">
                         <AreaChart data={data}>
                             <CartesianGrid />
-                            <Area dataKey="Kestrel" type="monotone" fill="#4e801f" stroke="#4e801f" />
-                            <Area dataKey="Bat" type="monotone" fill="#004c97" stroke="#004c97" />
+                            <Tooltip content={<TooltipModal />} />
+                            <Area dataKey="American Kestrel" type="monotone" fill="#4e801f" stroke="#4e801f" />
+                            <Area dataKey="Brown Bat" type="monotone" fill="#004c97" stroke="#004c97" />
                             <Area dataKey="Other" type="monotone" fill="#eaaa00" stroke="#eaaa00" />
-                            <XAxis dataKey="Day" />
+                            <XAxis dataKey="Date" />
                             <YAxis />
                         </AreaChart>
                     </ResponsiveContainer>
@@ -34,42 +56,33 @@ const Analytics = function () {
                 <div className="div-dashboard-view-analytics-species-container">
                     <h2>Identified Species</h2>
                     <ul className="dashboard-view-analytics-species-list">
-                        <li className="dashboard-view-analytics-species-list-item">
-                            <div className="div-dashboard-view-analytics-species-list-item-info-container">
-                                <ion-icon src="/media/icons/icon-dot.svg" />
-                                <span>American Kestrel</span>
-                            </div>
-                            <span>Target</span>
-                        </li>
-                        <li className="dashboard-view-analytics-species-list-item">
-                            <div className="div-dashboard-view-analytics-species-list-item-info-container">
-                                <ion-icon src="/media/icons/icon-dot.svg" />
-                                <span>Brown Bat</span>
-                            </div>
-                            <span>Target</span>
-                        </li>
-                        <li className="dashboard-view-analytics-species-list-item">
-                            <div className="div-dashboard-view-analytics-species-list-item-info-container">
-                                <ion-icon src="/media/icons/icon-dot.svg" />
-                                <span>Other</span>
-                            </div>
-                            <span>Non-Target</span>
-                        </li>
+                        {species?.map(({ id, name, isTarget }) => {
+                            return (
+                                <li key={id} className="dashboard-view-analytics-species-list-item">
+                                    <div className="div-dashboard-view-analytics-species-list-item-info-container">
+                                        <ion-icon src="/media/icons/icon-dot.svg" />
+                                        <span>{name}</span>
+                                    </div>
+                                    <span className={isTarget ? "target" : "non-target"}>{isTarget ? "Target" : "Non-Target"}</span>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
             </div>
             <div className="div-dashboard-view-analytics-pattern-container">
                 <header className="header-dashboard-view-analytics-pattern-container">
-                    <h2>Daily Activity Pattern</h2>
-                    <p>Peak activity hours for each detected species.</p>
+                    <h2>Monthly Activity Pattern</h2>
+                    <p>Activity numbers for each detected species.</p>
                 </header>
                 <ResponsiveContainer width="100%" height="240">
                     <BarChart data={data}>
                         <CartesianGrid />
-                        <Bar dataKey="Kestrel" fill="#4e801f" />
-                        <Bar dataKey="Bat" fill="#004c97" />
+                        <Tooltip cursor={{ fill: "#ebebea" }} content={<TooltipModal />} />
+                        <Bar dataKey="American Kestrel" fill="#4e801f" />
+                        <Bar dataKey="Brown Bat" fill="#004c97" />
                         <Bar dataKey="Other" fill="#eaaa00" />
-                        <XAxis dataKey="Day" />
+                        <XAxis dataKey="Date" />
                         <YAxis />
                     </BarChart>
                 </ResponsiveContainer>

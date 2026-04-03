@@ -79,8 +79,14 @@
     width: 100%;
     box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
     border-radius: 0.8rem;
+    /* transition: background-color 0.2s ease-in-out; */
     overflow: hidden;
     cursor: pointer;
+}
+
+.dashboard-view-gallery-grid-layout-list-item:hover,
+.active.dashboard-view-gallery-grid-layout-list-item {
+    background-color: var(--container-light);
 }
 
 /* DASHBOARD VIEW GALLERY GRID LAYOUT LIST ITEM IMAGE CONTAINER */
@@ -91,6 +97,7 @@
     justify-content: center;
     aspect-ratio: 1 / 1;
     background-color: var(--container-light-gray);
+    overflow: hidden;
 }
 
 .div-dashboard-view-gallery-grid-layout-list-item-image-container span {
@@ -103,9 +110,11 @@
     border-radius: 0.4rem;
 }
 
-.div-dashboard-view-gallery-grid-layout-list-item-image-container ion-icon {
-    font-size: 2.4rem;
-    color: var(--text-gray);
+.div-dashboard-view-gallery-grid-layout-list-item-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* DASHBOARD VIEW GALLERY GRID LAYOUT LIST ITEM IMAGE DETAILS CONTAINER */
@@ -139,11 +148,11 @@
 }
 
 .div-dashboard-view-gallery-grid-layout-list-item-image-description-container p:first-child {
-    color: var(--text-gray);
+    color: var(--color-green);
 }
 
 .div-dashboard-view-gallery-grid-layout-list-item-image-description-container p:last-child {
-    color: var(--color-green);
+    color: var(--text-gray);
 }
 
 /* DASHBOARD VIEW GALLERY LIST LAYOUT LIST */
@@ -162,7 +171,13 @@
     padding: 1.2rem;
     box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
     border-radius: 0.8rem;
+    /* transition: background-color 0.2s ease-in-out; */
     cursor: pointer;
+}
+
+.dashboard-view-gallery-list-layout-list-item:hover,
+.active.dashboard-view-gallery-list-layout-list-item {
+    background-color: var(--container-light);
 }
 
 .dashboard-view-gallery-list-layout-list-item span {
@@ -191,23 +206,26 @@
     background-color: var(--container-light-gray);
     box-shadow: inset 0 0 0 0.12rem var(--stroke-gray);
     border-radius: 0.8rem;
+    overflow: hidden;
 }
 
-.div-dashboard-view-gallery-list-layout-list-item-image-container ion-icon {
-    font-size: 2rem;
-    color: var(--text-gray);
+.div-dashboard-view-gallery-list-layout-list-item-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* DASHBOARD VIEW GALLERY LIST LAYOUT LIST ITEM IMAGE DETAILS CONTAINER */
 .div-dashboard-view-gallery-list-layout-list-item-image-details-container {
     display: flex;
     flex-direction: column;
+    gap: 0.4rem;
     height: 100%;
     padding: 0.4rem 0;
 }
 
 .div-dashboard-view-gallery-list-layout-list-item-image-details-container p {
-    margin-bottom: auto;
     font-size: 1.4rem;
 }
 
@@ -235,4 +253,9 @@
     bottom: 0;
     right: 0;
     font-size: 1.4rem;
+}
+
+.div-dashboard-view-gallery-container > p {
+    font-size: 1.4rem;
+    color: var(--text-gray);
 }

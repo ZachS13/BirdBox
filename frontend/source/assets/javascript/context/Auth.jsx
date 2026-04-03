@@ -1,7 +1,7 @@
 // IMPORTED CORE MODULES
 import { createContext, useContext, useEffect, useState } from "react";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../config";
+import { SERVER } from "../../../config.js";
 
 const AuthContext = createContext();
 
