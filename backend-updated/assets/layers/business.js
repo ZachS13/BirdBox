@@ -271,6 +271,7 @@ async function createNewBox(data) {
 
     return boxQueries.createNewBox(data);
 }
+
 async function getBoxById(id) {
     const box = await boxQueries.getBoxById(id);
 
@@ -394,32 +395,32 @@ async function getExportById(id) {
 
 /* ---------------- SPECIES ---------------- */
 
-async function listSpecies() {
+async function listAllSpecies() {
     return speciesQueries.getAllSpecies();
 }
 
 async function getSpeciesById(id) {
-    if (!id) throw badRequest("Specie ID is required.");
+    if (!id) throw badRequest("Species ID is required.");
 
-    const species = await speciesQueries.getSpeciesById(id);
+    const species = await speciesQueries.getSpeciesBy("id", id);
 
-    if (!species) throw notFound("Specie was not found.");
+    if (!species) throw notFound("Species was not found.");
 
     return species;
 }
 
-async function createSpecies(data) {
-    if (!data.name) throw badRequest("Specie name is required.");
+async function createNewSpecies(data) {
+    if (!data.name) throw badRequest("Species name is required.");
 
-    const specie = await speciesQueries.getSpeciesByName(data.name);
+    const species = await speciesQueries.getSpeciesBy("name", data.name);
 
-    if (specie) throw conflict("Specie already exists.");
+    if (species) throw conflict("Species already exists.");
 
-    return speciesQueries.createSpecies(data);
+    return speciesQueries.createNewSpecies(data);
 }
 
 async function updateSpecies(id, data) {
-    if (!id) throw badRequest("Specie ID is required.");
+    if (!id) throw badRequest("Species ID is required.");
 
     return speciesQueries.updateSpeciesById(id, data);
 }
@@ -482,9 +483,9 @@ module.exports = {
     getExportById,
 
     // SPECIES
-    listSpecies,
+    listAllSpecies,
     getSpeciesById,
-    createSpecies,
+    createNewSpecies,
     updateSpecies,
     deleteSpecies,
 };

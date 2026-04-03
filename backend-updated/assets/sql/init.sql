@@ -5,13 +5,13 @@ CREATE DATABASE glt_dashboard;
 USE glt_dashboard;
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(250) NULL UNIQUE,
     password CHAR(60) NOT NULL,
-    last_login_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+    last_login_at DATETIME NOT NULL,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
@@ -21,11 +21,11 @@ INSERT INTO users VALUES
 (1, "Balsha98", "balsa.bazovic@gmail.com", "$2b$10$kcq5SbH7qRcjH.F7Xi18OeLmKXsph4NQ6gJ08X6G7wb5nlKkxK4r2", NOW(), NOW(), NOW());
 
 CREATE TABLE sessions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     token CHAR(60) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    expires_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_sessions_users
         FOREIGN KEY (user_id)
         REFERENCES users (id)
@@ -35,15 +35,14 @@ CREATE TABLE sessions (
 -- SELECT * FROM sessions;
 
 CREATE TABLE birdboxes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     trail_name VARCHAR(150) NOT NULL,
     latitude DECIMAL(9, 7) NOT NULL,
     longitude DECIMAL(9, 7) NOT NULL,
     notes TEXT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-        ON UPDATE CURRENT_TIMESTAMP
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
 INSERT INTO birdboxes VALUES
@@ -54,56 +53,68 @@ INSERT INTO birdboxes VALUES
 (5, "BirdBox 5", "Irene Gossin Nature Preserve", 43.162653, -77.476247, "", NOW(), NOW());
 
 CREATE TABLE birdbox_telemetry (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     birdbox_id INT NOT NULL,
-    battery_life INT,
-    temperature INT,
-    humidity INT,
-    recorded_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX (birdbox_id),
+    battery_life INT NOT NULL,
+    -- temperature INT,
+    -- humidity INT,
+    recorded_at DATETIME NOT NULL,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_telemetry_birdboxes
         FOREIGN KEY (birdbox_id)
         REFERENCES birdboxes(id)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+INSERT INTO birdbox_telemetry VALUES
+(1, 1, 80, NOW(), NOW()),
+(2, 2, 64, NOW(), NOW()),
+(3, 3, 32, NOW(), NOW()),
+(4, 4, 56, NOW(), NOW()),
+(5, 5, 12, NOW(), NOW());
+
 CREATE TABLE birdbox_images (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     birdbox_id INT NOT NULL,
-    file_url VARCHAR(500),
-    file_type VARCHAR(50),
-    file_size INT,
-    encryption CHAR(1),
-    captured_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX (birdbox_id),
+    file_url VARCHAR(64) NOT NULL,
+    file_type VARCHAR(8) NOT NULL,
+    file_size FLOAT NOT NULL,
+    -- encryption CHAR(1),
+    captured_at DATETIME NOT NULL,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_images_birdboxes
         FOREIGN KEY (birdbox_id)
         REFERENCES birdboxes(id)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+-- SELECT * FROM birdbox_images;
+
+INSERT INTO birdbox_images VALUES
+(1, 1, "/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp", "webp", 15667.2, NOW(), NOW()),
+(2, 1, "/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp", "webp", 15667.2, NOW(), NOW());
+
 CREATE TABLE species (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(250),
-    is_target INT DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-        ON UPDATE CURRENT_TIMESTAMP
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(250) NOT NULL,
+    is_target INT NOT NULL DEFAULT 0,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
-CREATE TABLE specie_detections (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+INSERT INTO species (id, name, is_target) VALUES
+(1, "American Kestrel", 1),
+(2, "Brown Bat", 1),
+(3, "Other", 0);
+
+CREATE TABLE species_detections (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     birdbox_id INT NOT NULL,
     species_id INT NOT NULL,
     image_id INT NOT NULL,
-    confidence_pct DECIMAL(5,2),
-    activity ENUM("perching","feeding","flying","other"),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX (birdbox_id),
-    INDEX (species_id),
-    INDEX (image_id),
+    confidence_pct DECIMAL(3, 1) NOT NULL,
+    -- activity ENUM("perching","feeding","flying","other") NOT NULL,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_detections_birdboxes
         FOREIGN KEY (birdbox_id)
         REFERENCES birdboxes(id)
@@ -118,15 +129,16 @@ CREATE TABLE specie_detections (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+INSERT INTO species_detections VALUES 
+(1, 1, 1, 1, 85, NOW()),
+(2, 1, 2, 2, 90, NOW());
+
 -- CREATE TABLE maintenance_logs (
---     id INT AUTO_INCREMENT PRIMARY KEY,
+--     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 --     user_id INT NOT NULL,
 --     birdbox_id INT NOT NULL,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
---         ON UPDATE CURRENT_TIMESTAMP,
---     INDEX (user_id),
---     INDEX (birdbox_id),
+--     created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 --     CONSTRAINT fk_logs_users
 --         FOREIGN KEY (user_id)
 --         REFERENCES users(id)
@@ -138,7 +150,7 @@ CREATE TABLE specie_detections (
 -- ) ENGINE=InnoDB;
 
 CREATE TABLE maintenance_schedules (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     birdbox_id INT NOT NULL,
     title VARCHAR(250) NOT NULL,
@@ -149,11 +161,8 @@ CREATE TABLE maintenance_schedules (
     status ENUM("cancelled", "doing", "completed") NULL DEFAULT "doing",
     created_by INT NOT NULL,
     deadline DATETIME NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-        ON UPDATE CURRENT_TIMESTAMP,
-    INDEX (user_id),
-    INDEX (birdbox_id),
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_logs_users
         FOREIGN KEY (user_id)
         REFERENCES users(id)
@@ -167,15 +176,14 @@ CREATE TABLE maintenance_schedules (
 -- SELECT * FROM maintenance_schedules;
 
 CREATE TABLE birdbox_overview_history (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     birdbox_id INT NOT NULL,
-    total_kestrels INT DEFAULT 0,
-    total_brown_bats INT DEFAULT 0,
-    total_others INT DEFAULT 0,
-    range_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    range_end TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX (birdbox_id),
+    total_kestrels INT NULL DEFAULT 0,
+    total_brown_bats INT NULL DEFAULT 0,
+    total_others INT NULL DEFAULT 0,
+    range_start DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    range_end DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_history_birdboxes
         FOREIGN KEY (birdbox_id)
         REFERENCES birdboxes(id)
@@ -183,13 +191,12 @@ CREATE TABLE birdbox_overview_history (
 ) ENGINE=InnoDB;
 
 CREATE TABLE exports (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    type ENUM("csv","pdf","json") NOT NULL,
-    url VARCHAR(500),
-    status ENUM("pending","completed","failed") DEFAULT "pending",
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX (user_id),
+    type ENUM("csv","pdf", "json") NOT NULL,
+    url VARCHAR(500) NOT NULL,
+    status ENUM("pending","completed","failed") NULL DEFAULT "pending",
+    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_exports_user
         FOREIGN KEY (user_id)
         REFERENCES users(id)
@@ -197,14 +204,12 @@ CREATE TABLE exports (
 ) ENGINE=InnoDB;
 
 CREATE TABLE app_error_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    heading VARCHAR(250),
-    description TEXT,
-    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX (user_id),
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    heading VARCHAR(250) NOT NULL,
+    description TEXT NOT NULL,
+    recorded_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_errors_users
         FOREIGN KEY (user_id)
         REFERENCES users(id)
-        ON DELETE SET NULL
 ) ENGINE=InnoDB;

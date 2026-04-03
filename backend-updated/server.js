@@ -23,12 +23,13 @@ app.use("/", meRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/boxes", boxRoutes);
+app.use("/images", imageRoutes);
+app.use("/assets/images", express.static("assets/images"));
+app.use("/maintenance", maintenanceRoutes);
+app.use("/species", speciesRoutes);
 app.use("/detections", detectionRoutes);
 app.use("/analytics", analyticsRoutes);
-app.use("/images", imageRoutes);
-app.use("/maintenance", maintenanceRoutes);
 app.use("/exports", exportRoutes);
-app.use("/species", speciesRoutes);
 
 // Server Initiation
 app.listen(PORT, () => console.log(`Server running on: http://localhost:${PORT}`));

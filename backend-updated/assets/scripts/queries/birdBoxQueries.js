@@ -1,21 +1,76 @@
 const db = require("../../sql/database.js");
 
 async function getAllBoxes() {
-    const [rows] = await db.query(
+    const [boxes] = await db.query(
         `
         SELECT 
-            id, 
-            name, 
-            trail_name AS trail, 
-            latitude AS lat, 
-            longitude AS lng, 
-            notes 
+            birdboxes.id, 
+            birdboxes.name, 
+            birdboxes.trail_name AS trail, 
+            birdboxes.latitude AS lat, 
+            birdboxes.longitude AS lng, 
+            birdboxes.notes,
+            birdbox_telemetry.battery_life AS battery
         FROM 
-            birdboxes;
+            birdboxes
+        JOIN
+            birdbox_telemetry
+        ON
+            birdboxes.id = birdbox_telemetry.birdbox_id;
         `,
     );
 
-    return rows.length ? rows : null;
+    // TODO: Format response for multiple images.
+    for (const box of boxes) {
+        const [images] = await db.execute(
+            `
+            SELECT
+                birdbox_images.id,
+                birdbox_images.file_url AS fileUrl,
+                birdbox_images.file_type AS fileType,
+                birdbox_images.file_size AS fileSize,
+                birdbox_images.captured_at AS capturedAt,
+                species.name AS speciesName,
+                species_detections.confidence_pct AS confidencePct
+            FROM
+                birdbox_images
+            JOIN
+                species_detections
+            ON
+                birdbox_images.id = species_detections.image_id
+            JOIN
+                species
+            ON
+                species_detections.species_id = species.id
+            WHERE
+                birdbox_images.birdbox_id = ?
+            ORDER BY
+                birdbox_images.captured_at DESC,
+                birdbox_images.id DESC;
+            `,
+            [box.id],
+        );
+
+        box.images = images;
+
+        const [detections] = await db.execute(
+            `
+            SELECT
+                COUNT(species_detections.id) AS totalSightings
+            FROM
+                species_detections
+            WHERE
+                birdbox_id = ?;
+            `,
+            [box.id],
+        );
+
+        const [{ totalSightings }] = detections;
+
+        box.totalSightings = totalSightings;
+    }
+
+    return boxes.length ? boxes : null;
 }
 
 async function getBoxById(id) {

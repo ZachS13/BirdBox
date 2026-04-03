@@ -10,7 +10,7 @@ router.get("/", async (_, res) => {
     try {
         const boxes = await business.listAllBoxes();
 
-        res.status(200).json({ success: true, data: boxes });
+        res.status(200).json({ success: true, message: "All boxes retrieved successfully.", data: boxes });
     } catch (e) {
         res.status(e.status || 500).json({
             success: false,
@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
 
         const box = await business.getBoxById(id);
 
-        res.status(200).json({ success: true, data: box });
+        res.status(200).json({ success: true, message: `Box (${id}) retrieved successfully.`, data: box });
     } catch (e) {
         res.status(e.status || 500).json({
             success: false,

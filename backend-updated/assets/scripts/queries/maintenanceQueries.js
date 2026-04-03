@@ -14,6 +14,7 @@ async function getAllMaintenanceSchedulesByBoxId(boxId, timeline) {
             maintenance_schedules.status, 
             maintenance_schedules.created_by AS createdBy, 
             maintenance_schedules.deadline, 
+            maintenance_schedules.updated_at AS updatedAt, 
             users.email, 
             users.username 
         FROM 
@@ -31,14 +32,14 @@ async function getAllMaintenanceSchedulesByBoxId(boxId, timeline) {
             AND 
                 deadline < NOW() 
             OR 
-                status = "completed" 
+                status != "doing" 
         `;
     else if (timeline === "upcoming")
         query += `
             AND 
                 deadline > NOW() 
             AND 
-                status != "completed" 
+                status = "doing" 
         `;
 
     query += `
