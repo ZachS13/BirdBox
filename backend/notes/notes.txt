@@ -43,3 +43,15 @@ backend/
    ├─ maintenanceQueries.js
    ├─ exportQueries.js
    └─ speciesQueries.js
+
+
+
+
+   seperating data based on dates -- SQL or on node
+
+   {
+      date
+      kestrels #
+      bat #
+      other #
+   }

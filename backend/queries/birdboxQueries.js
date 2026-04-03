@@ -2,14 +2,14 @@ const pool = require('../db.js');
 
 async function getAllBoxes() {
     const [rows] = await pool.execute(
-        'SELECT id, name, trail_name AS trail, latitude AS lat, longitude AS lng, notes FROM boxes'
+        'SELECT id, name, trail_name AS trail, latitude AS lat, longitude AS lng, notes FROM birdboxes'
     );
     return rows;
 }
 
 async function getBoxById(id) {
     const [rows] = await pool.execute(
-        'SELECT * FROM boxes WHERE id = ?',
+        'SELECT id, name, trail_name AS trail, latitude AS lat, longitude AS lng, notes FROM birdboxes WHERE id = ?',
         [id]
     );
     return rows[0] || null;
