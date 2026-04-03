@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import "../../../../css/partials/modals/add-schedule.css";
 import "../../../../css/responsive/partials/modals/add-schedule.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../../config";
-import { formatDateTimeForDb } from "../../../helpers/datetime";
-import { capitalize } from "../../../helpers/string";
+import { SERVER } from "../../../../../config.js";
+import { formatDateTimeForDb } from "../../../helpers/datetime.js";
+import { capitalize } from "../../../helpers/string.js";
 import { useAuth } from "../../../context/Auth";
 
 const PRIORITY_LEVELS = [

@@ -5,16 +5,35 @@ import { Link } from "react-router-dom";
 import "../../../../../css/partials/views/dashboard/overview.css";
 import "../../../../../css/responsive/partials/views/dashboard/overview.css";
 // IMPORTED CUSTOM MODULES
+import { SERVER } from "../../../../../../config.js";
 import ImageModal from "../../modals/Image";
 
 const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
     const [isViewingImage, setIsViewingImage] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("");
 
-    const handleToggleImageModal = () => setIsViewingImage((value) => !value);
+    const recentImages = selectedBirdBox?.images.filter((_, i) => i <= 5);
+
+    const handleToggleImageModal = (e) => {
+        const { target } = e;
+
+        setIsViewingImage((value) => !value);
+
+        const { localName } = target;
+
+        // Guard clause.
+        if (localName !== "img") return;
+
+        const { json } = target.dataset;
+
+        const image = JSON.parse(json);
+
+        setSelectedImage(image);
+    };
 
     return (
         <>
-            {isViewingImage && <ImageModal onToggleImageModal={handleToggleImageModal} />}
+            {isViewingImage && <ImageModal selectedImage={selectedImage} onToggleImageModal={handleToggleImageModal} />}
             <div className="div-dashboard-view-overview-container">
                 <div className="div-dashboard-view-overview-statistics-container">
                     <div className="div-dashboard-view-overview-statistics-overview-container">
@@ -25,7 +44,7 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                         <ul className="dashboard-view-overview-statistics-overview-list">
                             <li className="dashboard-view-overview-statistics-overview-list-item">
                                 <p>Total Sightings:</p>
-                                <span>16</span>
+                                <span>{selectedBirdBox?.totalSightings}</span>
                             </li>
                             <li className="dashboard-view-overview-statistics-overview-list-item">
                                 <p>Avg. Occupancy:</p>
@@ -59,9 +78,11 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                             <h4>Battery</h4>
                         </header>
                         <div className="div-dashboard-view-overview-battery-overview-info-container">
-                            <span>80%</span>
+                            <span>{selectedBirdBox?.battery}%</span>
                             <div className="div-dashboard-view-overview-battery-overview-percentage-container">
-                                <span>&nbsp;</span>
+                                <div className="div-dashboard-view-overview-battery-overview-percentage" style={{ width: `${selectedBirdBox?.battery}%` }}>
+                                    &nbsp;
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -76,11 +97,27 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                             <span>View All</span>
                         </button>
                     </header>
-                    <ul className="dashboard-view-overview-recent-images-list">
-                        <li className="dashboard-view-overview-recent-images-list-item" onClick={handleToggleImageModal}>
-                            <ion-icon src="/media/icons/icon-camera.svg" />
-                        </li>
-                    </ul>
+                    {recentImages?.length ? (
+                        <ul className="dashboard-view-overview-recent-images-list">
+                            {Array.from({ length: 6 }).map((_, i) => {
+                                if (recentImages[i]) {
+                                    return (
+                                        <li key={i} className="dashboard-view-overview-recent-images-list-item clickable" onClick={handleToggleImageModal}>
+                                            <img src={`${SERVER}${recentImages[i].fileUrl}`} alt="Alt Text Goes Here" data-json={JSON.stringify(recentImages[i])} />
+                                        </li>
+                                    );
+                                }
+
+                                return (
+                                    <li key={i} className="dashboard-view-overview-recent-images-list-item">
+                                        <ion-icon src="/media/icons/icon-camera.svg" />
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    ) : (
+                        <p>There are currently no images available to display.</p>
+                    )}
                 </div>
             </div>
         </>

@@ -1,0 +1,41 @@
+/* TOOLTIP MODAL CONTAINER */
+.div-tooltip-modal-container {
+    padding: 1.6rem;
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--stroke-light-gray);
+    border-radius: 0.4rem;
+}
+
+/* TOOLTIP MODAL */
+.div-tooltip-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.div-tooltip-modal h4 {
+    font-size: 1.2rem !important;
+    font-weight: normal;
+}
+
+.div-tooltip-modal h4 span {
+    font-weight: 700;
+}
+
+/* TOOLTIP MODAL PAYLOAD LIST */
+.tooltip-modal-payload-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+/* TOOLTIP MODAL PAYLOAD LIST ITEM */
+.tooltip-modal-payload-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tooltip-modal-payload-list-item ion-icon,
+.tooltip-modal-payload-list-item p {
+    font-size: 1.2rem !important;
+}

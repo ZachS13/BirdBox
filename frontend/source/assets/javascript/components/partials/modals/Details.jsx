@@ -1,8 +1,14 @@
+// IMPORTED CORE MODULES
+import { Link } from "react-router-dom";
 // IMPORTED STYLESHEETS
 import "../../../../css/partials/modals/details.css";
 import "../../../../css/responsive/partials/modals/details.css";
+// IMPORTED CUSTOM MODULES
+import { SERVER } from "../../../../../config.js";
 
 const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
+    const recentImages = selectedBirdBox.images.filter((_, i) => i <= 5);
+
     return (
         <div className="div-details-modal-container">
             <div className="div-details-modal">
@@ -24,20 +30,22 @@ const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
                                 <ion-icon src="/media/icons/icon-battery.svg" />
                                 <h4>Battery</h4>
                             </div>
-                            <span>80%</span>
+                            <span>{selectedBirdBox.battery}%</span>
                         </header>
                         <div className="div-details-modal-battery-overview-percentage-container">
-                            <span>&nbsp;</span>
+                            <div className="div-details-modal-battery-overview-percentage" style={{ width: `${selectedBirdBox.battery}%` }}>
+                                &nbsp;
+                            </div>
                         </div>
                     </div>
                     <div className="div-details-modal-analytics-overview-container">
                         <div className="div-details-modal-sightings-overview-container">
                             <p>Total Sightings</p>
-                            <span>16</span>
+                            <span>{selectedBirdBox.totalSightings}</span>
                         </div>
                         <div className="div-details-modal-occupancy-overview-container">
                             <p>Avg. Occupancy</p>
-                            <span>6.2 hrs</span>
+                            <span>0 hrs</span>
                         </div>
                     </div>
                     <div className="div-details-modal-images-overview-container">
@@ -45,22 +53,32 @@ const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
                             <ion-icon src="/media/icons/icon-camera.svg" />
                             <h4>Recent Images</h4>
                         </header>
-                        <ul className="details-modal-images-overview-list">
-                            <li className="details-modal-images-overview-list-item">
-                                <ion-icon src="/media/icons/icon-camera.svg" />
-                            </li>
-                            <li className="details-modal-images-overview-list-item">
-                                <ion-icon src="/media/icons/icon-camera.svg" />
-                            </li>
-                            <li className="details-modal-images-overview-list-item">
-                                <ion-icon src="/media/icons/icon-camera.svg" />
-                            </li>
-                        </ul>
+                        {selectedBirdBox.images.length ? (
+                            <ul className="details-modal-images-overview-list">
+                                {Array.from({ length: 3 }).map((_, i) => {
+                                    if (recentImages[i]) {
+                                        return (
+                                            <li key={i} className="details-modal-images-overview-list-item">
+                                                <img src={`${SERVER}${recentImages[i].fileUrl}`} alt="Alt Text Goes Here" />
+                                            </li>
+                                        );
+                                    }
+
+                                    return (
+                                        <li key={i} className="details-modal-images-overview-list-item">
+                                            <ion-icon src="/media/icons/icon-camera.svg" />
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        ) : (
+                            <p>There are currently no images available to display.</p>
+                        )}
                     </div>
-                    <a href="#">
-                        {/* <ion-icon src="" /> */}
+                    <Link to={`/dashboard/${selectedBirdBox.id}`}>
+                        <ion-icon src="/media/icons/icon-bird-house.svg" />
                         <span>View Full Details</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

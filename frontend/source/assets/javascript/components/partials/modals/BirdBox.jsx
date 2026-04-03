@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../../../../css/partials/modals/birdbox.css";
 import "../../../../css/responsive/partials/modals/birdbox.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../../config";
+import { SERVER } from "../../../../../config.js";
 
 const BirdBox = function ({ setBirdBoxes, setNotificationVisibility, setNotificationStatus, setNotificationMessage, onToggleBirdBoxModal }) {
     const [inputFocused, setInputFocused] = useState({});

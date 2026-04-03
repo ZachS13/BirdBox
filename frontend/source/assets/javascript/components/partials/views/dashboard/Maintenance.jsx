@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import "../../../../../css/partials/views/dashboard/maintenance.css";
 import "../../../../../css/responsive/partials/views/dashboard/maintenance.css";
 // IMPORTED MODULES
-import { SERVER } from "../../../../../../config";
-import { formatDateTimeForUser } from "../../../../helpers/datetime";
-import { capitalize } from "../../../../helpers/string";
+import { SERVER } from "../../../../../../config.js";
+import { formatDateTimeForUser } from "../../../../helpers/datetime.js";
+import { capitalize } from "../../../../helpers/string.js";
 import AddScheduleModal from "../../modals/AddSchedule";
 import UpdateScheduleModal from "../../modals/UpdateSchedule";
 
@@ -53,8 +53,8 @@ const Maintenance = function ({ selectedBirdBox }) {
                     {maintenanceSchedules?.past?.length ? (
                         <>
                             <ul className="dashboard-view-maintenance-log-list">
-                                {maintenanceSchedules.past.map(({ id, title, priority, status, deadline, username, email }, i) => {
-                                    const { date, time } = formatDateTimeForUser(deadline);
+                                {maintenanceSchedules.past.map(({ id, title, priority, status, updatedAt, username, email }, i) => {
+                                    const { date, time } = formatDateTimeForUser(updatedAt);
 
                                     return (
                                         <li
@@ -68,7 +68,7 @@ const Maintenance = function ({ selectedBirdBox }) {
                                                 <div className="div-header-dashboard-view-maintenance-log-list-item-info-container">
                                                     <p>{title}</p>
                                                     <span>
-                                                        Expected By: {date} @ {time}
+                                                        {capitalize(status)} On: {date} @ {time}
                                                     </span>
                                                 </div>
                                                 <span>

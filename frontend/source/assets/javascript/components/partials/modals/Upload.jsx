@@ -4,10 +4,13 @@ import { useState } from "react";
 import "../../../../css/partials/modals/upload.css";
 
 const Upload = function ({ birdBoxes, onToggleUploadModal }) {
+    const [inputFocused, setInputFocused] = useState({});
     const [isSelectingBirdBox, setIsSelectingBirdBox] = useState(false);
     const [uploadFileName, setUploadFileName] = useState("");
     const [uploadFileSource, setUploadFileSource] = useState(null);
     const [selectedBirdBox, setSelectedBirdBox] = useState(() => ({ id: 0, trail: "Choose a BirdBox" }));
+
+    const handleSetInputFocused = (e) => setInputFocused((ids) => ({ ...ids, [e.target.getAttribute("id")]: true }));
 
     const handleIsSelectingBirdBox = (e) => {
         setIsSelectingBirdBox((value) => !value);
@@ -51,7 +54,7 @@ const Upload = function ({ birdBoxes, onToggleUploadModal }) {
                     </div>
                     <div className="div-form-upload-input-container">
                         <span>Target Box</span>
-                        <div className="div-target-box-select-container">
+                        <div id="target-box" className="div-target-box-select-container" onBlur={handleSetInputFocused} tabIndex={0}>
                             <div className="div-selected-target-box-info-container" onClick={handleIsSelectingBirdBox}>
                                 <p>
                                     {selectedBirdBox.id ? `Box ${selectedBirdBox.id} -` : ""} {selectedBirdBox.trail}
@@ -77,6 +80,7 @@ const Upload = function ({ birdBoxes, onToggleUploadModal }) {
                                 </ul>
                             )}
                         </div>
+                        <ion-icon src="/media/icons/icon-warning.svg" className={inputFocused["target-box"] && !selectedBirdBox.id ? "visible" : "hidden"} />
                     </div>
                     <div className="div-form-upload-notice-container">
                         <p>Please make sure that the desired box matches the box data.</p>

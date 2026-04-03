@@ -179,12 +179,15 @@
 
 /* FORM UPDATE SCHEDULE OPTIONS LIST ITEM */
 .div-form-update-schedule-input-container > div ul li {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
 }
 
 .div-form-update-schedule-input-container > div ul li span {
+    flex-grow: 1;
     display: -webkit-box;
-    padding-right: 3.2rem;
     font-size: 1.4rem;
     line-clamp: 1;
     -webkit-line-clamp: 1;
@@ -193,12 +196,9 @@
 }
 
 .div-form-update-schedule-input-container > div ul li ion-icon {
-    position: absolute;
-    top: 50%;
-    right: 0;
+    flex-shrink: 0;
     font-size: 1.6rem;
     color: var(--text-white);
-    transform: translateY(-50%);
     /* transition: all 0.2s ease-in-out; */
 }
 
@@ -281,6 +281,7 @@
     padding: 0.8rem 1.2rem;
     color: var(--text-white);
     background-color: var(--container-black);
+    border: unset;
     border-radius: 0.8rem;
     /* transition: all 0.2s ease-in-out; */
     cursor: pointer;

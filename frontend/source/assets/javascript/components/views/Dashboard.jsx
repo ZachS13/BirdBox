@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import "../../../css/views/dashboard.css";
 import "../../../css/responsive/views/dashboard.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../config";
+import { SERVER } from "../../../../config.js";
 import PageLoader from "../partials/loaders/Page";
 import BirdBoxModal from "../partials/modals/BirdBox";
 import ExportModal from "../partials/modals/Export";
@@ -69,6 +69,8 @@ const Dashboard = function () {
             const request = await fetch(`${SERVER}/boxes`);
 
             const response = await request.json();
+
+            // console.log(response);
 
             // Guard clause.
             if (!response.success) return;
@@ -171,7 +173,7 @@ const Dashboard = function () {
                             <Analytics />
                         </Activity>
                         <Activity mode={selectedInnerView === "gallery" ? "visible" : "hidden"}>
-                            <Gallery />
+                            <Gallery images={selectedBirdBox?.images} />
                         </Activity>
                         <Activity mode={selectedInnerView === "maintenance" ? "visible" : "hidden"}>
                             <Maintenance selectedBirdBox={selectedBirdBox} />

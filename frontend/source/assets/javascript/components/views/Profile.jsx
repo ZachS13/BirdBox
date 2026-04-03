@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "../../../css/views/profile.css";
 import "../../../css/responsive/views/profile.css";
 // IMPORTED CUSTOM MODULES
-import { SERVER } from "../../../../config";
+import { SERVER } from "../../../../config.js";
 import { useAuth } from "../../context/Auth";
 import PageLoader from "../partials/loaders/Page";
 import Nav from "../partials/Nav";

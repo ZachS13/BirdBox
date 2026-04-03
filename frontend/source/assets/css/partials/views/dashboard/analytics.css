@@ -91,13 +91,12 @@
     border-radius: 0.4rem;
 }
 
-.dashboard-view-analytics-species-list-item:nth-child(1) > span,
-.dashboard-view-analytics-species-list-item:nth-child(2) > span {
+.dashboard-view-analytics-species-list-item > span.target {
     color: var(--text-white);
     background-color: var(--container-black);
 }
 
-.dashboard-view-analytics-species-list-item:nth-child(3) > span {
+.dashboard-view-analytics-species-list-item > span.non-target {
     background-color: var(--container-gray);
 }
 

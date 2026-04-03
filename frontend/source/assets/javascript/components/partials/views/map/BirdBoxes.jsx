@@ -21,9 +21,10 @@ const BirdBoxes = function ({ birdBoxes, isAddingBox, onToggleBirdBoxModal, isVi
                     {birdBoxes.map(({ id, name, trail }, i) => {
                         return (
                             <li key={i} className="map-view-birdboxes-list-item">
-                                <p>{name}</p>
-                                <span>{trail}</span>
-                                <Link to={`/dashboard/${id}`} />
+                                <Link to={`/dashboard/${id}`}>
+                                    <p>{name}</p>
+                                    <span>{trail}</span>
+                                </Link>
                             </li>
                         );
                     })}
