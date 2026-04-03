@@ -2,7 +2,9 @@ const db = require("../db");
 
 async function getImageById(id) {
     const sql = `
-        SELECT *
+        SELECT 
+            id,
+            file_url AS url
         FROM birdbox_images
         WHERE id = ?
         LIMIT 1

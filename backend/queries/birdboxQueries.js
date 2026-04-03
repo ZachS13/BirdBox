@@ -2,7 +2,7 @@ const pool = require('../db.js');
 
 async function getAllBoxes() {
     const [rows] = await pool.execute(
-        'SELECT * FROM boxes'
+        'SELECT id, name, trail_name AS trail, latitude AS lat, longitude AS lng, notes FROM boxes'
     );
     return rows;
 }
