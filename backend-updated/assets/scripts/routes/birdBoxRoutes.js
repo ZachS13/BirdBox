@@ -80,57 +80,69 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-/* ---------------- SUMMARY ---------------- */
+/* ---------------- ANALYTICS ---------------- */
 
-// router.get("/:id/summary", async (req, res) => {
-//     try {
-//         res.status(200).json({ success: true, data: await business.getBoxSummary(req.params.id) });
-//     } catch (e) {
-//         res.status(e.status || 500).json({
-//             success: false,
-//             message: e.message,
-//         });
-//     }
-// });
+router.get("/:id/analytics/week", async (req, res) => {
+    try {
+        const { id } = req.params;
 
-/* ---------------- TELEMETRY ---------------- */
+        const detections = await business.getBoxDetectionsPerWeek(id);
 
-// router.get("/:id/telemetry", async (req, res) => {
-//     try {
-//         res.status(200).json({ success: true, data: await business.getBoxTelemetry(req.params.id) });
-//     } catch (e) {
-//         res.status(e.status || 500).json({
-//             success: false,
-//             message: e.message,
-//         });
-//     }
-// });
+        res.status(200).json({ success: true, message: `Box (${id}) detections retrieved successfully.`, data: detections });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
+});
 
-/* ---------------- DETECTIONS ---------------- */
+router.get("/:id/analytics/month", async (req, res) => {
+    try {
+        const { id } = req.params;
 
-// router.get("/:id/detections", async (req, res) => {
-//     try {
-//         res.status(200).json({ success: true, data: await business.getBoxDetections(req.params.id) });
-//     } catch (e) {
-//         res.status(e.status || 500).json({
-//             success: false,
-//             message: e.message,
-//         });
-//     }
-// });
+        const detections = await business.getBoxDetectionsPerMonth(id);
+
+        res.status(200).json({ success: true, message: `Box (${id}) detections retrieved successfully.`, data: detections });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
+});
 
 /* ---------------- IMAGES ---------------- */
 
-// router.get("/:id/images", async (req, res) => {
-//     try {
-//         res.status(200).json({ success: true, data: await business.getBoxImages(req.params.id) });
-//     } catch (e) {
-//         res.status(e.status || 500).json({
-//             success: false,
-//             message: e.message,
-//         });
-//     }
-// });
+router.get("/:boxId/images", async (req, res) => {
+    try {
+        const { boxId } = req.params;
+
+        const images = await business.getBoxImages(boxId);
+
+        res.status(200).json({ success: true, message: `Box (${boxId}) images retrieved successfully.`, data: images });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
+});
+
+router.get("/:boxId/images/:imageId", async (req, res) => {
+    try {
+        const { boxId, imageId } = req.params;
+
+        const image = await business.getBoxImageByImageId(boxId, imageId);
+
+        res.status(200).json({ success: true, message: `Image (${imageId}) for box (${boxId}) was retrieved successfully.`, data: image });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
+});
 
 /* ---------------- MAINTENANCE ---------------- */
 

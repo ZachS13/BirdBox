@@ -5,45 +5,45 @@ const router = express.Router();
 
 router.get("/:id", async (req, res) => {
     try {
-        const image = await business.getImageById(req.params.id);
+        const { id } = req.params;
 
-        res.status(200).json({ ok: true, data: image });
-    } catch (error) {
-        const status = error.status || 500;
+        const image = await business.getImageById(id);
 
-        return res.status(status).json({
+        res.status(200).json({ success: true, message: `Image (${id}) was fetched successfully.`, data: image });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message,
+            message: e.message,
         });
     }
 });
 
 router.get("/:id/download", async (req, res) => {
     try {
-        const download = await business.downloadImageById(req.params.id);
+        const { id } = req.params;
 
-        res.status(200).json({ ok: true, data: download });
-    } catch (error) {
-        const status = error.status || 500;
+        const image = await business.downloadImageById(id);
 
-        return res.status(status).json({
+        res.status(200).json({ success: true, message: `Image (${id}) was fetched successfully.`, data: image });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message,
+            message: e.message,
         });
     }
 });
 
 router.delete("/:id", async (req, res) => {
     try {
-        const image = await business.deleteImageById(req.params.id);
+        const { id } = req.params;
 
-        res.status(200).json({ ok: true, data: image });
-    } catch (error) {
-        const status = error.status || 500;
+        const image = await business.deleteImageById(id);
 
-        return res.status(status).json({
+        res.status(200).json({ success: true, message: `Image (${id}) was deleted successfully.`, data: image });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message,
+            message: e.message,
         });
     }
 });

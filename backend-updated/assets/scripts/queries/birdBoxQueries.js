@@ -1,5 +1,9 @@
 const db = require("../../sql/database.js");
 
+const dateFormatter = require("../../utils/date.js");
+
+const SPECIES = ["American Kestrel", "Brown Bat", "Other"];
+
 async function getAllBoxes() {
     const [boxes] = await db.query(
         `
@@ -20,7 +24,6 @@ async function getAllBoxes() {
         `,
     );
 
-    // TODO: Format response for multiple images.
     for (const box of boxes) {
         const [images] = await db.execute(
             `
@@ -154,30 +157,174 @@ async function deleteBoxById(id) {
     return result.affectedRows > 0;
 }
 
-async function getBoxSummary(boxId) {
-    return { boxId: Number(boxId), status: "stub", lastSeen: null };
+async function getBoxDetectionsPerWeek(boxId) {
+    const [rows] = await db.execute(
+        `
+        SELECT
+            COUNT(species_detections.id) AS detections,
+            species.name AS speciesName,
+            species_detections.created_at AS createdAt
+        FROM
+            species_detections
+        JOIN
+            species ON species_detections.species_id = species.id
+        WHERE
+            species_detections.birdbox_id = ?
+        AND 
+            species_detections.created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+        GROUP BY
+            species_detections.created_at, species_detections.species_id
+        ORDER BY
+            species_detections.created_at ASC;
+        `,
+        [boxId],
+    );
+
+    const lastSevenDays = Array.from({ length: 7 }).map((_, i, arr) => {
+        const todaysDate = new Date();
+
+        const dateToFormat = todaysDate.setDate(todaysDate.getDate() - arr.length + i + 1);
+
+        return dateFormatter.formatDateToLocale(dateToFormat, "en-US");
+    });
+
+    const chartData = lastSevenDays.reduce((acc, date) => {
+        acc[date] = { Date: date };
+
+        SPECIES.forEach((name) => (acc[date][name] = 0));
+
+        return acc;
+    }, {});
+
+    rows.forEach(({ detections, speciesName, createdAt }) => {
+        const formattedDate = dateFormatter.formatDateToLocale(createdAt, "en-US");
+
+        if (chartData[formattedDate]) chartData[formattedDate][speciesName] = detections;
+    });
+
+    return chartData ? Object.values(chartData) : null;
 }
 
-async function getBoxTelemetry(boxId) {
-    return { boxId: Number(boxId), telemetry: [] };
+async function getBoxDetectionsPerMonth(boxId) {
+    const [rows] = await db.execute(
+        `
+        SELECT
+            COUNT(species_detections.id) AS detections,
+            species.name AS speciesName,
+            species_detections.created_at AS createdAt
+        FROM
+            species_detections
+        JOIN
+            species ON species_detections.species_id = species.id
+        WHERE
+            species_detections.birdbox_id = ?
+        AND 
+            species_detections.created_at >= DATE_FORMAT(NOW(), "%Y-%m-01")
+        AND 
+            species_detections.created_at <= NOW()
+        GROUP BY
+            species_detections.created_at, species_detections.species_id
+        ORDER BY
+            species_detections.created_at ASC;
+        `,
+        [boxId],
+    );
+
+    const currentMonthDays = () => {
+        const todaysDateObj = new Date();
+        const todaysDateYear = todaysDateObj.getFullYear();
+        const todaysDateMonth = todaysDateObj.getMonth();
+        const todaysDateDay = todaysDateObj.getDate();
+
+        const monthDates = [];
+        for (let i = 1; i <= todaysDateDay; i++) {
+            const currentDate = new Date(todaysDateYear, todaysDateMonth, i);
+            const currentDateFormatted = dateFormatter.formatDateToLocale(currentDate, "en-US");
+
+            monthDates.push(currentDateFormatted);
+        }
+
+        return monthDates;
+    };
+
+    const chartData = currentMonthDays().reduce((acc, date) => {
+        acc[date] = { Date: date };
+
+        SPECIES.forEach((name) => (acc[date][name] = 0));
+
+        return acc;
+    }, {});
+
+    rows.forEach(({ detections, speciesName, createdAt }) => {
+        const formattedDate = dateFormatter.formatDateToLocale(createdAt, "en-US");
+
+        if (chartData[formattedDate]) chartData[formattedDate][speciesName] = detections;
+    });
+
+    return chartData ? Object.values(chartData) : null;
 }
 
-async function getBoxDetections(boxId) {
-    return { boxId: Number(boxId), detections: [] };
+async function getBoxImagesByBoxId(boxId) {
+    const [images] = await db.execute(
+        `
+        SELECT
+            id,
+            file_url AS fileUrl,
+            file_type AS fileType,
+            file_size AS fileSize,
+            captured_at AS capturedAt
+        FROM
+            birdbox_images 
+        WHERE
+            birdbox_id = ?
+        ORDER BY
+            captured_at DESC,
+            id DESC;
+        `,
+        [boxId],
+    );
+
+    return images.length ? images : null;
 }
 
-async function getBoxImages(boxId) {
-    return { boxId: Number(boxId), images: [] };
+async function getBoxImageByImageId(boxId, imageId) {
+    const [image] = await db.execute(
+        `
+        SELECT
+            id,
+            file_url AS fileUrl,
+            file_type AS fileType,
+            file_size AS fileSize,
+            captured_at AS capturedAt
+        FROM
+            birdbox_images 
+        WHERE
+            id = ?
+        AND 
+            birdbox_id = ?
+        ORDER BY
+            captured_at DESC,
+            id DESC;
+        `,
+        [imageId, boxId],
+    );
+
+    return image.length ? image[0] : null;
 }
 
 module.exports = {
+    // BOXES
     getAllBoxes,
     getBoxById,
     createNewBox,
     updateBoxById,
     deleteBoxById,
-    getBoxSummary,
-    getBoxTelemetry,
-    getBoxDetections,
-    getBoxImages,
+
+    // DETECTIONS
+    getBoxDetectionsPerWeek,
+    getBoxDetectionsPerMonth,
+
+    // IMAGES
+    getBoxImagesByBoxId,
+    getBoxImageByImageId,
 };
