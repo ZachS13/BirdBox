@@ -44,13 +44,17 @@ const SpeciesOverview = function () {
                         <span>0</span>
                     </li>
                     <li className="report-view-specie-overview-list-item">
+                        <p>Last Seen:</p>
+                        <span>Today</span>
+                    </li>
+                    {/* <li className="report-view-specie-overview-list-item">
                         <p>Active Nesting Sights:</p>
                         <span>0</span>
-                    </li>
-                    <li className="report-view-specie-overview-list-item">
+                    </li> */}
+                    {/* <li className="report-view-specie-overview-list-item">
                         <p>Average Occupancy:</p>
                         <span>0 hrs</span>
-                    </li>
+                    </li> */}
                     {/* <li className="report-view-specie-overview-list-item">
                         <p>Peak Time:</p>
                         <span>8:00 AM</span>
@@ -68,13 +72,17 @@ const SpeciesOverview = function () {
                         <span>0</span>
                     </li>
                     <li className="report-view-specie-overview-list-item">
+                        <p>Last Seen:</p>
+                        <span>Today</span>
+                    </li>
+                    {/* <li className="report-view-specie-overview-list-item">
                         <p>Active Nesting Sights:</p>
                         <span>0</span>
-                    </li>
-                    <li className="report-view-specie-overview-list-item">
+                    </li> */}
+                    {/* <li className="report-view-specie-overview-list-item">
                         <p>Average Occupancy:</p>
                         <span>0 hrs</span>
-                    </li>
+                    </li> */}
                     {/* <li className="report-view-specie-overview-list-item">
                         <p>Peak Time:</p>
                         <span>8:00 AM</span>

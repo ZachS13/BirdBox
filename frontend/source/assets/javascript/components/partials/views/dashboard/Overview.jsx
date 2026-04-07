@@ -6,12 +6,14 @@ import "../../../../../css/partials/views/dashboard/overview.css";
 import "../../../../../css/responsive/partials/views/dashboard/overview.css";
 // IMPORTED CUSTOM MODULES
 import { SERVER } from "../../../../../../config.js";
+import { calculateTimeAgo } from "../../../../helpers/datetime.js";
 import ImageModal from "../../modals/Image";
 
 const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
     const [isViewingImage, setIsViewingImage] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
 
+    const lastActive = selectedBirdBox?.images[0].capturedAt;
     const recentImages = selectedBirdBox?.images.filter((_, i) => i <= 5);
 
     const handleToggleImageModal = (e) => {
@@ -47,8 +49,8 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                                 <span>{selectedBirdBox?.totalSightings}</span>
                             </li>
                             <li className="dashboard-view-overview-statistics-overview-list-item">
-                                <p>Avg. Occupancy:</p>
-                                <span>6.2 hrs</span>
+                                <p>Last Active:</p>
+                                <span>{calculateTimeAgo(lastActive)}</span>
                             </li>
                         </ul>
                     </div>

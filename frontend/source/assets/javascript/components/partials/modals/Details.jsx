@@ -44,8 +44,8 @@ const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
                             <span>{selectedBirdBox.totalSightings}</span>
                         </div>
                         <div className="div-details-modal-occupancy-overview-container">
-                            <p>Avg. Occupancy</p>
-                            <span>0 hrs</span>
+                            <p>Last Active</p>
+                            <span>Today</span>
                         </div>
                     </div>
                     <div className="div-details-modal-images-overview-container">

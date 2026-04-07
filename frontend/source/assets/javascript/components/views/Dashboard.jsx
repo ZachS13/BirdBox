@@ -170,7 +170,7 @@ const Dashboard = function () {
                             <Overview selectedBirdBox={selectedBirdBox} onToggleInnerView={handleToggleInnerView} />
                         </Activity>
                         <Activity mode={selectedInnerView === "analytics" ? "visible" : "hidden"}>
-                            <Analytics />
+                            <Analytics selectedBirdBox={selectedBirdBox} />
                         </Activity>
                         <Activity mode={selectedInnerView === "gallery" ? "visible" : "hidden"}>
                             <Gallery images={selectedBirdBox?.images} />

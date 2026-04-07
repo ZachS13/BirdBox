@@ -8,33 +8,57 @@ import "../../../../../css/responsive/partials/views/dashboard/analytics.css";
 import { SERVER } from "../../../../../../config.js";
 import TooltipModal from "../../modals/Tooltip";
 
-const Analytics = function () {
-    const [species, setSpecies] = useState([]);
+const SPECIES = [
+    {
+        name: "American Kestrel",
+        lineType: "monotone",
+        color: "#4e801f",
+    },
+    {
+        name: "Brown Bat",
+        lineType: "monotone",
+        color: "#004c97",
+    },
+    {
+        name: "Other",
+        lineType: "monotone",
+        color: "#eaaa00",
+    },
+];
 
-    const data = [
-        { Date: "Feb 1", "American Kestrel": 12, "Brown Bat": 3, Other: 9 },
-        { Date: "Feb 2", "American Kestrel": 10, "Brown Bat": 6, Other: 3 },
-        { Date: "Feb 3", "American Kestrel": 3, "Brown Bat": 9, Other: 10 },
-        { Date: "Feb 4", "American Kestrel": 6, "Brown Bat": 3, Other: 12 },
-        { Date: "Feb 5", "American Kestrel": 9, "Brown Bat": 6, Other: 3 },
-        { Date: "Feb 6", "American Kestrel": 3, "Brown Bat": 12, Other: 6 },
-        { Date: "Feb 7", "American Kestrel": 9, "Brown Bat": 10, Other: 3 },
-    ];
+const Analytics = function ({ selectedBirdBox }) {
+    const [species, setSpecies] = useState([]);
+    const [weeklyChartData, setWeeklyChartData] = useState([]);
+    const [monthlyChartData, setMonthlyChartData] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const request = await fetch(`${SERVER}/species`);
+            const boxId = selectedBirdBox?.id;
 
-            const response = await request.json();
+            const [speciesReq, weeklyChartDataReq, monthlyChartDataReq] = await Promise.all([fetch(`${SERVER}/species`), fetch(`${SERVER}/boxes/${boxId}/analytics/week`), fetch(`${SERVER}/boxes/${boxId}/analytics/month`)]);
+
+            const speciesRes = await speciesReq.json();
 
             // Guard clause.
-            if (!response.success) return;
+            if (!speciesRes.success) return;
 
-            const { data } = response;
+            setSpecies(speciesRes.data);
 
-            setSpecies(data);
+            const weeklyChartDataRes = await weeklyChartDataReq.json();
+
+            // Guard clause.
+            if (!weeklyChartDataRes.success) return;
+
+            setWeeklyChartData(weeklyChartDataRes.data);
+
+            const monthlyChartDataRes = await monthlyChartDataReq.json();
+
+            // Guard clause.
+            if (!monthlyChartDataRes.success) return;
+
+            setMonthlyChartData(monthlyChartDataRes.data);
         })();
-    }, []);
+    }, [selectedBirdBox]);
 
     return (
         <div className="div-dashboard-view-analytics-container">
@@ -42,12 +66,12 @@ const Analytics = function () {
                 <div className="div-dashboard-view-analytics-trends-container">
                     <h2>Occupancy Trends (Last 7 Days)</h2>
                     <ResponsiveContainer width="100%" height="240">
-                        <AreaChart data={data}>
+                        <AreaChart data={weeklyChartData}>
                             <CartesianGrid />
                             <Tooltip content={<TooltipModal />} />
-                            <Area dataKey="American Kestrel" type="monotone" fill="#4e801f" stroke="#4e801f" />
-                            <Area dataKey="Brown Bat" type="monotone" fill="#004c97" stroke="#004c97" />
-                            <Area dataKey="Other" type="monotone" fill="#eaaa00" stroke="#eaaa00" />
+                            {SPECIES.map(({ name, lineType, color }, i) => (
+                                <Area key={i} dataKey={name} type={lineType} fill={color} stroke={color} />
+                            ))}
                             <XAxis dataKey="Date" />
                             <YAxis />
                         </AreaChart>
@@ -76,12 +100,12 @@ const Analytics = function () {
                     <p>Activity numbers for each detected species.</p>
                 </header>
                 <ResponsiveContainer width="100%" height="240">
-                    <BarChart data={data}>
+                    <BarChart data={monthlyChartData}>
                         <CartesianGrid />
                         <Tooltip cursor={{ fill: "#ebebea" }} content={<TooltipModal />} />
-                        <Bar dataKey="American Kestrel" fill="#4e801f" />
-                        <Bar dataKey="Brown Bat" fill="#004c97" />
-                        <Bar dataKey="Other" fill="#eaaa00" />
+                        {SPECIES.map(({ name, color }, i) => (
+                            <Bar key={i} dataKey={name} fill={color} />
+                        ))}
                         <XAxis dataKey="Date" />
                         <YAxis />
                     </BarChart>
