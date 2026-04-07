@@ -13,7 +13,7 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
     const [isViewingImage, setIsViewingImage] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
 
-    const lastActive = selectedBirdBox?.images[0].capturedAt;
+    const lastActive = calculateTimeAgo(selectedBirdBox?.images[0].capturedAt);
     const recentImages = selectedBirdBox?.images.filter((_, i) => i <= 5);
 
     const handleToggleImageModal = (e) => {
@@ -50,7 +50,7 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                             </li>
                             <li className="dashboard-view-overview-statistics-overview-list-item">
                                 <p>Last Active:</p>
-                                <span>{calculateTimeAgo(lastActive)}</span>
+                                <span>{lastActive}</span>
                             </li>
                         </ul>
                     </div>

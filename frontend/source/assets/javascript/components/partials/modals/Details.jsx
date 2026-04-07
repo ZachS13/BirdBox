@@ -5,8 +5,10 @@ import "../../../../css/partials/modals/details.css";
 import "../../../../css/responsive/partials/modals/details.css";
 // IMPORTED CUSTOM MODULES
 import { SERVER } from "../../../../../config.js";
+import { calculateTimeAgo } from "../../../helpers/datetime.js";
 
 const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
+    const lastActive = calculateTimeAgo(selectedBirdBox.images[0].capturedAt);
     const recentImages = selectedBirdBox.images.filter((_, i) => i <= 5);
 
     return (
@@ -45,7 +47,7 @@ const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
                         </div>
                         <div className="div-details-modal-occupancy-overview-container">
                             <p>Last Active</p>
-                            <span>Today</span>
+                            <span>{lastActive}</span>
                         </div>
                     </div>
                     <div className="div-details-modal-images-overview-container">
