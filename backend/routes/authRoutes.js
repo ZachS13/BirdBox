@@ -3,10 +3,16 @@ const router = express.Router();
 
 const business = require('../businessLayer');
 
+const getClientIp = (req) => {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
+    return ip === '::1' ? '127.0.0.1' : ip;
+};
+
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const result = await business.loginUser({ username, password });
+        const clientIp = getClientIp(req);
+        const result = await business.loginUser({ username, password, clientIp });
         res.status(200).json({ success: true, message: 'Login success', data: result });
     } catch (error) {
         const status = error.status || 500;

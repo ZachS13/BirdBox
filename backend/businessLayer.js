@@ -9,7 +9,8 @@ const authQueries = require('./queries/authQueries.js'),
       exportQueries = require('./queries/exportQueries.js'),
       speciesQueries = require('./queries/speciesQueries.js');
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"),
+      crypto = require("crypto");
 
 function badRequest(msg) {
     const e = new Error(msg);
@@ -36,11 +37,37 @@ function conflict(msg = "Conflict") {
 }
 
 /* ---------------- AUTH ---------------- */
+function createToken( userId, username, clientIp ) {
+    const ipHash = hashTokenPart(String(clientIp)),
+        userIdHash = hashTokenPart(String(userId)),
+        usernameHash = hashTokenPart(String(username));
+
+    const token = createWeave(ipHash, userIdHash, usernameHash);
+    return token;
+}
+
+function hashTokenPart(value) {
+    return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function createWeave(hash1, hash2, hash3) {
+    const hashLength = Math.max(hash1.length, hash2.length, hash3.length);
+    let weavedToken = '';
+
+    // hashes are the same length so there should not be an index out of bounds
+    for (let i = 0; i < hashLength; i++) {
+        weavedToken += hash1[i];
+        weavedToken += hash2[i];
+        weavedToken += hash3[i];
+    }
+    return weavedToken;
+}
+
 /**
  * Login as a user.
  * @returns Token and User Object w/ ID and username.
  */
-async function loginUser({ username, password }) {
+async function loginUser({ username, password, clientIp }) {
     if (!username || !password) {
         throw badRequest("username and password are required");
     }
@@ -57,17 +84,18 @@ async function loginUser({ username, password }) {
     }
 
     // Will be passed into the function later with a hashed and combined username, id, and IP address.
-    const token = "stub-token";
+    const userId = user.id;
+    const token = createToken({ userId, username, clientIp });
 
     await sessionQueries.createSession({
-        userId: user.id,
+        userId: userId,
         token,
     });
 
     return {
         token,
         user: {
-            id: user.id,
+            id: userId,
             username: user.username
         }
     };
@@ -484,8 +512,8 @@ module.exports = {
 
     listExports,
     getExportById,
-    createExport,
-    deleteExport,
+    // createExport,
+    // deleteExport,
 
     listSpecies,
     getSpeciesById,

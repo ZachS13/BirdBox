@@ -319,6 +319,6 @@ module.exports = {
     createBoxMaintenanceSchedule,
     updateBoxMaintenanceSchedule,
     deleteBoxMaintenanceSchedule,
-    getBoxSettings,
-    updateBoxSettings
+    // getBoxSettings,
+    // updateBoxSettings
 };
