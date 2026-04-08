@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+const { create } = require('domain');
 const authQueries = require('./queries/authQueries.js'),
       sessionQueries = require('./queries/sessionQueries.js'),
       userQueries = require('./queries/userQueries.js'),
@@ -42,7 +45,10 @@ function createToken( userId, username, clientIp ) {
         userIdHash = hashTokenPart(String(userId)),
         usernameHash = hashTokenPart(String(username));
 
-    const token = createWeave(ipHash, userIdHash, usernameHash);
+    const weave = createWeave(ipHash, userIdHash, usernameHash);
+    const token = crypto.createHmac('sha256', process.env.SECRET_KEY)
+                    .update(weave)
+                    .digest('hex');
     return token;
 }
 
@@ -61,7 +67,16 @@ function createWeave(hash1, hash2, hash3) {
         weavedToken += hash3[i];
     }
     return weavedToken;
-}
+};
+
+const user1 = createToken(1, "testuser", "123.123.1234");
+console.log("User 1 token:", user1);
+const user1copy = createToken(1, "testuser", "123.123.1234");
+const user2 = createToken(2, "otheruser", "321.321.4321");
+console.log("User 2 token:", user2);
+
+console.log(user1 === user2 ? "Tokens are the same (unexpected)" : "Tokens are different (expected)");
+console.log(user1 === user1copy ? "User 1 token is consistent (expected)" : "User 1 token is not consistent (unexpected)");
 
 /**
  * Login as a user.

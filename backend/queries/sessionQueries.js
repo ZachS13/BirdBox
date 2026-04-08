@@ -9,6 +9,14 @@ async function getSessionByToken(token) {
     return rows[0] || null;
 }
 
+async function getSessionsByUserId(userId) {
+    const [rows] = await pool.query(
+        'SELECT * FROM sessions WHERE user_id = ?',
+        [userId]
+    );
+    return rows[0] || null;
+}
+
 async function createSession({ user_id, token }) {
     const [result] = await pool.query(
         `INSERT INTO sessions (user_id, token, created_at, expires_at)
@@ -39,6 +47,7 @@ async function deleteSessionsByUserId(userId) {
 
 module.exports = {
     getSessionByToken,
+    getSessionsByUserId,
     createSession,
     deleteSessionByToken,
     deleteSessionsByUserId
