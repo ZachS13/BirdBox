@@ -296,20 +296,20 @@ async function deleteBoxById(id) {
     return boxQueries.deleteBoxById(id);
 }
 
-async function getBoxSummary(id) {
-    return boxQueries.getBoxSummary(id);
+async function getBoxDetectionsPerWeek(id) {
+    return boxQueries.getBoxDetectionsPerWeek(id);
 }
 
-async function getBoxTelemetry(id) {
-    return boxQueries.getBoxTelemetry(id);
+async function getBoxDetectionsPerMonth(id) {
+    return boxQueries.getBoxDetectionsPerMonth(id);
 }
 
-async function getBoxDetections(id) {
-    return boxQueries.getBoxDetections(id);
+async function getBoxImagesByBoxId(boxId) {
+    return boxQueries.getBoxImagesByBoxId(boxId);
 }
 
-async function getBoxImages(id) {
-    return boxQueries.getBoxImages(id);
+async function getBoxImageByImageId(boxId, imageId) {
+    return boxQueries.getBoxImageByImageId(boxId, imageId);
 }
 
 /* ---------------- DETECTIONS ---------------- */
@@ -452,10 +452,10 @@ module.exports = {
     getBoxById,
     updateBox,
     deleteBoxById,
-    getBoxSummary,
-    getBoxTelemetry,
-    getBoxDetections,
-    getBoxImages,
+    getBoxDetectionsPerWeek,
+    getBoxDetectionsPerMonth,
+    getBoxImagesByBoxId,
+    getBoxImageByImageId,
 
     // DETECTIONS
     getDetectionById,

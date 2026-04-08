@@ -25,3 +25,25 @@ export const formatDateTimeForUser = (datetime) => {
         time: `${hours}:${minutes} ${meridiem}`,
     };
 };
+
+export const calculateTimeAgo = (datetime) => {
+    const todaysDate = new Date();
+    const lastActiveDate = new Date(datetime);
+
+    const differenceInTime = todaysDate.getTime() - lastActiveDate.getTime();
+    const differenceInDays = Math.round(differenceInTime / (1000 * 60 * 60 * 24));
+
+    console.log(differenceInTime, differenceInDays);
+
+    if (differenceInDays === 0) return "Today";
+
+    if (differenceInDays === 1) return "Yesterday";
+
+    if (differenceInDays < 7) return `${differenceInDays} Days Ago`;
+
+    if (differenceInDays < 30) return `${Math.floor(differenceInDays / 7)} Weeks Ago`;
+
+    if (differenceInDays < 365) return `${Math.floor(differenceInDays / 30)} Months Ago`;
+
+    return `${Math.floor(differenceInDays / 365)} Years Ago`;
+};

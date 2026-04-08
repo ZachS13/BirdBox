@@ -21,7 +21,7 @@ async function getImageDownloadById(id) {
         `
         SELECT
             id,
-            file_url AS url
+            file_url AS fileUrl
         FROM 
             birdbox_images
         WHERE 

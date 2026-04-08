@@ -88,11 +88,34 @@ CREATE TABLE birdbox_images (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- SELECT * FROM birdbox_images;
+-- SELECT * FROM birdbox_images; 
 
 INSERT INTO birdbox_images VALUES
-(1, 1, "/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp", "webp", 15667.2, NOW(), NOW()),
-(2, 1, "/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp", "webp", 15667.2, NOW(), NOW());
+(1, 3, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15667.20, '2026-02-05 08:23:11', NOW()),
+(2, 1, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 14203.45, '2026-02-07 09:14:32', NOW()),
+(3, 5, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 16890.12, '2026-02-10 07:45:55', NOW()),
+(4, 2, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 13456.78, '2026-02-12 11:22:43', NOW()),
+(5, 4, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15234.90, '2026-02-15 06:33:21', NOW()),
+(6, 1, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 14789.34, '2026-02-18 08:55:17', NOW()),
+(7, 3, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 16123.67, '2026-02-21 10:12:44', NOW()),
+(8, 5, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 13987.23, '2026-02-24 07:28:59', NOW()),
+(9, 2, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15543.11, '2026-02-27 09:44:36', NOW()),
+(10, 4, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 14321.89, '2026-02-30 11:05:22', NOW()),
+(11, 1, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 16234.56, '2026-03-02 08:17:48', NOW()),
+(12, 3, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 13678.90, '2026-03-05 07:33:15', NOW()),
+(13, 5, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15890.23, '2026-03-08 10:48:52', NOW()),
+(14, 2, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 14567.45, '2026-03-11 06:22:39', NOW()),
+(15, 4, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 16012.78, '2026-03-14 09:37:26', NOW()),
+(16, 1, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 13234.12, '2026-03-17 11:53:13', NOW()),
+(17, 3, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15678.34, '2026-03-20 07:08:50', NOW()),
+(18, 5, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 14890.67, '2026-03-23 08:24:37', NOW()),
+(19, 2, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 16345.90, '2026-03-26 10:39:24', NOW()),
+(20, 4, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 13123.23, '2026-04-01 06:55:11', NOW()),
+(21, 1, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15456.56, '2026-04-04 09:10:58', NOW()),
+(22, 3, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 14678.89, '2026-04-07 11:26:45', NOW()),
+(23, 5, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 16789.12, '2026-04-10 07:41:32', NOW()),
+(24, 2, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o9p.webp', 'webp', 13901.45, '2026-04-13 08:57:19', NOW()),
+(25, 4, '/assets/images/3f2a1b4c5d6e7f8g9h2j3k4l5m6n7o8p.webp', 'webp', 15012.78, '2026-04-16 10:12:06', NOW());
 
 CREATE TABLE species (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -111,7 +134,7 @@ CREATE TABLE species_detections (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     birdbox_id INT NOT NULL,
     species_id INT NOT NULL,
-    image_id INT NOT NULL,
+    image_id INT NULL DEFAULT 0,
     confidence_pct DECIMAL(3, 1) NOT NULL,
     -- activity ENUM("perching","feeding","flying","other") NOT NULL,
     created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -126,12 +149,35 @@ CREATE TABLE species_detections (
     CONSTRAINT fk_detection_image
         FOREIGN KEY (image_id)
         REFERENCES birdbox_images(id)
-        ON DELETE CASCADE
+        ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
-INSERT INTO species_detections VALUES 
-(1, 1, 1, 1, 85, NOW()),
-(2, 1, 2, 2, 90, NOW());
+INSERT INTO species_detections VALUES
+(1, 3, 1, 1, 92.5, '2026-02-05 08:23:11'),
+(2, 1, 2, 2, 88.0, '2026-02-07 09:14:32'),
+(3, 5, 1, 3, 95.5, '2026-02-10 07:45:55'),
+(4, 2, 2, 4, 83.0, '2026-02-12 11:22:43'),
+(5, 4, 1, 5, 97.5, '2026-02-15 06:33:21'),
+(6, 1, 2, 6, 86.5, '2026-02-18 08:55:17'),
+(7, 3, 1, 7, 91.0, '2026-02-21 10:12:44'),
+(8, 5, 2, 8, 84.5, '2026-02-24 07:28:59'),
+(9, 2, 1, 9, 98.0, '2026-02-27 09:44:36'),
+(10, 4, 2, 10, 89.5, '2026-02-30 11:05:22'),
+(11, 1, 1, 11, 93.0, '2026-03-02 08:17:48'),
+(12, 3, 2, 12, 82.5, '2026-03-05 07:33:15'),
+(13, 5, 1, 13, 96.0, '2026-03-08 10:48:52'),
+(14, 2, 2, 14, 87.0, '2026-03-11 06:22:39'),
+(15, 4, 1, 15, 99.5, '2026-03-14 09:37:26'),
+(16, 1, 2, 16, 85.5, '2026-03-17 11:53:13'),
+(17, 3, 1, 17, 94.0, '2026-03-20 07:08:50'),
+(18, 5, 2, 18, 81.0, '2026-03-23 08:24:37'),
+(19, 2, 1, 19, 90.5, '2026-03-26 10:39:24'),
+(20, 4, 2, 20, 83.5, '2026-04-01 06:55:11'),
+(21, 1, 1, 21, 97.0, '2026-04-04 09:10:58'),
+(22, 3, 2, 22, 88.5, '2026-04-07 11:26:45'),
+(23, 5, 1, 23, 92.0, '2026-04-10 07:41:32'),
+(24, 2, 2, 24, 86.0, '2026-04-13 08:57:19'),
+(25, 4, 1, 25, 95.0, '2026-04-16 10:12:06');
 
 -- CREATE TABLE maintenance_logs (
 --     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
