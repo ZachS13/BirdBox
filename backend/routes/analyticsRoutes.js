@@ -7,14 +7,44 @@ router.get('/identified-species', async (req, res, next) => {
     catch (err) { next(err); }
 });
 
-router.get('/occupancy-trend', async (req, res, next) => {
-    try { res.status(200).json({ ok: true, data: await business.analyticsOccupancyTrend() }); }
-    catch (err) { next(err); }
+router.get('/weekly-activity', async (req, res, next) => {
+    try { 
+        const result = await business.analyticsWeeklyActivity();
+        res.status(200).json({ ok: true, data: result }); 
+    } catch (error) {
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false,
+            message: error.message
+        });
+    }
 });
 
 router.get('/daily-activity', async (req, res, next) => {
-    try { res.status(200).json({ ok: true, data: await business.analyticsDailyActivity() }); }
-    catch (err) { next(err); }
+    try { 
+        const result = await business.analyticsDailyActivity();
+        res.status(200).json({ ok: true, data: result }); 
+    } catch (error) {
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false,
+            message: error.message
+        });
+    }
+});
+
+router.get('/activity/:date', async (req, res, next) => {
+    const { date } = req.params;
+    try {
+        const result = await business.analyticsDailyActivity(date);
+        res.status(200).json({ ok: true, data: result });
+    } catch (error) {
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false,
+            message: error.message
+        });
+    }
 });
 
 router.get('/target-efficiency', async (req, res, next) => {

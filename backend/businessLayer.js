@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const { create } = require('domain');
 const authQueries = require('./queries/authQueries.js'),
       sessionQueries = require('./queries/sessionQueries.js'),
       userQueries = require('./queries/userQueries.js'),
@@ -68,15 +67,6 @@ function createWeave(hash1, hash2, hash3) {
     }
     return weavedToken;
 };
-
-const user1 = createToken(1, "testuser", "123.123.1234");
-console.log("User 1 token:", user1);
-const user1copy = createToken(1, "testuser", "123.123.1234");
-const user2 = createToken(2, "otheruser", "321.321.4321");
-console.log("User 2 token:", user2);
-
-console.log(user1 === user2 ? "Tokens are the same (unexpected)" : "Tokens are different (expected)");
-console.log(user1 === user1copy ? "User 1 token is consistent (expected)" : "User 1 token is not consistent (unexpected)");
 
 /**
  * Login as a user.
@@ -381,9 +371,58 @@ async function analyticsIdentifiedSpecies() {
 async function analyticsOccupancyTrend() {
     return analyticsQueries.getOccupancyTrend();
 }
-async function analyticsDailyActivity() {
-    return analyticsQueries.getDailyActivity();
+
+async function analyticsWeeklyActivity() {
+    const data = await analyticsQueries.getWeeklyActivity();
+    if (!data || data.length === 0) throw notFound("Weekly activity data not found");
+
+    const grouped = {};
+
+    for (const row of data) {
+        const date = row.date instanceof Date
+            ? row.date.toISOString().split('T')[0]
+            : row.date;
+
+        if (!grouped[date]) {
+            grouped[date] = {
+                date,
+                result: []
+            };
+        }
+
+        grouped[date].result.push({
+            name: row.name,
+            detections_today: row.detections
+        });
+    }
+    return Object.values(grouped);
 }
+
+async function analyticsDailyActivity() {
+    const data = await analyticsQueries.getDailyActivity();
+    if (!data || data.length === 0) throw notFound("Daily activity data not found");
+    
+    const today = new Date();
+    const result = {
+        date: today.toISOString().split('T')[0],
+        result: data
+    };
+
+    return result;
+}
+
+async function analyticsActivityByDate(date) {
+    if (!date) throw badRequest("date is required");
+    const data = await analyticsQueries.getDailyActivity(date);
+    if (!data || data.length === 0) throw notFound("Daily activity data not found for the specified date");
+
+    const result = {
+        date,
+        result: data
+    };
+    return result;
+}
+
 async function analyticsTargetEfficiency() {
     return analyticsQueries.getTargetEfficiency();
 }
@@ -515,7 +554,9 @@ module.exports = {
 
     analyticsIdentifiedSpecies,
     analyticsOccupancyTrend,
+    analyticsWeeklyActivity,
     analyticsDailyActivity,
+    analyticsActivityByDate,
     analyticsTargetEfficiency,
 
     getImageById,

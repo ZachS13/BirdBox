@@ -49,9 +49,35 @@ backend/
 
    seperating data based on dates -- SQL or on node
 
-   {
-      date
-      kestrels #
-      bat #
-      other #
-   }
+
+daily activity just gets the activity for the current date,
+Daily Activity Result: {
+  date: '2026-04-08',
+  data: [
+    { name: 'American Kestrel', detections_today: 0 },
+    { name: 'Brown Bat', detections_today: 0 },
+    { name: 'Other', detections_today: 0 }
+  ]
+
+  Weekly Activity Result: {
+   [
+      {
+         date: 2026-04-03
+         result: {[
+            { name: 'American Kestrel', detections_today: 0 },
+            { name: 'Brown Bat', detections_today: 0 },
+            { name: 'Other', detections_today: 0 }
+         ]}
+      },
+      {
+         date: 2026-04-04
+         result: {[
+            { name: 'American Kestrel', detections_today: 2 },
+            { name: 'Brown Bat', detections_today: 1 },
+            { name: 'Other', detections_today: 0 }
+         ]}
+      },
+   ]
+  }
+}
+
