@@ -7,6 +7,24 @@ async function getOccupancyTrend() {
     return { series: [] };
 }
 
+async function getMonthlyActivity() {
+    const sql = `
+        SELECT 
+            DATE_FORMAT(created_at, '%b') AS Month,
+            SUM(CASE WHEN species_id = 1 THEN 1 ELSE 0 END) AS 'American Kestrel',
+            SUM(CASE WHEN species_id = 2 THEN 1 ELSE 0 END) AS 'Brown Bat',
+            SUM(CASE WHEN species_id = 3 THEN 1 ELSE 0 END) AS 'Other',
+            COUNT(*) AS Total
+        FROM species_detections
+        WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 8 MONTH)
+        GROUP BY YEAR(created_at), MONTH(created_at), DATE_FORMAT(created_at, '%b')
+        ORDER BY YEAR(created_at), MONTH(created_at);
+    `;
+
+    const [rows] = await db.execute(sql);
+    return rows;
+}
+
 async function getWeeklyActivity() {
     const sql = `
         SELECT
@@ -36,7 +54,7 @@ async function getWeeklyActivity() {
 
 async function getDailyActivity() {
     const sql = `
-        SELECT s.name, COUNT(sd.id) AS detections_today
+        SELECT s.name, COUNT(sd.id) AS detections
         FROM species s
         LEFT JOIN species_detections sd
             ON s.id = sd.species_id
@@ -70,6 +88,7 @@ async function getTargetEfficiency() {
 module.exports = {
     getIdentifiedSpecies,
     getOccupancyTrend,
+    getMonthlyActivity,
     getWeeklyActivity,
     getDailyActivity,
     getActivityByDate,

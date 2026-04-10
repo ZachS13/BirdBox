@@ -392,7 +392,7 @@ async function analyticsWeeklyActivity() {
 
         grouped[date].result.push({
             name: row.name,
-            detections_today: row.detections
+            detections: row.detections
         });
     }
     return Object.values(grouped);
