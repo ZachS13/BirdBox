@@ -9,33 +9,46 @@ async function getAllUsers() {
 
 async function getUserById(id) {
     const [rows] = await pool.execute(
-        'SELECT * FROM users WHERE id = ?',
+        'SELECT * FROM users WHERE id = ? LIMIT 1',
         [id]
     );
 
     return rows[0] || null;
 }
 
+async function findByEmail(email) {
+    console.log("Finding user by email:", email);
+
+    const [rows] = await pool.execute(
+        'SELECT * FROM users WHERE email = ? LIMIT 1',
+        [email]
+    );
+
+    return rows[0] || null;
+}
+
 async function createUser(user) {
-    const { first_name, last_name, username, email, password, phone } = user || {};
+    console.log("Creating user with data:", user);
+
+    const { username, email, password } = user;
 
     const [result] = await pool.execute(
-        `INSERT INTO users (first_name, last_name, username, email, password, phone, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, NOW())`,
-        [first_name, last_name, username, email, password, phone]
+        `INSERT INTO users (username, email, password, created_at)
+         VALUES ( ?, ?, ?, NOW())`,
+        [username, email, password]
     );
 
     return { id: result.insertId };
 }
 
 async function updateUserById(id, user) {
-    const { first_name, last_name, username, email, phone } = user || {};
+    const { username, email, phone } = user || {};
 
     const [result] = await pool.execute(
         `UPDATE users
-         SET first_name = ?, last_name = ?, username = ?, email = ?, phone = ?, updated_at = NOW()
+         SET username = ?, email = ?, phone = ?, updated_at = NOW()
          WHERE id = ?`,
-        [first_name, last_name, username, email, phone, id]
+        [username, email, phone, id]
     );
 
     if (result.affectedRows === 0) {
@@ -65,6 +78,7 @@ async function deleteUserById(id) {
 module.exports = {
     getAllUsers,
     getUserById,
+    findByEmail,
     createUser,
     updateUserById,
     deleteUserById

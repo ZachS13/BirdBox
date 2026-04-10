@@ -69,7 +69,7 @@ async function getDailyActivity() {
 
 async function getActivityByDate(date) {
     const sql = `
-        SELECT s.name, COUNT(sd.id) AS detections_on_date
+        SELECT s.name, COUNT(sd.id) AS detections
         FROM species s
         LEFT JOIN species_detections sd
             ON s.id = sd.species_id

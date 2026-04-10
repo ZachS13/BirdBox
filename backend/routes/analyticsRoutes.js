@@ -49,7 +49,7 @@ router.get('/daily-activity', async (req, res, next) => {
 router.get('/activity/:date', async (req, res, next) => {
     const { date } = req.params;
     try {
-        const result = await business.analyticsDailyActivity(date);
+        const result = await business.analyticsActivityByDate(date);
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         const status = error.status || 500;

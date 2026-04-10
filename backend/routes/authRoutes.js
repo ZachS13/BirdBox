@@ -56,7 +56,8 @@ router.post("/signup", async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        const result = await businessLayer.signup(username, email, password);
+        console.log("Signup request received:", { username, email });
+        const result = await business.signup(username, email, password);
 
         res.status(201).json({ success: true, message: "User created successfully", data: result });
     } catch (error) {

@@ -111,6 +111,7 @@ async function loginUser({ username, password, clientIp }) {
  * @returns User ID.
  */
 async function signup(username, email, password) {
+    console.log("Signup called with:", { username, email });
     if (!username || !email || !password) {
         throw new Error("Missing required fields");
     }
@@ -123,8 +124,8 @@ async function signup(username, email, password) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await userQueries.createUser({
-        username,
-        email,
+        username: username,
+        email: email,
         password: hashedPassword
     });
 
@@ -413,7 +414,9 @@ async function analyticsDailyActivity() {
 
 async function analyticsActivityByDate(date) {
     if (!date) throw badRequest("date is required");
-    const data = await analyticsQueries.getDailyActivity(date);
+
+    const data = await analyticsQueries.getActivityByDate(date);
+
     if (!data || data.length === 0) throw notFound("Daily activity data not found for the specified date");
 
     const result = {
