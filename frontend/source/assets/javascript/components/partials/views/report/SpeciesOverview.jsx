@@ -1,8 +1,33 @@
+// IMPORTED CORE MODULES
+import { useEffect, useState } from "react";
+// IMPORTED CUSTOM MODULES
+import { SERVER } from "../../../../../../config.js";
+// import { calculateTimeAgo } from "../../../../helpers/datetime.js";
 // IMPORTED STYLESHEETS
 import "../../../../../css/partials/views/report/species-overview.css";
 import "../../../../../css/responsive/partials/views/report/species-overview.css";
 
-const SpeciesOverview = function () {
+const SpeciesOverview = function ({ selectedDate }) {
+    const [selectedSpeciesAnalysis, setSelectedSpeciesAnalysis] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            const year = selectedDate.getFullYear();
+            const month = selectedDate.getMonth() + 1;
+
+            const request = await fetch(`${SERVER}/report/species?year=${year}&month=${month}`);
+
+            const response = await request.json();
+
+            // Guard clause.
+            if (!response.success) return;
+
+            const { data } = response;
+
+            setSelectedSpeciesAnalysis(data);
+        })();
+    }, [selectedDate]);
+
     return (
         <div className="div-report-view-species-overview-container">
             <div className="div-report-view-specie-overview-container">
@@ -13,11 +38,11 @@ const SpeciesOverview = function () {
                 <ul className="report-view-specie-overview-list">
                     <li className="report-view-specie-overview-list-item">
                         <p>American Kestrel:</p>
-                        <span>0 obs</span>
+                        <span>{selectedSpeciesAnalysis?.totalKestrelSightings} obs</span>
                     </li>
                     <li className="report-view-specie-overview-list-item">
                         <p>Brown Bat:</p>
-                        <span>0 obs</span>
+                        <span>{selectedSpeciesAnalysis?.totalBatSightings} obs</span>
                     </li>
                 </ul>
             </div>
@@ -29,7 +54,7 @@ const SpeciesOverview = function () {
                 <ul className="report-view-specie-overview-list">
                     <li className="report-view-specie-overview-list-item">
                         <p>Other:</p>
-                        <span>0 obs</span>
+                        <span>{selectedSpeciesAnalysis?.totalNonTargetSightings} obs</span>
                     </li>
                 </ul>
             </div>
@@ -41,7 +66,7 @@ const SpeciesOverview = function () {
                 <ul className="report-view-specie-overview-list">
                     <li className="report-view-specie-overview-list-item">
                         <p>Observations:</p>
-                        <span>0</span>
+                        <span>{selectedSpeciesAnalysis?.totalKestrelSightings}</span>
                     </li>
                     <li className="report-view-specie-overview-list-item">
                         <p>Last Seen:</p>
@@ -69,7 +94,7 @@ const SpeciesOverview = function () {
                 <ul className="report-view-specie-overview-list">
                     <li className="report-view-specie-overview-list-item">
                         <p>Observations:</p>
-                        <span>0</span>
+                        <span>{selectedSpeciesAnalysis?.totalBatSightings}</span>
                     </li>
                     <li className="report-view-specie-overview-list-item">
                         <p>Last Seen:</p>

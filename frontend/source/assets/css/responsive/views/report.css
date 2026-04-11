@@ -5,8 +5,46 @@
         padding: 1.6rem;
     }
 
+    /* HEADER REPORT VIEW CONTAINER */
+    .header-report-view-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.6rem;
+    }
+
+    /* HEDER REPORT VIEW ACTIONS CONTAINER */
+    .div-header-report-view-actions-container {
+        width: 100%;
+    }
+
+    /* REPORT DATE SELECT CONTAINER */
+    .div-report-date-select-container {
+        flex-grow: 1;
+    }
+
+    /* SELECTED REPORT DATE INFO CONTAINER */
+    .div-selected-report-date-info-container {
+        width: 100%;
+    }
+
     /* REPORT VIEW ANALYTICS CONTAINER */
     .div-report-view-analytics-container {
         gap: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* HEDER REPORT VIEW ACTIONS CONTAINER */
+    .div-header-report-view-actions-container {
+        flex-direction: column;
+    }
+
+    /* REPORT DATE SELECT CONTAINER */
+    .div-report-date-select-container {
+        width: 100%;
+    }
+
+    .div-header-report-view-actions-container button {
+        width: 100%;
     }
 }

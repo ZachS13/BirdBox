@@ -42,21 +42,27 @@ const Analytics = function ({ selectedBirdBox }) {
             // Guard clause.
             if (!speciesRes.success) return;
 
-            setSpecies(speciesRes.data);
+            const { data: speciesData } = speciesRes;
+
+            setSpecies(speciesData);
 
             const weeklyChartDataRes = await weeklyChartDataReq.json();
 
             // Guard clause.
             if (!weeklyChartDataRes.success) return;
 
-            setWeeklyChartData(weeklyChartDataRes.data);
+            const { data: weeklyData } = weeklyChartDataRes;
+
+            setWeeklyChartData(weeklyData);
 
             const monthlyChartDataRes = await monthlyChartDataReq.json();
 
             // Guard clause.
             if (!monthlyChartDataRes.success) return;
 
-            setMonthlyChartData(monthlyChartDataRes.data);
+            const { data: monthlyData } = monthlyChartDataRes;
+
+            setMonthlyChartData(monthlyData);
         })();
     }, [selectedBirdBox]);
 

@@ -1,8 +1,6 @@
+// IMPORTED CORE MODULES
 import { useEffect, useState } from "react";
-// IMPORTED STYLESHEETS
-import "../../../css/views/report.css";
-import "../../../css/responsive/views/report.css";
-// IMPORTED MODULES
+// IMPORTED CUSTOM MODULES
 import PageLoader from "../partials/loaders/Page";
 import ExportModal from "../partials/modals/Export";
 import Nav from "../partials/Nav";
@@ -10,6 +8,9 @@ import Summary from "../partials/views/report/Summary";
 import SpeciesOverview from "../partials/views/report/SpeciesOverview";
 import SeasonalHistory from "../partials/views/report/SeasonalHistory";
 import NotificationModal from "../partials/modals/Notification";
+// IMPORTED STYLESHEETS
+import "../../../css/views/report.css";
+import "../../../css/responsive/views/report.css";
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -38,16 +39,24 @@ const Report = function () {
 
         const { year, month } = option.dataset;
 
-        setSelectedDate(new Date(year, month));
+        setTimeout(() => setSelectedDate(new Date(year, month)), 400);
+
+        setIsViewLoading(true);
     };
 
-    useEffect(function () {
+    useEffect(() => {
         document.title = "Nestify | Report";
 
         const loadingTimer = setTimeout(() => setIsViewLoading(false), 800);
 
         return () => clearTimeout(loadingTimer);
     }, []);
+
+    useEffect(() => {
+        const loadingTimer = setTimeout(() => setIsViewLoading(false), 800);
+
+        return () => clearTimeout(loadingTimer);
+    }, [selectedDate]);
 
     return (
         <>
@@ -91,15 +100,15 @@ const Report = function () {
                                 )}
                             </div>
                             <button onClick={handleToggleExportModal}>
-                                <ion-icon src="/media/icons/icon-file.svg" />
-                                <span>Generate Report</span>
+                                <ion-icon src="/media/icons/icon-download.svg" />
+                                <span>Export Data</span>
                             </button>
                         </div>
                     </header>
                     <Summary selectedDate={selectedDate} />
                     <div className="div-report-view-analytics-container">
-                        <SpeciesOverview />
-                        <SeasonalHistory />
+                        <SpeciesOverview selectedDate={selectedDate} />
+                        <SeasonalHistory selectedDate={selectedDate} />
                     </div>
                 </div>
             </div>

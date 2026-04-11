@@ -141,8 +141,8 @@
     justify-content: center;
     gap: 0.6rem;
     padding: 0.8rem 1.2rem;
-    color: var(--text-white);
-    background-color: var(--color-green);
+    background-color: var(--container-white);
+    box-shadow: inset 0 0 0 0.12rem var(--color-green);
     border: unset;
     border-radius: 0.8rem;
     /* transition: all 0.2s ease-in-out; */
@@ -150,7 +150,7 @@
 }
 
 .div-header-report-view-actions-container button:hover {
-    background-color: var(--color-green-hover);
+    background-color: var(--container-light);
 }
 
 .div-header-report-view-actions-container button ion-icon {

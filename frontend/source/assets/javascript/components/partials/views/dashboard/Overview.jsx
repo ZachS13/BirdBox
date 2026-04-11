@@ -74,7 +74,7 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                             <span>View on Map</span>
                         </Link>
                     </div>
-                    <div className="div-dashboard-view-overview-battery-overview-container">
+                    {/* <div className="div-dashboard-view-overview-battery-overview-container">
                         <header className="header-dashboard-view-overview-battery-overview-container">
                             <ion-icon src="/media/icons/icon-battery.svg" />
                             <h4>Battery</h4>
@@ -87,7 +87,7 @@ const Overview = function ({ selectedBirdBox, onToggleInnerView }) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="div-dashboard-view-overview-recent-images-container">
                     <header className="header-dashboard-view-overview-recent-images-container">

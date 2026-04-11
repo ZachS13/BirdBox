@@ -18,7 +18,6 @@ const Nav = function () {
     return (
         <>
             {isLoggingOut && <Logout onToggleLogoutModal={handleToggleLogoutModal} />}
-
             <div className="div-main-nav-container">
                 <div className="div-main-edge-container">
                     <Link to="/dashboard">
@@ -52,7 +51,7 @@ const Nav = function () {
                             <span>Logout</span>
                         </button>
                     </nav>
-                    <button onClick={handleToggleMobileNav}>
+                    <button className={isViewingNav ? "active" : ""} onClick={handleToggleMobileNav}>
                         <ion-icon src={`/media/icons/icon-${isViewingNav ? "close" : "menu"}.svg`} />
                     </button>
                 </div>

@@ -103,7 +103,15 @@
     object-position: center;
 }
 
-.div-image-details-modal-image-overview-container button {
+/* IMAGE DETAILS MODAL IMAGE OVERVIEW ACTIONS CONTAINER */
+.div-image-details-modal-image-overview-actions-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.div-image-details-modal-image-overview-actions-container button:first-child {
+    flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,15 +125,35 @@
     cursor: pointer;
 }
 
-.div-image-details-modal-image-overview-container button:hover {
+.div-image-details-modal-image-overview-actions-container button:first-child:hover {
     background-color: var(--container-light);
 }
 
-.div-image-details-modal-image-overview-container button ion-icon {
+.div-image-details-modal-image-overview-actions-container button:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background-color: var(--color-red);
+    border: unset;
+    border-radius: 0.8rem;
+    /* transition: all 0.2s ease-in-out; */
+    cursor: pointer;
+}
+
+.div-image-details-modal-image-overview-actions-container button:last-child:hover {
+    background-color: var(--color-red-hover);
+}
+
+.div-image-details-modal-image-overview-actions-container button ion-icon {
     font-size: 1.6rem;
 }
 
-.div-image-details-modal-image-overview-container button span {
+.div-image-details-modal-image-overview-actions-container button:last-child ion-icon {
+    color: var(--text-white);
+}
+
+.div-image-details-modal-image-overview-actions-container button span {
     font-size: 1.4rem;
 }
 

@@ -29,7 +29,8 @@
     cursor: pointer;
 }
 
-.div-main-nav-container .div-main-edge-container > button:hover {
+.div-main-nav-container .div-main-edge-container > button:hover,
+.div-main-nav-container .div-main-edge-container > button.active {
     background-color: var(--container-light);
 }
 

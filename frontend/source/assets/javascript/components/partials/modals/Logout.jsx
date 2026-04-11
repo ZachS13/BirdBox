@@ -7,7 +7,7 @@ import "../../../../css/partials/modals/logout.css";
 
 const Logout = function ({ onToggleLogoutModal }) {
     const navigateTo = useNavigate();
-    const { logout } = useAuth();
+    const { activeUser, logout } = useAuth();
 
     const handleLogout = async (e) => {
         const parent = e.target.closest("button");
@@ -34,7 +34,7 @@ const Logout = function ({ onToggleLogoutModal }) {
 				</header>
 				<div className="div-logout-modal-info-container">
 					<p>Are you sure you want to logout from the Conservation Dashboard?</p>
-					<p>You are currently logged in as: <span>Username</span></p>
+					<p>You are currently logged in as: <span>{activeUser.username}</span></p>
 				</div>
                 <footer className="footer-logout-modal">
                     <button onClick={onToggleLogoutModal}>

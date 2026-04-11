@@ -8,7 +8,7 @@
 /* DASHBOARD VIEW OVERVIEW STATISTICS CONTAINER */
 .div-dashboard-view-overview-statistics-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2.4rem;
 }
 
@@ -30,16 +30,17 @@
 
 .div-dashboard-view-overview-statistics-container > div header ion-icon {
     font-size: 2rem;
+    color: var(--brand-green-core);
 }
 
-.div-dashboard-view-overview-statistics-container > div:nth-child(1) header ion-icon,
+/* .div-dashboard-view-overview-statistics-container > div:nth-child(1) header ion-icon,
 .div-dashboard-view-overview-statistics-container > div:nth-child(2) header ion-icon {
     color: var(--brand-green-core);
 }
 
 .div-dashboard-view-overview-statistics-container > div:nth-child(3) header ion-icon {
     color: var(--accent-sky);
-}
+} */
 
 .div-dashboard-view-overview-statistics-container > div header h4 {
     font-size: 1.6rem;
@@ -112,7 +113,7 @@
 }
 
 /* DASHBOARD VIEW OVERVIEW BATTERY OVERVIEW INFO CONTAINER */
-.div-dashboard-view-overview-battery-overview-info-container {
+/* .div-dashboard-view-overview-battery-overview-info-container {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -121,10 +122,10 @@
 .div-dashboard-view-overview-battery-overview-info-container > span {
     font-size: 2rem;
     font-weight: 700;
-}
+} */
 
 /* DASHBOARD VIEW OVERVIEW BATTERY OVERVIEW PERCENTAGE CONTAINER */
-.div-dashboard-view-overview-battery-overview-percentage-container {
+/* .div-dashboard-view-overview-battery-overview-percentage-container {
     display: flex;
     background-color: var(--container-light);
     border-radius: 12rem;
@@ -133,7 +134,7 @@
 .div-dashboard-view-overview-battery-overview-percentage {
     background-color: var(--container-gray);
     border-radius: 12rem;
-}
+} */
 
 /* DASHBOARD VIEW OVERVIEW RECENT IMAGES CONTAINER */
 .div-dashboard-view-overview-recent-images-container {

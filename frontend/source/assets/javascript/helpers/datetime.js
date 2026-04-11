@@ -33,8 +33,6 @@ export const calculateTimeAgo = (datetime) => {
     const differenceInTime = todaysDate.getTime() - lastActiveDate.getTime();
     const differenceInDays = Math.round(differenceInTime / (1000 * 60 * 60 * 24));
 
-    console.log(differenceInTime, differenceInDays);
-
     if (differenceInDays === 0) return "Today";
 
     if (differenceInDays === 1) return "Yesterday";

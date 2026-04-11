@@ -26,7 +26,7 @@ const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
                     </button>
                 </header>
                 <div className="div-details-modal-overview-container">
-                    <div className="div-details-modal-battery-overview-container">
+                    {/* <div className="div-details-modal-battery-overview-container">
                         <header className="header-details-modal-battery-overview-container">
                             <div className="div-header-details-modal-battery-overview-info-container">
                                 <ion-icon src="/media/icons/icon-battery.svg" />
@@ -39,7 +39,7 @@ const Details = function ({ selectedBirdBox, onToggleDetailsModal }) {
                                 &nbsp;
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="div-details-modal-analytics-overview-container">
                         <div className="div-details-modal-sightings-overview-container">
                             <p>Total Sightings</p>

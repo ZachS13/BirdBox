@@ -84,14 +84,14 @@
 }
 
 /* DETAILS MODAL BATTERY OVERVIEW CONTAINER */
-.div-details-modal-battery-overview-container {
+/* .div-details-modal-battery-overview-container {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-}
+} */
 
 /* HEADER DETAILS MODAL BATTERY OVERVIEW CONTAINER */
-.header-details-modal-battery-overview-container {
+/* .header-details-modal-battery-overview-container {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -100,10 +100,10 @@
 .header-details-modal-battery-overview-container span {
     font-size: 1.6rem;
     font-weight: 700;
-}
+} */
 
 /* HEADER DETAILS MODAL BATTERY OVERVIEW INFO CONTAINER */
-.div-header-details-modal-battery-overview-info-container {
+/* .div-header-details-modal-battery-overview-info-container {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -116,10 +116,10 @@
 
 .div-header-details-modal-battery-overview-info-container h4 {
     font-size: 1.4rem;
-}
+} */
 
 /* DETAILS MODAL BATTERY OVERVIEW PERCENTAGE CONTAINER */
-.div-details-modal-battery-overview-percentage-container {
+/* .div-details-modal-battery-overview-percentage-container {
     display: flex;
     background-color: var(--container-light);
     border-radius: 12rem;
@@ -128,7 +128,7 @@
 .div-details-modal-battery-overview-percentage {
     background-color: var(--container-gray);
     border-radius: 12rem;
-}
+} */
 
 /* DETAILS MODAL ANALYTICS OVERVIEW CONTAINER */
 .div-details-modal-analytics-overview-container {
