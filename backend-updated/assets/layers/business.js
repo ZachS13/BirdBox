@@ -4,8 +4,7 @@ const authQueries = require("../scripts/queries/authQueries.js");
 const sessionQueries = require("../scripts/queries/sessionQueries.js");
 const userQueries = require("../scripts/queries/userQueries.js");
 const boxQueries = require("../scripts/queries/birdBoxQueries.js");
-const detectionQueries = require("../scripts/queries/detectionQueries.js");
-const analyticsQueries = require("../scripts/queries/analyticsQueries.js");
+const reportQueries = require("../scripts/queries/reportQueries.js");
 const imageQueries = require("../scripts/queries/imageQueries.js");
 const maintenanceQueries = require("../scripts/queries/maintenanceQueries.js");
 const exportQueries = require("../scripts/queries/exportQueries.js");
@@ -312,28 +311,22 @@ async function getBoxImageByImageId(boxId, imageId) {
     return boxQueries.getBoxImageByImageId(boxId, imageId);
 }
 
-/* ---------------- DETECTIONS ---------------- */
-
-async function getDetectionById(id) {
-    return detectionQueries.getDetectionById(id);
+async function deleteBoxImageByImageId(boxId, imageId) {
+    return boxQueries.deleteBoxImageByImageId(boxId, imageId);
 }
 
 /* ---------------- ANALYTICS ---------------- */
 
-async function analyticsIdentifiedSpecies() {
-    return analyticsQueries.getIdentifiedSpecies();
+async function getReportSummary(year, month) {
+    return reportQueries.getReportSummary(year, month);
 }
 
-async function analyticsOccupancyTrend() {
-    return analyticsQueries.getOccupancyTrend();
+async function getReportSpeciesAnalysis(year, month) {
+    return reportQueries.getReportSpeciesAnalysis(year, month);
 }
 
-async function analyticsDailyActivity() {
-    return analyticsQueries.getDailyActivity();
-}
-
-async function analyticsTargetEfficiency() {
-    return analyticsQueries.getTargetEfficiency();
+async function getReportSeasonalHistory(month) {
+    return reportQueries.getReportSeasonalHistory(month);
 }
 
 /* ---------------- IMAGES ---------------- */
@@ -380,7 +373,7 @@ async function deleteMaintenanceSchedule(id, boxId) {
 /* ---------------- EXPORTS ---------------- */
 
 async function listExports() {
-    return exportQueries.getExports();
+    return exportQueries.getAllExports();
 }
 
 async function getExportById(id) {
@@ -456,15 +449,12 @@ module.exports = {
     getBoxDetectionsPerMonth,
     getBoxImagesByBoxId,
     getBoxImageByImageId,
+    deleteBoxImageByImageId,
 
-    // DETECTIONS
-    getDetectionById,
-
-    // ANALYTICS
-    analyticsIdentifiedSpecies,
-    analyticsOccupancyTrend,
-    analyticsDailyActivity,
-    analyticsTargetEfficiency,
+    // REPORT
+    getReportSummary,
+    getReportSpeciesAnalysis,
+    getReportSeasonalHistory,
 
     // IMAGES
     getImageById,

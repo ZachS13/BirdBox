@@ -144,6 +144,21 @@ router.get("/:boxId/images/:imageId", async (req, res) => {
     }
 });
 
+router.delete("/:boxId/images/:imageId", async (req, res) => {
+    try {
+        const { boxId, imageId } = req.params;
+
+        const isDeleted = await business.deleteBoxImageByImageId(boxId, imageId);
+
+        res.status(200).json({ success: true, message: `Image (${imageId}) for box (${boxId}) was deleted successfully.`, data: isDeleted });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
+});
+
 /* ---------------- MAINTENANCE ---------------- */
 
 router.get("/:boxId/maintenance/schedules", async (req, res) => {

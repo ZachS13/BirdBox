@@ -29,6 +29,7 @@ async function getAllBoxes() {
             `
             SELECT
                 birdbox_images.id,
+                birdbox_images.birdbox_id as boxId,
                 birdbox_images.file_url AS fileUrl,
                 birdbox_images.file_type AS fileType,
                 birdbox_images.file_size AS fileSize,
@@ -185,7 +186,7 @@ async function getBoxDetectionsPerWeek(boxId) {
 
         const dateToFormat = todaysDate.setDate(todaysDate.getDate() - arr.length + i + 1);
 
-        return dateFormatter.formatDateToLocale(dateToFormat, "en-US");
+        return dateFormatter.formatDateToLocale(dateToFormat, "en-US", true);
     });
 
     const chartData = lastSevenDays.reduce((acc, date) => {
@@ -239,7 +240,7 @@ async function getBoxDetectionsPerMonth(boxId) {
         const monthDates = [];
         for (let i = 1; i <= todaysDateDay; i++) {
             const currentDate = new Date(todaysDateYear, todaysDateMonth, i);
-            const currentDateFormatted = dateFormatter.formatDateToLocale(currentDate, "en-US");
+            const currentDateFormatted = dateFormatter.formatDateToLocale(currentDate, "en-US", true);
 
             monthDates.push(currentDateFormatted);
         }
@@ -256,7 +257,7 @@ async function getBoxDetectionsPerMonth(boxId) {
     }, {});
 
     rows.forEach(({ detections, speciesName, createdAt }) => {
-        const formattedDate = dateFormatter.formatDateToLocale(createdAt, "en-US");
+        const formattedDate = dateFormatter.formatDateToLocale(createdAt, "en-US", true);
 
         if (chartData[formattedDate]) chartData[formattedDate][speciesName] = detections;
     });
@@ -312,6 +313,22 @@ async function getBoxImageByImageId(boxId, imageId) {
     return image.length ? image[0] : null;
 }
 
+async function deleteBoxImageByImageId(boxId, imageId) {
+    const [result] = await db.execute(
+        `
+        DELETE FROM
+            birdbox_images
+        WHERE
+            id = ?
+        AND
+            birdbox_id = ?;
+        `,
+        [imageId, boxId],
+    );
+
+    return result.affectedRows > 0;
+}
+
 module.exports = {
     // BOXES
     getAllBoxes,
@@ -327,4 +344,5 @@ module.exports = {
     // IMAGES
     getBoxImagesByBoxId,
     getBoxImageByImageId,
+    deleteBoxImageByImageId,
 };

@@ -161,8 +161,8 @@ INSERT INTO species_detections VALUES
 (6, 1, 2, 6, 86.5, '2026-02-18 08:55:17'),
 (7, 3, 1, 7, 91.0, '2026-02-21 10:12:44'),
 (8, 5, 2, 8, 84.5, '2026-02-24 07:28:59'),
-(9, 2, 1, 9, 98.0, '2026-02-27 09:44:36'),
-(10, 4, 2, 10, 89.5, '2026-02-30 11:05:22'),
+(9, 2, 1, 9, 98.0, '2026-02-25 09:44:36'),
+(10, 4, 2, 10, 89.5, '2026-02-26 11:05:22'),
 (11, 1, 1, 11, 93.0, '2026-03-02 08:17:48'),
 (12, 3, 2, 12, 82.5, '2026-03-05 07:33:15'),
 (13, 5, 1, 13, 96.0, '2026-03-08 10:48:52'),
@@ -221,20 +221,20 @@ CREATE TABLE maintenance_schedules (
 
 -- SELECT * FROM maintenance_schedules;
 
-CREATE TABLE birdbox_overview_history (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    birdbox_id INT NOT NULL,
-    total_kestrels INT NULL DEFAULT 0,
-    total_brown_bats INT NULL DEFAULT 0,
-    total_others INT NULL DEFAULT 0,
-    range_start DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-    range_end DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-    created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_history_birdboxes
-        FOREIGN KEY (birdbox_id)
-        REFERENCES birdboxes(id)
-        ON DELETE CASCADE
-) ENGINE=InnoDB;
+-- CREATE TABLE birdbox_overview_history (
+--     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--     birdbox_id INT NOT NULL,
+--     total_kestrels INT NULL DEFAULT 0,
+--     total_brown_bats INT NULL DEFAULT 0,
+--     total_others INT NULL DEFAULT 0,
+--     range_start DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+--     range_end DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+--     created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+--     CONSTRAINT fk_history_birdboxes
+--         FOREIGN KEY (birdbox_id)
+--         REFERENCES birdboxes(id)
+--         ON DELETE CASCADE
+-- ) ENGINE=InnoDB;
 
 CREATE TABLE exports (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -249,13 +249,13 @@ CREATE TABLE exports (
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE app_error_logs (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    heading VARCHAR(250) NOT NULL,
-    description TEXT NOT NULL,
-    recorded_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_errors_users
-        FOREIGN KEY (user_id)
-        REFERENCES users(id)
-) ENGINE=InnoDB;
+-- CREATE TABLE app_error_logs (
+--     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     heading VARCHAR(250) NOT NULL,
+--     description TEXT NOT NULL,
+--     recorded_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+--     CONSTRAINT fk_errors_users
+--         FOREIGN KEY (user_id)
+--         REFERENCES users(id)
+-- ) ENGINE=InnoDB;
