@@ -15,6 +15,7 @@ const speciesRoutes = require('./routes/speciesRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 5500;
+const staticImages = express.static("./images/");
 
 app.use(express.json());
 app.use(cors());
@@ -27,6 +28,7 @@ app.use('/boxes', boxRoutes);
 app.use('/detections', detectionRoutes);
 app.use('/analytics', analyticsRoutes);
 app.use('/images', imageRoutes);
+app.use("/assets/images", staticImages);
 app.use('/maintenance', maintenanceRoutes);
 app.use('/exports', exportRoutes);
 app.use('/species', speciesRoutes);

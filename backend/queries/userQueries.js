@@ -33,8 +33,8 @@ async function createUser(user) {
     const { username, email, password } = user;
 
     const [result] = await pool.execute(
-        `INSERT INTO users (username, email, password, created_at)
-         VALUES ( ?, ?, ?, NOW())`,
+        `INSERT INTO users (username, email, password, last_login_at, created_at)
+         VALUES ( ?, ?, ?, NOW(), NOW())`,
         [username, email, password]
     );
 

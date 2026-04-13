@@ -4,7 +4,9 @@ const business = require('../businessLayer');
 
 router.get('/', async (req, res) => {
     try {
+        console.log('Received request to list all bird boxes');
         const boxes = await business.listBoxes();
+        console.log(`Retrieved boxes: ${JSON.stringify(boxes[0])}`);
         res.status(200).json({ success: true, data: boxes });
     } catch (error) {
         const status = error.status || 500;
@@ -30,6 +32,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
+        console.log(`Received request to get bird box with ID: ${req.params.id}`);
         res.status(200).json({ success: true, data: await business.getBoxById(req.params.id) });
     } catch (error) {
         const status = error.status || 500;
@@ -42,7 +45,11 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        res.status(200).json({ success: true, data: await business.updateBox(req.params.id, req.body) });
+        const { id } = req.params;
+        const { body } = req;
+        
+        const box = await business.updateBox(id, body);
+        res.status(200).json({ success: true, message: `Box (${id}) updated successfully.`, data: box });
     } catch (error) {
         const status = error.status || 500;
         return res.status(status).json({
@@ -64,10 +71,12 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// Box detail endpoints
-router.get('/:id/summary', async (req, res) => {
+/* ------------- ANALYTICS ENDPOINTS ------------- */
+router.get('/:id/analytics/week', async (req, res) => {
     try {
-        res.status(200).json({ success: true, data: await business.getBoxSummary(req.params.id) });
+        const { id } = req.params;
+        const detections = await business.getBoxDetectionsPerWeek(id);
+        res.status(200).json({ success: true, data: detections });
     } catch (error) {
         const status = error.status || 500;
         return res.status(status).json({
@@ -77,9 +86,11 @@ router.get('/:id/summary', async (req, res) => {
     }
 });
 
-router.get('/:id/telemetry', async (req, res) => {
+router.get('/:id/analytics/month', async (req, res) => {
     try {
-        res.status(200).json({ success: true, data: await business.getBoxTelemetry(req.params.id) });
+        const { id } = req.params;
+        const detections = await business.getBoxDetectionsPerMonth(id);
+        res.status(200).json({ success: true, data: detections });
     } catch (error) {
         const status = error.status || 500;
         return res.status(status).json({
@@ -89,21 +100,13 @@ router.get('/:id/telemetry', async (req, res) => {
     }
 });
 
-router.get('/:id/detections', async (req, res) => {
-    try {
-        res.status(200).json({ success: true, data: await business.getBoxDetections(req.params.id) });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
-            success: false,
-            message: error.message
-        });
-    }
-});
+/* ------------- IMAGES ENDPOINTS ------------- */
 
 router.get('/:id/images', async (req, res) => {
     try {
-        res.status(200).json({ success: true, data: await business.getBoxImages(req.params.id) });
+        const { id } = req.params;
+        const images = await business.getBoxImages(id);
+        res.status(200).json({ success: true, data: images });
     } catch (error) {
         const status = error.status || 500;
         return res.status(status).json({
@@ -113,7 +116,23 @@ router.get('/:id/images', async (req, res) => {
     }
 });
 
-// Maintenance logs under a box
+router.get('/:id/images/:imageId', async (req, res) => {
+    try {
+        const { boxId, imageId } = req.params;
+        const image = await business.getBoxImageByImageId(boxId, imageId);
+        res.status(200).json({ success: true, data: image });
+    } catch (error) {
+        const status = error.status || 500;
+        return res.status(status).json({
+            success: false,
+            message: error.message
+        });
+    }
+});
+
+
+/* ---------------- MAINTENANCE ---------------- */
+
 router.get('/:id/maintenance/logs', async (req, res) => {
     try {
         res.status(200).json({ success: true, data: await business.listBoxMaintenanceLogs(req.params.id) });
@@ -166,81 +185,83 @@ router.delete('/:id/maintenance/logs/:logId', async (req, res) => {
 });
 
 // Maintenance schedule under a box
-router.get('/:id/maintenance/schedule', async (req, res) => {
+router.get("/:boxId/maintenance/schedules", async (req, res) => {
     try {
-        res.status(200).json({ success: true, data: await business.getBoxMaintenanceSchedule(req.params.id) });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
+        const { boxId } = req.params;
+
+        const schedules = await business.getAllMaintenanceSchedulesByBoxId(boxId, true);
+
+        res.status(200).json({ success: true, message: `Box (${boxId}) schedules retrieved successfully.`, data: schedules });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message
+            message: e.message,
         });
     }
 });
 
-router.post('/:id/maintenance/schedule', async (req, res) => {
+router.get("/:boxId/maintenance/schedules/:scheduleId", async (req, res) => {
     try {
-        res.status(201).json({ success: true, data: await business.createBoxMaintenanceSchedule(req.params.id, req.body) });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
+        const { boxId, scheduleId } = req.params;
+
+        const schedule = await business.getMaintenanceScheduleById(scheduleId, boxId);
+
+        res.status(200).json({ success: true, message: `Box (${boxId}) schedule (${scheduleId}) retrieved successfully.`, data: schedule });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message
+            message: e.message,
         });
     }
 });
 
-router.put('/:id/maintenance/schedule/:scheduleId', async (req, res) => {
+router.post("/:boxId/maintenance/schedules", async (req, res) => {
     try {
-        res.status(200).json({
-            success: true,
-            data: await business.updateBoxMaintenanceSchedule(req.params.id, req.params.scheduleId, req.body)
-        });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
+        const {
+            body,
+            params: { boxId },
+        } = req;
+
+        const schedule = await business.createNewMaintenanceSchedule(boxId, body);
+
+        res.status(201).json({ success: true, message: "New box schedule created successfully.", data: schedule });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message
+            message: e.message,
         });
     }
 });
 
-router.delete('/:id/maintenance/schedule/:scheduleId', async (req, res) => {
+router.put("/:boxId/maintenance/schedules/:scheduleId/status", async (req, res) => {
     try {
-        res.status(200).json({
-            success: true,
-            data: await business.deleteBoxMaintenanceSchedule(req.params.id, req.params.scheduleId)
-        });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
+        const {
+            body,
+            params: { boxId, scheduleId },
+        } = req;
+
+        const schedule = await business.updateMaintenanceScheduleStatus(scheduleId, boxId, body);
+
+        res.status(200).json({ success: true, message: schedule ? `Box (${boxId}}) schedule (${scheduleId}) was updated successfully.` : "No changes were necessary.", data: schedule });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message
+            message: e.message,
         });
     }
 });
 
-// Settings under a box
-router.get('/:id/settings', async (req, res) => {
+router.delete("/:boxId/maintenance/schedules/:scheduleId", async (req, res) => {
     try {
-        res.status(200).json({ success: true, data: await business.getBoxSettings(req.params.id) });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
-            success: false,
-            message: error.message
-        });
-    }
-});
+        const { boxId, scheduleId } = req.params;
 
-router.put('/:id/settings', async (req, res) => {
-    try {
-        res.status(200).json({ success: true, data: await business.updateBoxSettings(req.params.id, req.body) });
-    } catch (error) {
-        const status = error.status || 500;
-        return res.status(status).json({
+        const isDeleted = await business.deleteMaintenanceSchedule(scheduleId, boxId);
+
+        res.status(200).json({ success: true, message: isDeleted ? `Box (${boxId}}) schedule (${scheduleId}) was deleted successfully.` : "No changes were necessary.", data: isDeleted });
+    } catch (e) {
+        res.status(e.status || 500).json({
             success: false,
-            message: error.message
+            message: e.message,
         });
     }
 });

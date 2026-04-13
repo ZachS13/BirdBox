@@ -102,12 +102,50 @@ async function getBoxTelemetry(boxId) {
     return rows;
 }
 
-async function getBoxDetections(boxId) {
+async function getBoxDetectionsPerWeek(boxId) {
     const sql = `
-        SELECT *
-        FROM birdbox_overview_history
-        WHERE birdbox_id = ?
-        ORDER BY range_end DESC
+        SELECT
+            COUNT(species_detections.id) AS detections,
+            species.name AS speciesName,
+            species_detections.created_at AS createdAt
+        FROM
+            species_detections
+        JOIN
+            species ON species_detections.species_id = species.id
+        WHERE
+            species_detections.birdbox_id = ?
+        AND
+            species_detections.created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+        GROUP BY
+            species_detections.created_at, species_detections.species_id
+        ORDER BY
+            species_detections.created_at ASC;
+    `;
+
+    const [rows] = await pool.execute(sql, [boxId]);
+    return rows;
+}
+
+async function getBoxDetectionsPerMonth(boxId) {
+    const sql = `
+        SELECT
+            COUNT(species_detections.id) AS detections,
+            species.name AS speciesName,
+            species_detections.created_at AS createdAt
+        FROM
+            species_detections
+        JOIN
+            species ON species_detections.species_id = species.id
+        WHERE
+            species_detections.birdbox_id = ?
+        AND
+            species_detections.created_at >= DATE_FORMAT(NOW(), "%Y-%m-01")
+        AND
+            species_detections.created_at <= NOW()
+        GROUP BY
+            species_detections.created_at, species_detections.species_id
+        ORDER BY
+            species_detections.created_at ASC;
     `;
 
     const [rows] = await pool.execute(sql, [boxId]);
@@ -126,16 +164,42 @@ async function getBoxImages(boxId) {
     return rows;
 }
 
-async function getBoxMaintenanceLogs(boxId) {
+async function getBoxImageByImageId(boxId, imageId) {
     const sql = `
-        SELECT *
-        FROM maintenance_logs
-        WHERE birdbox_id = ?
-        ORDER BY created_at DESC
+        SELECT
+            id,
+            file_url AS fileUrl,
+            file_type AS fileType,
+            file_size AS fileSize,
+            captured_at AS capturedAt
+        FROM
+        birdbox_images
+        WHERE
+            birdbox_id = ?
+            AND id = ?
+        ORDER BY
+            captured_at DESC,
+        id DESC;
     `;
 
-    const [rows] = await pool.execute(sql, [boxId]);
+    const [rows] = await pool.execute(sql, [boxId, imageId]);
     return rows;
+}
+
+async function deleteBoxImageByImageId(boxId, imageId) {
+    const [result] = await db.execute(
+        `
+        DELETE FROM
+            birdbox_images
+        WHERE
+            id = ?
+        AND
+            birdbox_id = ?;
+        `,
+        [imageId, boxId],
+    );
+
+    return result.affectedRows > 0;
 }
 
 async function createBoxMaintenanceLog(boxId, data) {
@@ -309,9 +373,12 @@ module.exports = {
     deleteBoxById,
     getBoxSummary,
     getBoxTelemetry,
-    getBoxDetections,
+    getBoxDetectionsPerWeek,
+    getBoxDetectionsPerMonth,
     getBoxImages,
-    getBoxMaintenanceLogs,
+    getBoxImageByImageId,
+    deleteBoxImageByImageId,
+    // getBoxMaintenanceLogs,
     createBoxMaintenanceLog,
     updateBoxMaintenanceLog,
     deleteBoxMaintenanceLog,

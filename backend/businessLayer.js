@@ -162,7 +162,9 @@ async function getMe({ token }) {
     const session = await sessionQueries.getSessionByToken(token);
     if (!session) throw unauthorized();
 
-    const user = await userQueries.getUserById(session.userId);
+    const userId = session.user_id;
+
+    const user = await userQueries.getUserById(userId);
     if (!user) throw unauthorized();
 
     return user;
@@ -293,9 +295,18 @@ async function getBoxTelemetry(id) {
 
     return telemetry;
 }
-async function getBoxDetections(id) {
-    return boxQueries.getBoxDetections(id);
+async function getBoxDetectionsPerWeek(id) {
+    if (!id) throw badRequest("id is required");
+
+    return boxQueries.getBoxDetectionsPerWeek(id);
 }
+
+async function getBoxDetectionsPerMonth(id) {
+    if (!id) throw badRequest("id is required");
+
+    return boxQueries.getBoxDetectionsPerMonth(id);
+}
+
 async function getBoxImages(id) {
     if (!id) throw badRequest("id is required");
 
@@ -303,6 +314,15 @@ async function getBoxImages(id) {
     if (!images) throw notFound("Images not found");
 
     return images;
+}
+
+async function getBoxImageByImageId(boxId, imageId) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!imageId) throw badRequest("imageId is required");
+
+    const image = await boxQueries.getBoxImageByImageId(boxId, imageId);
+    if (!image) throw notFound("Image not found");
+    return image;
 }
 
 async function listBoxMaintenanceLogs(boxId) {
@@ -463,15 +483,6 @@ async function getMaintenanceLogById(id) {
     return maintenanceLog;
 }
 
-async function getMaintenanceScheduleById(id) {
-    if (!id) throw badRequest("id is required");
-
-    const maintenanceSchedule = await maintenanceQueries.getMaintenanceScheduleById(id);
-    if (!maintenanceSchedule) throw notFound("Maintenance schedule not found");
-
-    return maintenanceSchedule;
-}
-
 /* ---------------- EXPORTS ---------------- */
 async function listExports() {
     return exportQueries.getExports();
@@ -520,6 +531,47 @@ async function deleteSpecies(id) {
     return speciesQueries.deleteSpeciesById(id);
 }
 
+/*---------------- NEW MAINTENANCE SCHEDULE FUNCTIONS ----------------*/
+async function getAllMaintenanceSchedulesByBoxId(boxId, isPerTimeline) {
+    if (!isPerTimeline) return await maintenanceQueries.getAllMaintenanceSchedulesByBoxId(boxId);
+
+    const past = await maintenanceQueries.getAllMaintenanceSchedulesByBoxId(boxId, "past");
+    const upcoming = await maintenanceQueries.getAllMaintenanceSchedulesByBoxId(boxId, "upcoming");
+
+    return { past, upcoming };
+}
+
+async function getMaintenanceScheduleById(id, boxId) {
+    if (!id) throw badRequest("id is required");
+
+    const maintenanceSchedule = await maintenanceQueries.getMaintenanceScheduleById(id);
+    if (!maintenanceSchedule) throw notFound("Maintenance schedule not found");
+
+    return maintenanceSchedule;
+}
+
+async function createNewMaintenanceSchedule(boxId, data) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!data) throw badRequest("data is required");
+
+    return maintenanceQueries.createNewMaintenanceSchedule(boxId, data);
+}
+
+async function updateMaintenanceScheduleStatus(id, boxId, body) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!id) throw badRequest("id is required");
+    if (!body) throw badRequest("body is required");
+
+    return maintenanceQueries.updateMaintenanceScheduleStatus(id, boxId, body);
+}
+
+async function deleteMaintenanceSchedule(id, boxId) {
+    if (!boxId) throw badRequest("boxId is required");
+    if (!id) throw badRequest("id is required");
+
+    return maintenanceQueries.deleteMaintenanceScheduleById(id, boxId);
+}
+
 module.exports = {
     loginUser,
     signup,
@@ -540,8 +592,11 @@ module.exports = {
     deleteBox,
     getBoxSummary,
     getBoxTelemetry,
-    getBoxDetections,
+    getBoxDetectionsPerWeek,
+    getBoxDetectionsPerMonth,
     getBoxImages,
+    getBoxImageByImageId,
+
     listBoxMaintenanceLogs,
     createBoxMaintenanceLog,
     updateBoxMaintenanceLog,
@@ -550,6 +605,7 @@ module.exports = {
     createBoxMaintenanceSchedule,
     updateBoxMaintenanceSchedule,
     deleteBoxMaintenanceSchedule,
+
     getBoxSettings,
     updateBoxSettings,
 
@@ -566,7 +622,11 @@ module.exports = {
     downloadImageById,
     deleteImageById,
 
+    getAllMaintenanceSchedulesByBoxId,
     getMaintenanceLogById,
+    createNewMaintenanceSchedule,
+    updateMaintenanceScheduleStatus,
+    deleteMaintenanceSchedule,
     getMaintenanceScheduleById,
 
     listExports,

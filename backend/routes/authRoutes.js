@@ -25,8 +25,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     try {
-        // Example token read (you can change to cookies later)
-        const token = req.headers.authorization?.replace('Bearer ', '');
+        const token = req.headers.authorization?.split(" ")[1];
         const result = await business.logoutUser({ token });
         res.status(200).json({ success: true, message: 'Logout success', data: result });
     } catch (error) {
@@ -38,25 +37,23 @@ router.post('/logout', async (req, res) => {
     }
 });
 
-router.post('/refresh', async (req, res) => {
-    try {
-        const { refreshToken } = req.body;
-        const result = await business.refreshAuth({ refreshToken });
-        res.status(200).json({ success: true, message: 'Refresh success', data: result });
-    } catch (error) {
-        const status = error.status || 500;
-        res.status(status).json({
-            success: false,
-            message: error.message
-        });
-    }
-});
+// router.post('/refresh', async (req, res) => {
+//     try {
+//         const { refreshToken } = req.body;
+//         const result = await business.refreshAuth({ refreshToken });
+//         res.status(200).json({ success: true, message: 'Refresh success', data: result });
+//     } catch (error) {
+//         const status = error.status || 500;
+//         res.status(status).json({
+//             success: false,
+//             message: error.message
+//         });
+//     }
+// });
 
 router.post("/signup", async (req, res) => {
     try {
         const { username, email, password } = req.body;
-
-        console.log("Signup request received:", { username, email });
         const result = await business.signup(username, email, password);
 
         res.status(201).json({ success: true, message: "User created successfully", data: result });

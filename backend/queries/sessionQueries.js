@@ -17,11 +17,11 @@ async function getSessionsByUserId(userId) {
     return rows[0] || null;
 }
 
-async function createSession({ user_id, token }) {
+async function createSession({ userId, token }) {
     const [result] = await pool.query(
         `INSERT INTO sessions (user_id, token, created_at, expires_at)
          VALUES (?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 DAY))`,
-        [user_id, token]
+        [userId, token]
     );
 
     return { id: result.insertId };

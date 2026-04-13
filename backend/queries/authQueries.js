@@ -11,6 +11,17 @@ async function findUserByEmail(email) {
     return rows[0] || null;
 }
 
+async function findUserByUsername(username) {
+  const sql = `
+    SELECT *
+    FROM users
+    WHERE username = ?
+    LIMIT 1
+  `;
+  const [rows] = await db.execute(sql, [username]);
+  return rows[0] || null;
+}
+
 async function findUserPublicById(userId) {
     const sql = `
     SELECT *
@@ -55,6 +66,7 @@ async function emailExists(email) {
 
 module.exports = {
     findUserByEmail,
+    findUserByUsername,
     findUserPublicById,
     createUser,
     updateLastLoginAt,

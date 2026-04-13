@@ -10,7 +10,7 @@ router.get('/me', async (req, res) => {
 
         res.status(200).json({
             ok: true,
-            message: 'Current user (stub)',
+            message: 'Current User Info',
             data: user
         });
     } catch (error) {
