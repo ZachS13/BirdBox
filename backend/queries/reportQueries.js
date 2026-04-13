@@ -1,6 +1,6 @@
 const db = require("../db.js");
 
-const dateFormatter = require("../../utils/date.js");
+const dateFormatter = require("../utils/date.js");
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const SPECIES = ["American Kestrel", "Brown Bat", "Other", "Total"];
