@@ -1,4 +1,4 @@
-const db = require("../../sql/database.js");
+const db = require("../db.js");
 
 const dateFormatter = require("../../utils/date.js");
 

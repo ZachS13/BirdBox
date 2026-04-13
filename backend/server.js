@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes.js');
 const meRoutes = require('./routes/meRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 const boxRoutes = require('./routes/birdboxRoutes.js');
+const reportRoutes = require('./routes/reportRoutes.js');
 const detectionRoutes = require('./routes/detectionRoutes.js');
 const analyticsRoutes = require('./routes/analyticsRoutes.js');
 const imageRoutes = require('./routes/imageRoutes.js');
