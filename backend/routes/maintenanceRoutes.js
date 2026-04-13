@@ -2,14 +2,34 @@ const express = require('express');
 const router = express.Router();
 const business = require('../businessLayer');
 
-router.get('/log/:id', async (req, res, next) => {
-    try { res.status(200).json({ ok: true, data: await business.getMaintenanceLogById(req.params.id) }); }
-    catch (err) { next(err); }
+router.get("/:boxId/schedules", async (req, res) => {
+    try {
+        const { boxId } = req.params;
+
+        const schedules = await business.getAllMaintenanceSchedulesByBoxId(boxId, false);
+
+        res.status(200).json({ success: true, message: `Box (${boxId}) schedules retrieved successfully.`, data: schedules });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
 });
 
-router.get('/schedule/:id', async (req, res, next) => {
-    try { res.status(200).json({ ok: true, data: await business.getMaintenanceScheduleById(req.params.id) }); }
-    catch (err) { next(err); }
+router.get("/:boxId/schedules/:scheduleId", async (req, res) => {
+    try {
+        const { boxId, scheduleId } = req.params;
+
+        const schedule = await business.getMaintenanceScheduleById(scheduleId, boxId);
+
+        res.status(200).json({ success: true, message: `Box (${boxId}) schedule (${scheduleId}) retrieved successfully.`, data: schedule });
+    } catch (e) {
+        res.status(e.status || 500).json({
+            success: false,
+            message: e.message,
+        });
+    }
 });
 
 module.exports = router;

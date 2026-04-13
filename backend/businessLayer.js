@@ -543,6 +543,7 @@ async function getAllMaintenanceSchedulesByBoxId(boxId, isPerTimeline) {
 
 async function getMaintenanceScheduleById(id, boxId) {
     if (!id) throw badRequest("id is required");
+    if (!boxId) throw badRequest("boxId is required");
 
     const maintenanceSchedule = await maintenanceQueries.getMaintenanceScheduleById(id);
     if (!maintenanceSchedule) throw notFound("Maintenance schedule not found");
@@ -570,6 +571,27 @@ async function deleteMaintenanceSchedule(id, boxId) {
     if (!id) throw badRequest("id is required");
 
     return maintenanceQueries.deleteMaintenanceScheduleById(id, boxId);
+}
+
+/* ---------------- REPORTING ---------------- */
+async function getReportSummary(year, month) {
+    if (!year) throw badRequest("year is required");
+    if (!month) throw badRequest("month is required");
+
+    return reportQueries.getReportSummary(year, month);
+}
+
+async function getReportSpeciesAnalysis(year, month) {
+    if (!year) throw badRequest("year is required");
+    if (!month) throw badRequest("month is required");
+
+    return reportQueries.getReportSpeciesAnalysis(year, month);
+}
+
+async function getReportSeasonalHistory(month) {
+    if (!month) throw badRequest("month is required");
+
+    return reportQueries.getReportSeasonalHistory(month);
 }
 
 module.exports = {
@@ -628,6 +650,10 @@ module.exports = {
     updateMaintenanceScheduleStatus,
     deleteMaintenanceSchedule,
     getMaintenanceScheduleById,
+
+    getReportSummary,
+    getReportSpeciesAnalysis,
+    getReportSeasonalHistory,
 
     listExports,
     getExportById,
